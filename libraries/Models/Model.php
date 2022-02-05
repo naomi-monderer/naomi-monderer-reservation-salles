@@ -21,7 +21,7 @@ abstract class Model // <3
         $var = htmlspecialchars(trim($var));
         return $var;
     }
-    public function ifExist($login) // Est ce que l'utilisateur existe ? 
+    public function ifDoesntExist($login) // Est ce que l'utilisateur existe ? 
     {
         $sql = "SELECT login FROM utilisateurs WHERE login = :login";
         $result = $this->bdd->prepare($sql);

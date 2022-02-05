@@ -12,7 +12,7 @@ class Connexion
     {
         $this->login = $_POST['login'];
         $this->password = $_POST['password'];
-        $errorLog = null;
+      
 
         if (!empty($login) && !empty($password)) { // il faut remplir les champs sinon $errorLog
 
@@ -21,26 +21,27 @@ class Connexion
             $login = $modelConnection->secure($login);
             $password = $modelConnection->secure($password);
 
-            $fetch = $modelConnection->checkuser($login); // savoir si le compte existe pour etre connecté
-            if ($fetch) {
+            $data = $modelConnection->checkuser($login); // savoir si le compte existe pour etre connecté
+            if ($data) {
                 $passwordSql = $modelConnection->passwordVerifySql($login);
 
                 if (password_verify($password, $passwordSql['password'])) {
                     $_SESSION['connected'] = true;
                     $utilisateur = $modelConnection->findAll($login);
                     $_SESSION['utilisateur'] = $utilisateur; // la carte d'identité de l'utilisateur à été créer et initialisé dans une $_SESSION
-                    $Http = new \Http();
-                    $Http->redirect('profil.php'); // GG WP
+                    header('Location:../view/profil.php');
+                    die();
                 } else {
-                    $errorLog = "<p class='alert alert-danger' role='alert'>Mot de passe incorrect</p>";
+                    header('Location: ../view/connexion.php?login_err=password');
+                    die();
                 }
             } else {
-                $errorLog = "<p class='alert alert-danger' role='alert'>Identifiant incorrect</p>";
+                header('Location: ../view/connexion.php?login_err=email');
+                die();
             }
         } else {
-            $errorLog = "<p class='alert alert-danger' role='alert'>Veuillez entrer des caracteres dans les champs</p>";
+            header('Location: ../view/connexion.php?login_err=already');
+            die();
         }
-        echo $errorLog; // on aurait pu mettre un return mais flemme :-) pour un prochain projet
-    }
-
-}
+    } 
+} 

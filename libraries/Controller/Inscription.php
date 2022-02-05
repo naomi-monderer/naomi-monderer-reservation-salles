@@ -1,82 +1,69 @@
 <?php
 
-namespace Controller; // une etiquette 
+namespace Controller;
 
-require_once('./Controller.php'); // c'est pour permettre d'extends 
-$error= " ";
+require_once($Http);
+require_once($utils);
 
-
-    class Register extends Controller // fichier.php
+class Inscription // s'appel User
+{
+    public $login = "";
+    public $password = "";
+   
+    public function register($login, $password, $confirm_password)
     {
-        public $login = "";
-        public $password = ""; 
-        // est ce qu'on a besoin de dire que la variable est = à un string vide 
-        // car comme le controller fait le lien avec la view, les strings du user vont remplir la variable?
+        $this->login = $_POST['login'];
+        $this->password = $_POST['password'];
 
-        public function __construct()
-        {
-            
-        }
+        $confirm_password = $_POST['confirm_password'];
+        $errorLog = null;
+        if (!empty($login) && !empty($password) && !empty($confirm_password)) { // si les champs sont vides alors $errorLog
 
-        public function register($login,$password,$passwordConfirm)
+            $login_length = strlen($login);
+            $password_length = strlen($password);
+            $confirm_password_length = strlen($confirm_password);
+            if ($row == 0) {
+                if (($login_length >= 2) && ($password_length  >= 5) && ($confirm_password_length >= 5)) { // limite minimum de caractere
 
-        {
-            $this->login = $_POST['login'];
-            $this->password=$_POST['password'];
-            $passwordConfirm=$_POST['passwordConfirm'];
-            // $passwordhash = password_hash($password, PASSWORD_BCRYPT);
+                    if (($login_length <= 30) && ($password_length  <= 255) && ($confirm_password_length <= 255)) { // limite maximum de caractere
 
-            if (!empty($login) && !empty($password) && !empty($passwordConfirm) && !empty($email) && !empty($firstname) && !empty($lastname))
-                {
-                    
-                    $login_lenght = strlen($login);
-                    $password_lenght = strlen($password);
-                    $passwordConfirm_lenght = strlen($passwordConfirm);
+                        $modelInscription = new \Models\Inscription();
+                        $return = $modelInscription->checkuser($login); // l'utilisateur existe-t-il ? 
 
-                    if(($login_lenght >=3) && ($password_lenght >= 5) && ($passwordConfirm_lenght >= 5))//limite minimum de caractères
-                    {
-                        if(($login_lenght <=25) && ($password_lenght<=25) && ($passwordConfirm_lenght<=25))
-                        {
-                            $modelsRegister = new \Models\Register();// pourquoi il connait pas ca?
-                            // je veux emmener ma fonction register dans la variable $modelsRegister
-                            
-                            $verifylogin = $modelsRegister->verifylogin($login);//recherche d'un utilisateur dans la bdd
-                            
-                            if(!$verifylogin)
+                        if (!$return) {
+
+                            if ($confirm_password == $password) // si le mdp != confirm mdp alors $errorLog
                             {
-                                if($passwordConfirm ==$password)
-                                {
-                                    $password_hash = password_hash($password,PASSWORD_BCRYPT);
-                                    $modelsRegister->register($login,$password_hash);
-
-                                }
-                                else
-                                {
-                                    $error = "Les mots de passent doivent être identiques.";
-                                }
+                                $modelInscription->secure($login);
+                                $modelInscription->secure($password);
+                                $cryptedpass = password_hash($password, PASSWORD_BCRYPT); // CRYPTED 
+                                $modelInscription->insert($login, $cryptedpass);
+                                header('Location:../connexion.php?reg_err=success');
+                            } else {
+                                header('Location: ../view/inscription.php?reg_err=password');
+                                die();
                             }
-                            else
-                            {
-                                $error="Ce login est déjà utilisé";
-                            }
+                        } else {
+                            header('Location: ../view/inscription.php?reg_err=login');
+                            die();
                         }
-                        else
-                        {
-                            $error ="Le login ou les mots de passent choisis sont trop long";
-                        }
-
+                    } else {
+                        header('Location: ../view/inscription.php?reg_err=info_length');
+                        die();
                     }
-                    else
-                    {   
-                        $error=" Le login ou les mots passent choisis sont trop court";
-                    }
+                } else {
+                    header('Location: ../view/inscription.php?reg_err=info_length');
+                    die();
                 }
-                else
-                {
-                    $error=" Veuillez remplir tous les champs";
-                }
-           
+            } else {
+                header('Location: ../view/inscription.php?reg_err=info_length');
+                die();
+            }
+        } else {
+            header('Location: ../view/inscription.php?reg_err=already');
+            die();
         }
-    }        
-
-?>
+            echo $errorLog;
+        }
+        
+    }

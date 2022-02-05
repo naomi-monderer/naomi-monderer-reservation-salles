@@ -8,7 +8,7 @@ class DataBase
     {
         try 
     {
-        $bdd = new PDO("mysql:host=localhost;dbname=moduleconnexion;charset=utf8", "root", "root");
+        $bdd = new PDO("mysql:host=localhost;dbname=reservationsalles;charset=utf8", "root", "root");
     }
     catch(PDOException $e)
     {

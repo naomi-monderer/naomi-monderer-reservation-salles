@@ -6,17 +6,14 @@ namespace Models {
 
     class Inscription extends Model
     {
-        public function insert($login, $password) //insertion dans la bdd
+        public function insert($login, $cryptedpass) //insertion dans la bdd
         {
-            $cost = ['cost' => 12];
-            $password = password_hash($password, PASSWORD_BCRYPT, $cost);
-            $insert = $bdd->prepare('INSERT INTO utilisateurs (login, prenom, nom, password) VALUES (:login, :prenom, :nom, :password)');
-            $insert->execute(array(
-            'login' => $email,
-            'nom' => $nom,
-            'prenom' => $prenom,
-            'password' => $password,));
-            header('Location:../connexion.php?reg_err=success');
+            $req = "INSERT INTO utilisateurs (login, password) VALUES (:login, :password)"; 
+            $result = $this->bdd->prepare($req);
+            $result->bindvalue(':login', $login, \PDO::PARAM_STR);
+            $result->bindvalue(':password', $cryptedpass, \PDO::PARAM_STR);
+            $result->execute();
+            
         }
-    }  
+    }
 }
