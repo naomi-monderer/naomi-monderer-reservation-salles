@@ -1,34 +1,19 @@
-<?php
+<?php 
 
-namespace Models;
-
-Class ConnectDb
+//connexion à la base de donnée
+class DataBase
 {
-    public $bdd;
-    public function __construct()
+    //Methode permettant la connexion à la BDD
+    protected function connect()
     {
-        
+        try 
+    {
+        $bdd = new PDO("mysql:host=localhost;dbname=moduleconnexion;charset=utf8", "root", "root");
+    }
+    catch(PDOException $e)
+    {
+        die('Erreur : '.$e->getMessage());
     }
 
-    function connect_bdd()
-    {
-    //connexion à la BDD
-    $serveur = "localhost";
-    $dbname = "classes";
-    $username = "root";
-    $password = "root";
-
-    try { $bdd = new \PDO ("mysql:host=$serveur;dbname=$dbname", $username, $password);
-            $bdd->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-        // echo "connected  successfully";
-        $this->bdd = $bdd;
-
-    }catch(\PDOException $e){
-
-        echo "connection failed" . $e->getMessage(); 
-    } 
-    return $bdd;
     }
 }
-
-?>

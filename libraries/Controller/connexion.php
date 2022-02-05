@@ -21,7 +21,7 @@ class Connexion
             $login = $modelConnection->secure($login);
             $password = $modelConnection->secure($password);
 
-            $fetch = $modelConnection->ifDoesntExist($login); // savoir si le compte existe pour etre connecté
+            $fetch = $modelConnection->checkuser($login); // savoir si le compte existe pour etre connecté
             if ($fetch) {
                 $passwordSql = $modelConnection->passwordVerifySql($login);
 

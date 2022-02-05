@@ -1,52 +1,54 @@
 <?php
+
 namespace Models;
-require_once("database.php");
 
-    class Model extends ConnectDb
-    {   
-        protected $variableDeBdd;
-        protected $login;
-        protected $password;
+require_once($database);
+require_once($session);
 
-        public function __construct()
-        {
-            $conn= new ConnectDb();
-            $this->variableDeBdd = $conn->connect_bdd(); // initialise de la connexion 
-        }
-        public function verifyLogin($login)
-        {
-            $infos = "SELECT * FROM utilisateurs WHERE login = :login";
-            $tab = $this->variableDeBdd->prepare($infos);
-            $tab->bindvalue(':login',$login);
-         // $tab->setFetchMode(PDO:: FETCH_ASSOC);// j'utilise fetch_assoc pour récuperer les key d'un tableau associatif 
-            $tab->execute();
-            $users = $tab->fetchAll(\PDO:: FETCH_ASSOC);
-        }
+abstract class Model // <3
+{
+    protected $bdd;
+    protected $login;
+    protected $password;
 
-        public function passwordVerifySql($login) 
+    public function __construct()
     {
-        $infos = "SELECT password FROM utilisateurs WHERE login = '$login'"; // on repere le mdp crypté a comparer avec celui entré par l'utilisateur
-        $tab = $this->pdo->prepare($infos);
-        $tab->bindvalue(':login', $login, \PDO::PARAM_STR);
-        $tab->execute();
-        $fetch = $tab->fetch(\PDO::FETCH_ASSOC);
+        $this->bdd = connect(); // initialisation de la connexion pour toutes les fonctions
+    }
+
+    public function secure($var) // le sang de la veine
+    {
+        $var = htmlspecialchars(trim($var));
+        return $var;
+    }
+    public function ifExist($login) // Est ce que l'utilisateur existe ? 
+    {
+        $sql = "SELECT login FROM utilisateurs WHERE login = :login";
+        $result = $this->bdd->prepare($sql);
+        $result->bindvalue(':login', $login, \PDO::PARAM_STR);
+        $result->execute();
+        $fetch = $result->fetch(\PDO::FETCH_ASSOC);
+        return $fetch;
+    }
+  
+    public function passwordVerifySql($login) 
+    {
+        $sql = "SELECT password FROM utilisateurs WHERE login = '$login'"; // on repere le mdp crypté a comparer avec celui entré par l'utilisateur
+        $result = $this->bdd->prepare($sql);
+        $result->bindvalue(':login', $login, \PDO::PARAM_STR);
+        $result->execute();
+        $fetch = $result->fetch(\PDO::FETCH_ASSOC);
 
         return $fetch;
     }
     public function findAll($login) // on repere un utilisateur et on prends toutes ses données
     {
-        $infos = "SELECT * FROM utilisateurs WHERE login = :login";
-        $tab = $this->pdo->prepare($infos);
-        $tab->bindvalue(':login', $login, \PDO::PARAM_STR);
-        $tab->execute();
-        $fetch = $tab->fetch(\PDO::FETCH_ASSOC);
+        $sql = "SELECT * FROM utilisateurs WHERE login = :login";
+        $result = $this->bdd->prepare($sql);
+        $result->bindvalue(':login', $login, \PDO::PARAM_STR);
+        $result->execute();
+        $fetch = $result->fetch(\PDO::FETCH_ASSOC);
 
         return $fetch;
     }
-    }
-
-
-
-    
-    
-?>
+}
