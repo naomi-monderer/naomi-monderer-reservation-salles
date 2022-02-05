@@ -2,10 +2,10 @@
 
 namespace Models;
 
-require_once($database);
-require_once($session);
+require_once('database.php');
+//require_once($session);
 
-abstract class Model // <3
+ class Model // <3
 {
     protected $bdd;
     protected $login;
@@ -13,7 +13,8 @@ abstract class Model // <3
 
     public function __construct()
     {
-        $this->bdd = connect(); // initialisation de la connexion pour toutes les fonctions
+        $bdd= new \DataBase();
+        $this->bdd = $bdd->connect();// initialisation de la connexion pour toutes les fonctions
     }
 
     public function secure($var) // le sang de la veine
@@ -23,8 +24,8 @@ abstract class Model // <3
     }
     public function ifDoesntExist($login) // Est ce que l'utilisateur existe ? 
     {
-        $sql = "SELECT login FROM utilisateurs WHERE login = :login";
-        $result = $this->bdd->prepare($sql);
+        $req = "SELECT login FROM utilisateurs WHERE login = :login";
+        $result = $this->bdd->prepare($req);
         $result->bindvalue(':login', $login, \PDO::PARAM_STR);
         $result->execute();
         $fetch = $result->fetch(\PDO::FETCH_ASSOC);
@@ -33,8 +34,8 @@ abstract class Model // <3
   
     public function passwordVerifySql($login) 
     {
-        $sql = "SELECT password FROM utilisateurs WHERE login = '$login'"; // on repere le mdp crypté a comparer avec celui entré par l'utilisateur
-        $result = $this->bdd->prepare($sql);
+        $req = "SELECT password FROM utilisateurs WHERE login = '$login'"; // on repere le mdp crypté a comparer avec celui entré par l'utilisateur
+        $result = $this->bdd->prepare($req);
         $result->bindvalue(':login', $login, \PDO::PARAM_STR);
         $result->execute();
         $fetch = $result->fetch(\PDO::FETCH_ASSOC);
@@ -43,8 +44,8 @@ abstract class Model // <3
     }
     public function findAll($login) // on repere un utilisateur et on prends toutes ses données
     {
-        $sql = "SELECT * FROM utilisateurs WHERE login = :login";
-        $result = $this->bdd->prepare($sql);
+        $req = "SELECT * FROM utilisateurs WHERE login = :login";
+        $result = $this->bdd->prepare($req);
         $result->bindvalue(':login', $login, \PDO::PARAM_STR);
         $result->execute();
         $fetch = $result->fetch(\PDO::FETCH_ASSOC);

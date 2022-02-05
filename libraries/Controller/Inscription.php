@@ -2,43 +2,52 @@
 
 namespace Controller;
 
-require_once($Http);
-require_once($utils);
-
-class Inscription // s'appel User
+// require_once($Http);
+// require_once($session);
+// LE CHEMIN EST EN FONCTION DE LA OU TAPPELLES LA FONCTION GROSSE MERDE
+require_once("../libraries/Models/Model.php");
+require_once("../libraries/Models/Inscription.php");
+require_once("../libraries/Http.php");
+class Inscription 
 {
     public $login = "";
     public $password = "";
    
     public function register($login, $password, $confirm_password)
     {
-        $this->login = $_POST['login'];
-        $this->password = $_POST['password'];
+        $this->login = $login;
+        $this->password = $password;
 
-        $confirm_password = $_POST['confirm_password'];
-        $errorLog = null;
-        if (!empty($login) && !empty($password) && !empty($confirm_password)) { // si les champs sont vides alors $errorLog
 
+
+
+        if (!empty($login) && !empty($password) && !empty($confirm_password)) { 
+            
             $login_length = strlen($login);
             $password_length = strlen($password);
             $confirm_password_length = strlen($confirm_password);
-            if ($row == 0) {
+            $model = new \Models\Model();
+            $result=$model->ifDoesntExist($login);
+            var_dump($result);
+            if (!$result) {
                 if (($login_length >= 2) && ($password_length  >= 5) && ($confirm_password_length >= 5)) { // limite minimum de caractere
 
                     if (($login_length <= 30) && ($password_length  <= 255) && ($confirm_password_length <= 255)) { // limite maximum de caractere
 
-                        $modelInscription = new \Models\Inscription();
-                        $return = $modelInscription->checkuser($login); // l'utilisateur existe-t-il ? 
+                        $modelInscription= new \Models\Inscription();
+                        $return = $modelInscription->ifDoesntExist($login); // l'utilisateur existe-t-il ?
 
                         if (!$return) {
 
                             if ($confirm_password == $password) // si le mdp != confirm mdp alors $errorLog
                             {
-                                $modelInscription->secure($login);
-                                $modelInscription->secure($password);
-                                $cryptedpass = password_hash($password, PASSWORD_BCRYPT); // CRYPTED 
-                                $modelInscription->insert($login, $cryptedpass);
-                                header('Location:../connexion.php?reg_err=success');
+                                $securedlogin=$model->secure($login);
+                                $securedpassword=$model->secure($password);
+                                $cryptedpass = password_hash($securedpassword, PASSWORD_BCRYPT);
+                                ;// CRYPTED
+                                $modelInscription->insert($securedlogin, $cryptedpass);
+                                $Http = new \Http();
+                                $Http->redirect('connexion.php?reg_err=success'); 
                             } else {
                                 header('Location: ../view/inscription.php?reg_err=password');
                                 die();
@@ -63,7 +72,10 @@ class Inscription // s'appel User
             header('Location: ../view/inscription.php?reg_err=already');
             die();
         }
-            echo $errorLog;
+            return 'caca';
         }
         
     }
+//    $caca=new Inscription();
+//    $caca->register('azerty','azertyu','azertyu');
+

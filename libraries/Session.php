@@ -1,5 +1,5 @@
 <?php
 
-if(!isset($_SESSION)){ // on met des session la ou y'en a pas
+if(!isset($_SESSION)){ 
     session_start();
 }

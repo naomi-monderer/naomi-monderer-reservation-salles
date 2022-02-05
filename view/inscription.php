@@ -1,6 +1,10 @@
 <?php
+$title = 'Inscription';
+require_once 'header.php';
 
-require ('header.php');
+// REQUIRE TA CLASS QUAND TU L'APPELLES
+require_once('../libraries/Controller/Inscription.php');
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -20,34 +24,68 @@ require ('header.php');
     </head>
     <header>
     </header>
+<body>
+    <div class="login-form">
+        <form action="" method="post">
+            <h2 class="text-center">Inscription</h2>
+            <div class="form-group">
+                <?php
+                if (isset($_GET['reg_err'])) {
+                    $err = htmlspecialchars($_GET['reg_err']);
 
-<main>
+                    switch ($err) {
+                        case 'success':
+                ?>
+                            <div class="alert alert-success">
+                                <strong>Succès</strong> inscription réussie !
+                            </div>
+                        <?php
+                            break;
 
-<section>
-        <form class="block" method="POST" action="">
-        <h2>Inscription</h2>
+                        case 'password':
+                        ?>
+                            <div class="alert alert-danger">
+                                <strong>Erreur</strong> mot de passe différent
+                            </div>
+                        <?php
+                            break;
 
+                        case 'already':
+                        ?>
+                            <div class="alert alert-danger">
+                                <strong>Erreur</strong> compte deja existant
+                            </div>
+                <?php
+
+                    }
+                }
+                ?>
+            </div>
+            <div class="form-group">
             <label name="login">Login</label>
-            <input type="text" id="inscriptionLogin" name="login"><br />
-
+            <input type="login" name="login" class="form-control" placeholder="login" required="required" autocomplete="off">
+            </div>
+            <div class="form-group">
             <label name="password">Password</label>
-            <input type="password" id="inscriptionPassword" name="password"><br />
-
+            <input type="password" name="password" class="form-control" placeholder="Mot de passe" required="required" autocomplete="off">
+            </div>
+            <div class="form-group">
             <label name="confirm_password">Confirm password</label>
-            <input type="password" id="inscriptionConfirm_password" name="confirm_password"><br />
-
+            <input type="password" name="password_retype" class="form-control" placeholder="Validez le mot de passe" required="required" autocomplete="off">
+            </div>
             <input style="margin-bottom:30px;" type="submit" id="inscriptionSubmit" value="register" name="register">
+
         </form>
-    <?php
+        <p class="text-center"><a href="connexion.php">Connexion</a></p>
+        <?php
 
-    if (isset($_POST['register'])) {
-        $newUser = new \Controller\Inscription(); // prend pas le bon
-        $newUser->register($_POST['login'], $_POST['password'], $_POST['confirm_password']);
-        }
+        if (isset($_POST['register'])) {
+        $newUser = new Controller\Inscription();
+        $newUser->register($_POST['login'], $_POST['password'], $_POST['password_retype']);
 
-    ?>
-</section>
-</main>
-<?php
-require ('footer.php');
+    }
+
 ?>
+    </div>
+</body>
+

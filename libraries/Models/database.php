@@ -4,11 +4,12 @@
 class DataBase
 {
     //Methode permettant la connexion à la BDD
-    protected function connect()
+    function connect()
     {
         try 
     {
-        $bdd = new PDO("mysql:host=localhost;dbname=reservationsalles;charset=utf8", "root", "root");
+         $bdd = new PDO("mysql:host=localhost;dbname=reservationsalles;charset=utf8", "root", "root");
+         return $bdd;
     }
     catch(PDOException $e)
     {

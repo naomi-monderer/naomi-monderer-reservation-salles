@@ -13,7 +13,6 @@ namespace Models {
             $result->bindvalue(':login', $login, \PDO::PARAM_STR);
             $result->bindvalue(':password', $cryptedpass, \PDO::PARAM_STR);
             $result->execute();
-            
         }
     }
 }
