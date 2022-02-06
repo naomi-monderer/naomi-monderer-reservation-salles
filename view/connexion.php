@@ -1,13 +1,9 @@
 <?php
 $title = 'Connexion';
 require_once 'header.php';
-if (isset($_POST['submit'])) {
-            
-    $newUser = new \Controller\Connexion(); 
-    $newUser->connect($_POST['login'], $_POST['password']);
-}
-?>
+require_once('../libraries/Controller/connexion.php');
 
+?>
 <body>
     <div class="login-form">
         <form action="" method="post">
@@ -58,21 +54,22 @@ if (isset($_POST['submit'])) {
                 }
                 ?>
                 <div class="form-group">
-                    <input type="text" name="prenom" class="form-control" placeholder="Prenom" required="required" autocomplete="off">
-                </div>
-                <div class="form-group">
-                    <input type="password" name="password" class="form-control" placeholder="Mot de passe" required="required" autocomplete="off">
-                </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-block">Connexion</button>
-                </div>
+            <input type="login" name="login" class="form-control" placeholder="login" required="required" autocomplete="off">
+            </div>
+            <div class="form-group">
+            <input type="password" name="password" class="form-control" placeholder="Mot de passe" required="required" autocomplete="off">
+            </div>
+            <button type="submit" class="btn btn-primary btn-block" value="register" name="register">Connexion</button>
         </form>
         <p class="text-center"><a href="inscription.php">Inscription</a></p>
-        <p class="text-center"><a href="https://github.com/sofiane-ziri/modul-connexion">Github</a></p>
 
     </div>
 </body>
 <?php
+if (isset($_POST['register'])) { 
+    $newUser = new \Controller\Connexion(); 
+    $newUser->connect($_POST['login'], $_POST['password']);
+}
 require_once 'header.php';
 ?>
 

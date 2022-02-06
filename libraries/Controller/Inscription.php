@@ -2,9 +2,6 @@
 
 namespace Controller;
 
-// require_once($Http);
-// require_once($session);
-// LE CHEMIN EST EN FONCTION DE LA OU TAPPELLES LA FONCTION GROSSE MERDE
 require_once("../libraries/Models/Model.php");
 require_once("../libraries/Models/Inscription.php");
 require_once("../libraries/Http.php");
@@ -18,9 +15,6 @@ class Inscription
         $this->login = $login;
         $this->password = $password;
 
-
-
-
         if (!empty($login) && !empty($password) && !empty($confirm_password)) { 
             
             $login_length = strlen($login);
@@ -28,7 +22,6 @@ class Inscription
             $confirm_password_length = strlen($confirm_password);
             $model = new \Models\Model();
             $result=$model->ifDoesntExist($login);
-            var_dump($result);
             if (!$result) {
                 if (($login_length >= 2) && ($password_length  >= 5) && ($confirm_password_length >= 5)) { // limite minimum de caractere
 
@@ -72,7 +65,7 @@ class Inscription
             header('Location: ../view/inscription.php?reg_err=already');
             die();
         }
-            return 'caca';
+            return 'EROR';
         }
         
     }
