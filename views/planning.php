@@ -1,5 +1,11 @@
 <?php
 
+use Models\ConnectDb;
+
+session_start();
+
+require_once('database.php');
+$bdd = new ConnectDb
 
 ?>
 <table>
