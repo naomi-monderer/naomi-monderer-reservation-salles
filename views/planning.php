@@ -5,7 +5,8 @@ use Models\ConnectDb;
 session_start();
 
 require_once('database.php');
-$bdd = new ConnectDb
+$database = new DataBase();
+$bdd = $database -> connect();
 
 ?>
 <table>
