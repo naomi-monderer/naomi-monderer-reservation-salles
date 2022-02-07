@@ -1,10 +1,9 @@
 <?php
-
+session_start();
 use Models\ConnectDb;
 
-session_start();
-
-require_once('database.php');
+// require_once('../libraries/Controllers/.php');
+require_once('../libraries/Models/database.php');
 $database = new DataBase();
 $bdd = $database -> connect();
 

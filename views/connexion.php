@@ -1,7 +1,8 @@
 <?php
 $title = 'Connexion';
 require_once 'header.php';
-require_once('../libraries/Controller/connexion.php');
+require_once('../libraries/Controllers/connexion.php');
+//require_once('../librairies/Models/database.php');
 
 ?>
 <body>

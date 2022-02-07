@@ -7,7 +7,8 @@ class Planning
     {
 
     }
-    
+    public function planning()
+    {}
 
 }
 ?>

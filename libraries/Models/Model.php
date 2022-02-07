@@ -34,7 +34,7 @@ require_once('database.php');
   
     public function passwordVerifySql($login) 
     {
-        $req = "SELECT password FROM utilisateurs WHERE login = '$login'"; // on repere le mdp crypté a comparer avec celui entré par l'utilisateur
+        $req = "SELECT password FROM utilisateurs WHERE login = :login"; // on repere le mdp crypté a comparer avec celui entré par l'utilisateur
         $result = $this->bdd->prepare($req);
         $result->bindvalue(':login', $login, \PDO::PARAM_STR);
         $result->execute();

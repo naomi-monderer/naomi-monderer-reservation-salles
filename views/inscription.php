@@ -1,7 +1,7 @@
 <?php
 $title = 'Inscription';
 require_once 'header.php';
-require_once('../libraries/Controller/Inscription.php');
+require_once('../libraries/Controllers/Inscription.php');
 ?>
 <body>
     <div class="login-form">
