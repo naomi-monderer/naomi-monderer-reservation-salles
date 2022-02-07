@@ -8,10 +8,12 @@ require_once("database.php");
         protected $login;
         protected $password;
 
+
         public function __construct()
         {
             $conn= new ConnectDb();
             $this->variableDeBdd = $conn->connect_bdd(); // initialise de la connexion 
+            parent::__construct();
         }
         public function verifyLogin($login)
         {

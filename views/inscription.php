@@ -4,7 +4,7 @@ require ('header.php');
 ?>
 <main>
     <section>
-    <form action="" methode="post">
+    <form action="" method="post">
         <label for="login">identifiant:</label>
         <input type="text" name="login" placeholder="identifiant">
 
