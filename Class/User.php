@@ -1,13 +1,14 @@
 <?php
+
 class User
 {
     private $id;
     public $login;
     public $password;
-    private $bdd;
-
+  
     public function __construct()
     {
+
         try
         {
             $options =
@@ -28,6 +29,7 @@ class User
             echo 'ERREUR :'.$exception->getMessage();
         }
     }
+    
 
     public function register($login,$password,$passwordConfirm)
     {
@@ -87,6 +89,7 @@ class User
         }
     }
     public function connect($login,$password){
+
         $_login = htmlspecialchars($login);
         $_password = htmlspecialchars($password);
       
@@ -99,31 +102,31 @@ class User
                
                 $infos = "SELECT * FROM utilisateurs WHERE login = :login ";
                 $result = $this->bdd->prepare($infos);
-                
                 $result->setFetchMode(PDO:: FETCH_ASSOC);// j'utilise fetch_assoc pour récuperer les key d'un tableau associatif 
                 $result->execute(array(
                     ":login"=> $login,
                     
                 ));
+                
 
                 $userData = $result->fetchAll();
-                
                 
                 if(password_verify($password,$userData[0]['password']))
                         {
                             session_start();
-                                $_SESSION["user"] = [
-                                    $this->id = $userData[0]["id"],
-                                    $this->login = $userData[0]["login"],
-                                    $this->password = $userData[0]["password"],
+                                $_SESSION["user"]= $userData[0];
+                                $_SESSION["userId"] = $userData[0]["id"];
+                                $_SESSION["userLogin"]= $userData[0]["login"];
+                                $_SESSION["userPassword"] = $userData[0]["password"];
+                                // // [
+                                //     $_SESSION["user"]= [
+                                //     $this->id = $userData[0]["id"],
+                                //     $this->login = $userData[0]["login"],
+                                //     $this->password = $userData[0]["password"],
                                 
-                                ];
-                              
-                                echo '<pre>';
-                                var_dump($_SESSION['user']);
-                                echo '</pre>';
-                                // header('Location:profil.php');
-                                // exit();
+                                // ];
+                                 header('Location:profil.php');
+                                exit();
                         }
                                 return $userData;
             }
@@ -134,6 +137,56 @@ class User
     {
         session_destroy();
         header('Location: connexion.php');
+    }
+
+    public function update($login, $password, $passwordConfirm)
+    {
+       
+        if(isset($_SESSION['user']))
+        {       $this->login = $login;
+                $this->password = $password;
+                
+
+                $infos2 = "SELECT * FROM utilisateurs WHERE login = :login ";
+                $result2 =$this->bdd->prepare($infos2);
+                $result2->setFetchMode(PDO:: FETCH_ASSOC);  
+                $result2->execute(array(
+                    ":login"=> $login,
+                ));
+                $verifyLogin = $result2->fetchAll();
+                
+                if(!$verifyLogin && $_SESSION['user']['login'])
+                {   
+                    if($password == $passwordConfirm)
+                    {
+                        $cryptedpass=password_hash($passwordConfirm,PASSWORD_BCRYPT);
+                        $update = "UPDATE utilisateurs SET login = :login , password= :password WHERE id = :id ";
+                        $result = $this->bdd->prepare($update);
+                        
+                        $result->execute(array(
+                            ":id"=>$_SESSION['user']['id'],
+                           ":login"=> $login,
+                           ":password"=> $cryptedpass));
+                        $updateProfil = $result->fetchAll();
+
+                    }
+
+                }
+           
+
+        
+                if(!$result2 && $_SESSION['user'])
+
+           
+                var_dump($result2);
+            
+           
+                //$user = $result2->fetchAll();
+                $_SESSION["user"]['login'] =$login;
+                echo "les informations de l'utilisateurs ont bien été modifiées";
+            
+            //return $result;
+        }
     }
 
 }
