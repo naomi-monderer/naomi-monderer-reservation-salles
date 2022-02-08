@@ -15,6 +15,7 @@ if(isset($_POST['submit']))
 $reservation->insert_event($titre,$description,$debut,$fin,$id_user);
 }
 
+echo "on veut push mais ca marche aps";
 
 ?>
 <main>
