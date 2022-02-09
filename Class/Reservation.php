@@ -53,27 +53,20 @@
             ));
             
     }
-    public function getDatas($debut)
+    public function getDatas($date_debut)
     {   
-        // $query=" SELECT * FROM reservations WHERE debut = :debut";
-        $query=" SELECT reservations.id, reservations.titre, reservations.description, utilisateurs.id, utilisateurs.login FROM reservations INNER JOIN utilisateurs ON id_utilisateurs = utilisateurs.id WHERE debut = 'debut'  ";
-        $result=$this->bdd->prepare($query);
-        // $result->execute(array(
-        //        ':debut'=>$debut,
-        //     ));
-        $result->bindValue(':debut',$debut);
-        $result->execute();
-
-        $getDatas = $result->fetch(PDO::FETCH_ASSOC);
-
-    
-
-
         
-            return $getDatas;
+    
+            $query="SELECT * FROM reservations WHERE debut= :debut";
+            $result = $this->bdd->prepare($query);
+            $result->bindValue(':debut',$date_debut);
+            $result->execute();
+            $getDatas= $result->fetchAll();
 
             
-    }
+            return $getDatas;
+
+            }
     // public function getReserv($debut)
     // {   
     //     // $query=" SELECT * FROM reservations WHERE debut = :debut";
@@ -93,5 +86,16 @@
             
     // }
  }
+ // $query=" SELECT * FROM reservations WHERE debut = :debut";
+//  $query=" SELECT reservations.id, reservations.titre, reservations.description, utilisateurs.id, utilisateurs.login FROM reservations INNER JOIN utilisateurs ON id_utilisateurs = utilisateurs.id WHERE debut = 'debut'  ";
+//  $result=$this->bdd->prepare($query);
+//  // $result->execute(array(
+//  //        ':debut'=>$debut,
+//  //     ));
+//  $result->bindValue(':debut',$debut);
+//  $result->execute();
+
+//  $getDatas = $result->fetch(PDO::FETCH_ASSOC);
+
 
 ?>
