@@ -1,22 +1,13 @@
 <?php
-<<<<<<< HEAD
-$title = 'Planning';
-?>
-<body>
-    <?php include 'assets/include/header.php'; ?>
-</body>
-=======
 session_start();
 require('Include/header.php');
 require('Class/User.php');
 require('Class/Reservation.php');
 
-$getData = new Reservation();
+$test = new Reservation();
 
+//afficher un lien dans un td vers le form 
 
-// echo '<pre>';
-// var_dump($result);
-// echo '</pre>';
 ?>
 
 
@@ -30,25 +21,60 @@ $getData = new Reservation();
         <?php endfor; ?>    
     </thead>
     <tbody>
-        <?php for($j = 8; $j <=19; $j++ ): ?>
+        <?php for ($j = 8; $j <=19; $j++ ): ?>
             <tr>
                 <td><?= $j. ":00"?></td>
            
             <?php
-                for($i=0; $i < 7;$i++)
+                for ($i=0; $i < 7;$i++)
                 {
-                    $getData->getDatas(date("Y-m-d",strtotime("Monday this week +" .$i. "days")).' '.$j.'00');
-                    // $reservation = $getDatas->getDatas(date("Y-m-d",strtotime("Monday this week +" .$i. "days")).' '.$j.'00');
-                    echo '<td>';
-                    var_dump($getData);
-                    // var_dump($reservation);
-                    echo '<td>';
-                }
-            ?>
+                    
+               
+                  $showResa = $test->showResa(date('Y-m-d',strtotime('Monday this week +'.$i.'days')).' '.$j.':00:00'); 
+                   
+
+                    if (!empty($showResa))
+                    {
+                        // $DateTime = new DateTime();
+                        // $z_debut = strtotime($showResa[0]['debut']); 
+                        // $z_fin = strtotime($showResa[0]['fin']); 
+                        
+                        // $debutdebut = date('d/M/Y h:i:s', $z_debut);
+                        // $finfin = date('d/M/Y h:i:s', $z_fin);
+                        // $result = $DateTime->diff($finfin,$debutdebut);
+                        // var_dump($result);
+                        // <a href="chemin;php?id=$reservations[0]['id']"></a>
+                        
+                        echo '<td style="background:purple";>'
+                        .$showResa[0]['login'].$showResa[0]['titre'].
+                        '</td>';
+                        // echo '<pre>';
+                        // var_dump($reservations[0]);
+                        // echo '</pre>';
+                        echo '<pre>';
+                        var_dump($showResa);
+                        echo '</pre>';
+                    }
+                    else
+                    {
+                        echo '<td style ="background:green";>
+                        <form action="reservation-form.php">
+                           <button style ="background:green">LIBRE</button>
+                        </form>
+                        </td>';
+                    }
+                }  
+                // echo '<pre>';
+                // var_dump($showResa);
+                // echo '</pre>';
+               
+                // echo '<pre>';
+                // var_dump($getDatas);
+                // echo '</pre>';
+                
+                ?>
                 
             </tr>
-        <?php endfor; ?>
-
-    </tbody>
+        <?php endfor;?>
+                
 </table>
->>>>>>> a28c3e20422f29f0d9ac4311c454ff2b9293c989

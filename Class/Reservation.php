@@ -24,7 +24,7 @@
             ]; 
             $DB_SDN ='mysql:host=localhost;dbname=reservationsalles';
             $DB_USER = 'root';
-            $DB_PASS ='root'; 
+            $DB_PASS =''; 
             
             //on va instancier donc créer un objet PDO
             $this->bdd = new PDO($DB_SDN, $DB_USER, $DB_PASS, $options);
@@ -56,7 +56,7 @@
     public function getDatas($debut)
     {   
         // $query=" SELECT * FROM reservations WHERE debut = :debut";
-        $query=" SELECT reservations.id, reservations.titre, reservations.description, utilisateurs.id, utilisateurs.login FROM reservations INNER JOIN utilisateurs ON id_utilisateurs = utilisateurs.id WHERE debut = 'debut'  ";
+        $query=" SELECT reservations.id, reservations.titre, reservations.description, utilisateurs.id, utilisateurs.login FROM reservations INNER JOIN utilisateurs ON id_utilisateur = utilisateurs.id WHERE debut = 'debut'  ";
         $result=$this->bdd->prepare($query);
         // $result->execute(array(
         //        ':debut'=>$debut,

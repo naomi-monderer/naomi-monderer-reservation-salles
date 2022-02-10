@@ -1,14 +1,7 @@
 <?php
-<<<<<<< HEAD
-$title = 'Réserver votre Salle';
-?>
-<body>
-    <?php include 'assets/include/header.php'; ?>
-</body>
-=======
 session_start();
 require_once('Class/Reservation.php');
-$id_user = $_SESSION['userId'];
+// $id_user = $_SESSION['userId'];
 
 $reservation = new Reservation();
 if(isset($_POST['submit']))
@@ -22,12 +15,12 @@ if(isset($_POST['submit']))
 $reservation->insert_event($titre,$description,$debut,$fin,$id_user);
 }
 
-echo "on veut push mais ca marche aps";
+// echo "on veut push mais ca marche aps";
 
 ?>
 <main>
     <h2>Faites votre réservation</h2>
-    <p>Vous devez reserver la salle avec des créneaux en heures plaines.</p>
+    <p>Vous devez reserver la salle avec des créneaux en heures pleines.</p>
     <form action="" method="post">
         <label for="titre">Titre du film:</label>
         <input type="text" name="titre" placeholder="ex:Die Hard 3" >
@@ -54,4 +47,3 @@ echo "on veut push mais ca marche aps";
    
 require 'Include/footer.php';
 ?>
->>>>>>> a28c3e20422f29f0d9ac4311c454ff2b9293c989
