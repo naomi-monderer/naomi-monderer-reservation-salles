@@ -18,7 +18,7 @@ if(isset($_POST['submit']))
     if(!empty($_POST['titre']) && !empty($_POST['description']) && !empty($_POST['debut']) && !empty($_POST['fin']))
     {
         $reservation->insert_event($titre,$description,$debut,$fin,$id_utilisateurs);
-        
+            
         
     }
     else

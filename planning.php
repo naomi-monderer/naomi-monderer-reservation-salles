@@ -35,14 +35,14 @@ $test = new Reservation();
 
                     if (!empty($showResa))
                     {
-                        $DateTime = new DateTime();
-                        $z_debut = strtotime($showResa[0]['debut']); 
-                        $z_fin = strtotime($showResa[0]['fin']); 
+                        // $DateTime = new DateTime();
+                        // $z_debut = strtotime($showResa[0]['debut']); 
+                        // $z_fin = strtotime($showResa[0]['fin']); 
                         
-                        $debutdebut = date('d/M/Y h:i:s', $z_debut);
-                        $finfin = date('d/M/Y h:i:s', $z_fin);
-                        $result = $DateTime->diff($finfin,$debutdebut);
-                        var_dump($result);
+                        // $debutdebut = date('d/M/Y h:i:s', $z_debut);
+                        // $finfin = date('d/M/Y h:i:s', $z_fin);
+                        // $result = $DateTime->diff($finfin,$debutdebut);
+                        // var_dump($result);
                         // <a href="chemin;php?id=$reservations[0]['id']"></a>
                         
                         echo '<td style="background:purple";>'
