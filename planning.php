@@ -15,7 +15,11 @@ $test = new Reservation();
     <thead>
         <th></th>
         <?php for($i=0;$i<7; $i++): ?>
-            <th><?= date("d-m-y",strtotime("Monday this week +" .$i. "days"))?></th>
+            <th><?= 
+                
+                // date("d-m-y",strtotime("Monday this week +" .$i. "days"))
+                $dateFrench = $test->formatDate($i);
+                ?></th>
 
 
         <?php endfor; ?>    
@@ -29,9 +33,12 @@ $test = new Reservation();
                 for ($i=0; $i < 7;$i++)
                 {
                     
-               
+                    
                   $showResa = $test->showResa(date('Y-m-d',strtotime('Monday this week +'.$i.'days')).' '.$j.':00:00'); 
-                   
+                    //  input date 
+                    //  bdd non =
+                    //  bdd input
+                    //  date : 3 niveau
 
                     if (!empty($showResa))
                     {

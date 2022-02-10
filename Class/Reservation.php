@@ -37,7 +37,7 @@
     }
 
    
-    public function insert_event($titre,$description,$debut,$fin,$id_user)
+    public function insert_event($titre,$description,$debut,$fin,$id_utilisateurs)
     {
         // var_dump($_SESSION);
        
@@ -49,49 +49,41 @@
                 ':description'=>$description,
                 ':debut'=>$debut,
                 ':fin'=>$fin,
-                ':id_utilisateurs'=>$id_user
+                ':id_utilisateurs'=>$id_utilisateurs
             ));
             
     }
-    public function getDatas($debut)
+    public function getDatas($date_debut)
     {   
-        // $query=" SELECT * FROM reservations WHERE debut = :debut";
-        $query=" SELECT reservations.id, reservations.titre, reservations.description, utilisateurs.id, utilisateurs.login FROM reservations INNER JOIN utilisateurs ON id_utilisateur = utilisateurs.id WHERE debut = 'debut'  ";
-        $result=$this->bdd->prepare($query);
-        // $result->execute(array(
-        //        ':debut'=>$debut,
-        //     ));
-        $result->bindValue(':debut',$debut);
+        $query="SELECT * FROM reservations WHERE debut= :debut";
+        $result = $this->bdd->prepare($query);
+        $result->bindValue(':debut',$date_debut);
         $result->execute();
-
-        $getDatas = $result->fetch(PDO::FETCH_ASSOC);
-
-    
-
-
-        
-            return $getDatas;
-
-            
+        $getDatas= $result->fetchAll();
+        return $getDatas;
     }
-    // public function getReserv($debut)
-    // {   
-    //     // $query=" SELECT * FROM reservations WHERE debut = :debut";
-    //     $query=" SELECT reservations.id, reservations.titre, reservations.description, utilisateurs.id, utilisateurs.login 
-    //             FROM reservations INNER JOIN utilisateurs ON id_utilisateurs = utilisateurs.id WHERE debut = :debut ";
-    //     $result=$this->bdd->prepare($query);
-    //     // $result->execute(array(
-    //     //        ':debut'=>$debut,
-    //     //     ));
-    //     $result->bindValue(':debut',$debut);
-    //     $result->execute();
 
-    //     $getDatas = $result->fetch(PDO::FETCH_ASSOC);
-        
-    //         return $getDatas;
+    public function showResa($date_debut)
+    {
+        $query = "SELECT reservations.titre, utilisateurs.login, reservations.debut, reservations.fin  
+                 FROM reservations 
+                 INNER JOIN utilisateurs
+                 ON reservations.id_utilisateurs = utilisateurs.id
+                 WHERE debut= :debut";
+        $result = $this->bdd->prepare($query);
+        $result->bindValue(':debut',$date_debut);
+        $result->execute();
+        $showResa = $result->fetchAll(PDO::FETCH_ASSOC);
+        return $showResa;
 
-            
-    // }
- }
+    }
 
+    public function formatDate($days)
+    {
+        // http://benjamin.leveque.me/formater-une-date-avec-php-5-3-l10n-partie-2.html
+        $format = new IntlDateFormatter('fr_FR', IntlDateFormatter::FULL, IntlDateFormatter::NONE);
+        $formatFrench = new DateTime("Monday this week +" .$days. "days");
+        return $format->format( $formatFrench);
+    }
+}
 ?>
