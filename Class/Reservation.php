@@ -65,7 +65,7 @@
 
     public function showResa($date_debut)
     {
-        $query = "SELECT reservations.titre, utilisateurs.login, reservations.debut, reservations.fin  
+        $query = "SELECT *
                  FROM reservations 
                  INNER JOIN utilisateurs
                  ON reservations.id_utilisateurs = utilisateurs.id
@@ -75,7 +75,6 @@
         $result->execute();
         $showResa = $result->fetchAll(PDO::FETCH_ASSOC);
         return $showResa;
-
     }
 
     public function formatDate($days)
@@ -84,6 +83,25 @@
         $format = new IntlDateFormatter('fr_FR', IntlDateFormatter::FULL, IntlDateFormatter::NONE);
         $formatFrench = new DateTime("Monday this week +" .$days. "days");
         return $format->format( $formatFrench);
+    }
+
+    public function displayReservation()
+    {
+        if(isset($_GET['id'])){
+            $id_reserv = $_GET['id'];
+        }
+        $query = "SELECT *  
+        FROM reservations 
+        INNER JOIN utilisateurs
+        ON reservations.id_utilisateurs = utilisateurs.id
+        WHERE reservations.id = :id";
+        $result = $this->bdd->prepare($query);
+        $result->bindValue(':id', $id_reserv);
+        $result->execute();
+        $displayResa = $result->fetchAll(PDO::FETCH_ASSOC);
+        var_dump($displayResa);
+        return $displayResa;
+
     }
 }
 ?>
