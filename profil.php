@@ -18,19 +18,19 @@ if(isset($_POST['submit']))
 
 ?>
 <body>
-        <main>    
-            <section>
-                <h3>PROFIL</h3>
-                <form method="post">
-                    <input type="text" name ="login" value="<?= $_SESSION['user']['login']; ?>" placeholder="Identifiant">
-                    <input type="password" name ="password" value="" placeholder="Mot de passe">
-                    <input type="password" name ="passwordConfirm" value="" placeholder="Mot de passe">
+    <main>    
+        <section>
+            <h3>PROFIL</h3>
+            <form method="post">
+                <input type="text" name ="login" value="<?= $_SESSION['user']['login']; ?>" placeholder="Identifiant">
+                <input type="password" name ="password" value="" placeholder="Mot de passe">
+                <input type="password" name ="passwordConfirm" value="" placeholder="Mot de passe">
 
-                    <input type="submit" name="submit" value="mise à jour du profil">
-                               
-                </form> 
-            </section>
-        </main>
+                <input type="submit" name="submit" value="mise à jour du profil">
+                            
+            </form> 
+        </section>
+    </main>
 </body>
 <?php
 require('Include/footer.php');

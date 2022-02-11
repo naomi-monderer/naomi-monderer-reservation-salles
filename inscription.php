@@ -2,12 +2,13 @@
 require('Include/header.php');
 require('Class/User.php');
 
-
 $userData = new User();
 if(isset($_POST['submit']))
 {
-    $userData->register($_POST['login'],$_POST['password'],$_POST['passwordConfirm']);
+    $Datas= $userData->register($_POST['login'],$_POST['password'],$_POST['passwordConfirm']);
+   
 }
+var_dump($userData);
 
 
 ?>

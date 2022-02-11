@@ -5,6 +5,7 @@ require('Class/User.php');
 require('Class/Reservation.php');
 
 $test = new Reservation();
+// $showResaUser = $test->showResaUser();
 
 //afficher un lien dans un td vers le form 
 
@@ -30,10 +31,10 @@ $test = new Reservation();
                 {
                     
                
-                  $showResa = $test->showResa(date('Y-m-d',strtotime('Monday this week +'.$i.'days')).' '.$j.':00:00'); 
+                  $resaPlanning = $test->resaPlanning(date('Y-m-d',strtotime('Monday this week +'.$i.'days')).' '.$j.':00:00'); 
                    
 
-                    if (!empty($showResa))
+                    if (!empty($resaPlanning))
                     {
                         // $DateTime = new DateTime();
                         // $z_debut = strtotime($showResa[0]['debut']); 
@@ -45,15 +46,12 @@ $test = new Reservation();
                         // var_dump($result);
                         // <a href="chemin;php?id=$reservations[0]['id']"></a>
                         
-                        echo '<td style="background:purple";>'
-                        .$showResa[0]['login'].$showResa[0]['titre'].
+                        echo '<td style="background:purple">
+                        <a href="reservation.php?id_resa=$id_resa"></a>'
+                        .$resaPlanning[0]['login'].$resaPlanning[0]['titre'].
                         '</td>';
-                        // echo '<pre>';
-                        // var_dump($reservations[0]);
-                        // echo '</pre>';
-                        echo '<pre>';
-                        var_dump($showResa);
-                        echo '</pre>';
+                       
+                        
                     }
                     else
                     {
@@ -64,13 +62,7 @@ $test = new Reservation();
                         </td>';
                     }
                 }  
-                // echo '<pre>';
-                // var_dump($showResa);
-                // echo '</pre>';
-               
-                // echo '<pre>';
-                // var_dump($getDatas);
-                // echo '</pre>';
+              
                 
                 ?>
                 

@@ -33,62 +33,64 @@ class User
 
     public function register($login,$password,$passwordConfirm)
     {
-        
-
-      
         $_login = htmlspecialchars($login);
         $_password = htmlspecialchars($password);
         $_passwordConfirm = htmlspecialchars($passwordConfirm);
 
-
-      
         $login = trim($_login);
         $passwordConfirm = trim($_passwordConfirm);
         $password = trim($_password);
      
-
-        if (!empty($login) && !empty($password) && !empty($passwordConfirm)) 
+       if (!empty($login) && !empty($password) && !empty($passwordConfirm)) 
         {
-          
-                
-                $infos = "SELECT * FROM utilisateurs WHERE login = :login ";
-                $result = $this->bdd->prepare($infos);
-                $result->bindvalue(':login',$login);
-                $result->setFetchMode(PDO:: FETCH_ASSOC);// j'utilise fetch_assoc pour récuperer les key d'un tableau associatif 
-                $result->execute();
-                $userData = $result->fetchAll();
+            $infos = "SELECT * FROM utilisateurs WHERE login = :login ";
+            $result = $this->bdd->prepare($infos);
+            $result->execute(array('login'=>$login));
+            $userData = $result->fetchAll(PDO::FETCH_ASSOC);
 
-                var_dump($infos);
+            if ((count($userData)) === 0)
 
-                if ((count($userData)) === 0)
-                    {
-                         if ($password == $passwordConfirm) 
-                        {
-                            
-                            $cost = ['cost' => 12];
-                            $password = password_hash($password,PASSWORD_BCRYPT);
-                             
+            {  
+                if ($password == $passwordConfirm) 
+                {
                     
-                            $query = "INSERT INTO utilisateurs(login, password)
-                            VALUES(:login, :password)";
-                            $result=$this->bdd->prepare($query);
-                            $result->bindvalue(':login', $login);
-                            $result->bindvalue(':password', $password);
-                            $result->execute(array(
-                                ":login" => $login,
-                                ":password" => $password,
-                            
-                            ));
-                            header('Location:connexion.php');
-                           
+                    $cost = ['cost' => 12];
+                    $password = password_hash($password,PASSWORD_BCRYPT);
                         
-                        }
-                            return $userData;
-                    }
-
+            
+                    $query = "INSERT INTO utilisateurs(login, password)
+                    VALUES(:login, :password)";
+                    $result=$this->bdd->prepare($query);
+                    $result->bindvalue(':login', $login);
+                    $result->bindvalue(':password', $password);
+                    $result->execute(array(
+                        ":login" => $login,
+                        ":password" => $password,
+                    
+                    ));
+                    header('Location:connexion.php');
+                    return $userData;
+                
+                }
+                else
+                {
+                    echo  "Les mots de passe doivent être identiques";
+                }
+            }
+            else
+            {
+                echo "Ce login est déjà utilisé";
+            }
+        }
+        else
+        {
+            echo "Tous les champs doivent être remplis.";
         }
     }
-    public function connect($login,$password){
+
+
+    public function connect($login,$password)
+    {
 
         $_login = htmlspecialchars($login);
         $_password = htmlspecialchars($password);
@@ -107,31 +109,43 @@ class User
                     ":login"=> $login,
                     
                 ));
-                
-
                 $userData = $result->fetchAll();
-                
-                if(password_verify($password,$userData[0]['password']))
-                        {
-                            session_start();
-                                $_SESSION["user"]= $userData[0];
-                                $_SESSION["userId"] = $userData[0]["id"];
-                                $_SESSION["userLogin"]= $userData[0]["login"];
-                                $_SESSION["userPassword"] = $userData[0]["password"];
-                                // // [
-                                //     $_SESSION["user"]= [
-                                //     $this->id = $userData[0]["id"],
-                                //     $this->login = $userData[0]["login"],
-                                //     $this->password = $userData[0]["password"],
-                                
-                                // ];
-                                 header('Location:profil.php');
-                                exit();
-                        }
-                                return $userData;
+                if (count($userData)===1)
+                {
+                    if(password_verify($password,$userData[0]['password']))
+                    {
+                        session_start();
+                            $_SESSION["user"]= $userData[0];
+                            $_SESSION["userId"] = $userData[0]["id"];
+                            $_SESSION["userLogin"]= $userData[0]["login"];
+                            $_SESSION["userPassword"] = $userData[0]["password"];
+                            // // [
+                            //     $_SESSION["user"]= [
+                            //     $this->id = $userData[0]["id"],
+                            //     $this->login = $userData[0]["login"],
+                            //     $this->password = $userData[0]["password"],
+                            
+                            // ];
+                             header('Location:profil.php');
+                            exit();
+                            return $userData;
+                    }
+                    else
+                    {
+                        echo "Les mots de passent doivent être identiques.";
+                    }
+                            
+                }
+                else
+                {
+                    echo "Ce login est incorrect.";
+                }
             }
-
-        }
+            else
+            {
+                echo "Tous les champs doivent être remplis.";
+            }
+    }
     
     public function disconnect()
     {
