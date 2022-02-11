@@ -35,33 +35,17 @@ $test = new Reservation();
                     
                     
                   $showResa = $test->showResa(date('Y-m-d',strtotime('Monday this week +'.$i.'days')).' '.$j.':00:00'); 
-                    //  input date 
-                    //  bdd non =
-                    //  bdd input
-                    //  date : 3 niveau
 
-                    if (!empty($showResa))
-                    {
-                        // $DateTime = new DateTime();
-                        // $z_debut = strtotime($showResa[0]['debut']); 
-                        // $z_fin = strtotime($showResa[0]['fin']); 
+                  if (!empty($showResa))
+                    { ?>
+ 
                         
-                        // $debutdebut = date('d/M/Y h:i:s', $z_debut);
-                        // $finfin = date('d/M/Y h:i:s', $z_fin);
-                        // $result = $DateTime->diff($finfin,$debutdebut);
-                        // var_dump($result);
-                        // <a href="chemin;php?id=$reservations[0]['id']"></a>
-                        
-                        echo '<td style="background:purple";>'
-                        .$showResa[0]['login'].$showResa[0]['titre'].
-                        '</td>';
-                        // echo '<pre>';
-                        // var_dump($reservations[0]);
-                        // echo '</pre>';
-                        echo '<pre>';
-                        var_dump($showResa);
-                        echo '</pre>';
-                    }
+                    <td style="background:purple";>
+                       <a href="reservation.php?id=<?= $showResa[0]['id'] ?>"><?= $showResa[0]['login'].$showResa[0]['titre'] ?> </a> 
+                    </td> 
+                       <?php  //var_dump($showResa) ?>
+                        </pre>
+                   <?php }
                     else
                     {
                         echo '<td style ="background:green";>
