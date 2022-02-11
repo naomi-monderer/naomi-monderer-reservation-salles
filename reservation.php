@@ -1,11 +1,22 @@
 <?php
+
 session_start();
 require_once('Class/Reservation.php');
 require_once('Class/User.php');
+require('Include/header.php');
 
-if(isset($_SESSION['user']))
-{
-    
-}
 
+$oneResa = new Reservation();
+
+$oneReservation = $oneResa->displayReservation();
+
+var_dump($_GET);
 ?>
+
+<h1>Réservé par <?= $oneReservation[0]['login'] ?> </h1>
+    <p>TITRE -  <?= $oneReservation[0]['titre'] ?></p>
+    <p>DESCRIPTION - <?= $oneReservation[0]['description'] ?></p>
+    <p>DEBUT - <?= $oneReservation[0]['debut'] ?></p>
+    <p>FIN - <?= $oneReservation[0]['fin'] ?></p>
+
+
