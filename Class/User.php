@@ -138,12 +138,11 @@ class User
         header('Location: connexion.php');
     }
 
-    public function update($login, $password, $passwordConfirm)
+    public function updatelogin($login)
     {
        
         if(isset($_SESSION['user']))
         {       $this->login = $login;
-                $this->password = $password;
              
                 $infos2 = "SELECT * FROM utilisateurs WHERE login = :login ";
                 $result2 =$this->bdd->prepare($infos2);
@@ -157,30 +156,26 @@ class User
                 
                 if(!$verifyLogin)
                 {   
-                    if($password == $passwordConfirm)
-                    {
-                        $cryptedpass=password_hash($passwordConfirm,PASSWORD_BCRYPT);
-                        $update = "UPDATE utilisateurs SET login= :login , password= :password WHERE id = :id ";
+                    
+                        $update = "UPDATE utilisateurs SET login= :login  WHERE id = :id ";
                         $result = $this->bdd->prepare($update);
                         
                         $result->execute(array(
                            ":id"=>$_SESSION['user']['id'],
                            ":login"=>$login,
-                           ":password"=> $cryptedpass,
                         ));
 
-                    }
+                    
 
                 }
                 if(isset($verifyLogin[0]) && $verifyLogin[0]['login']==$_SESSION['user']['login']){
                     $cryptedpass=password_hash($passwordConfirm,PASSWORD_BCRYPT);
-                        $update = "UPDATE utilisateurs SET login= :login , password= :password WHERE id = :id ";
+                        $update = "UPDATE utilisateurs SET login= :login  id = :id ";
                         $result = $this->bdd->prepare($update);
                         
                         $result->execute(array(
                            ":id"=>$_SESSION['user']['id'],
                            ":login"=>$login,
-                           ":password"=> $cryptedpass,
                         ));
                 }
 
@@ -192,11 +187,29 @@ class User
            
             
            
-                //$user = $result2->fetchAll();
                 $_SESSION["user"]['login'] =$login;
                 echo "les informations de l'utilisateurs ont bien été modifiées";
             
-            //return $result;
         }
+    }
+
+    public function updatepassword($password, $passwordConfirm)
+    {
+       
+       
+                    if($password == $passwordConfirm)
+                    {
+                        $cryptedpass=password_hash($passwordConfirm,PASSWORD_BCRYPT);
+                        $update = "UPDATE utilisateurs SET password= :password WHERE id = :id ";
+                        $result = $this->bdd->prepare($update);
+
+                        $result->execute(array(
+                           ":id"=>$_SESSION['user']['id'],
+                           ":password"=> $cryptedpass,
+                        ));
+
+                    }
+                echo "les informations de l'utilisateurs ont bien été modifiées";
+        
     }
 }
