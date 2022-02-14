@@ -1,8 +1,9 @@
 <?php
+$title = "Profil";
+session_start();
 require('Include/header.php');
 require('Class/User.php');
 
-session_start();
 
 $userData = new User();
 if(isset($_POST['submit']))
@@ -16,7 +17,7 @@ if(isset($_POST['submit']))
                 <h3>PROFIL</h3>
                 <form method="post">
                     <input type="text" name ="login" value="<?= $_SESSION['user']['login']; ?>" placeholder="Identifiant">
-                    <input type="submit" name="submit" value="mise à jour du login">                             
+                    <input type="submit" name="submit" class="btn btn-info" value="mise à jour du login">
                 </form> 
                
 <?php
@@ -29,7 +30,7 @@ if(isset($_POST['register']))
                 <form method="post">     
                    <input type="password" name ="password" value="" placeholder="password">
                    <input type="password" name ="passwordConfirm" value="" placeholder="passwordConfirm">
-                   <button type="register" name="register" value="mise à jour du login">
+                   <button type="register" name="register" class="btn btn-info" value="mise à jour du password">Mise à jour du password</button>
                 </form>
                
             </section>

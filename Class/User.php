@@ -78,11 +78,16 @@ class User
                                 ":password" => $password,
                             
                             ));
-                            header('Location:connexion.php');
+                            header('Location:connexion.php?reg_err=success');
                            
                         
                         }
-                            return $userData;
+                            else {
+                            header('Location: inscription.php?reg_err=password');
+                            die();}
+                    }else {
+                        header('Location: inscription.php?reg_err=already');
+                        die();
                     }
 
         }
@@ -117,25 +122,25 @@ class User
                                 $_SESSION["userId"] = $userData[0]["id"];
                                 $_SESSION["userLogin"]= $userData[0]["login"];
                                 $_SESSION["userPassword"] = $userData[0]["password"];
-                                // // [
-                                //     $_SESSION["user"]= [
-                                //     $this->id = $userData[0]["id"],
-                                //     $this->login = $userData[0]["login"],
-                                //     $this->password = $userData[0]["password"],
-                                
-                                // ];
+                               
                                  header('Location:profil.php');
                                 exit();
-                        }
                                 return $userData;
+                        }else {
+                            header('Location: connexion.php?login_err=password');
+                            die();
+                        }
+                                
             }
 
         }
     
     public function disconnect()
     {
-        session_destroy();
+        session_start(); // demarrage de la session
+        session_destroy(); // on détruit la/les session(s), soit si vous utilisez une autre session, utilisez de préférence le unset()
         header('Location: connexion.php');
+        die();
     }
 
     public function updatelogin($login)

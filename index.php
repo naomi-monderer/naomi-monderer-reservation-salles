@@ -1,5 +1,8 @@
-<?php require('Include/header.php'); 
+<?php 
 session_start();
+$title = "Accueil";
+require('Include/header.php'); 
+
 ?>
 
 <!DOCTYPE html>
@@ -11,6 +14,11 @@ session_start();
     <title>Accueil</title>
 </head>
 <body>
-    <h1>Bienvenue <?php echo $_SESSION['user']['login']; ?> </h1>
+<h1>reservation salles </h1>
+
+    <?php if(isset($_SESSION['user']['login'])){  ?>
+            <h1>Bienvenue <?php echo $_SESSION['user']['login']; } ?> </h1>
+            
+            
 </body>
 </html>
