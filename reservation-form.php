@@ -7,6 +7,8 @@ $id_utilisateurs = $_SESSION['userId'];
 $error = '';
 
 $reservation = new Reservation();
+$testResInfos = $reservation->getClickInfosReserv();
+
 if(isset($_POST['submit']))
 {  
     $titre = $_POST['titre'];
@@ -34,15 +36,19 @@ if(isset($_POST['submit']))
     <p>Vous devez reserver la salle avec des créneaux en heures pleines.</p>
     <form action="" method="post">
         <label for="titre">Titre du film:</label>   
-        <input type="text" name="titre" placeholder="ex:Die Hard 3">
-
-        <label for="description">Pitch:</label>
+       
+        <input type="text" name="titre" value="">
+        <?php  
+        // var_dump($reservation);  
+        var_dump($testResInfos);
+        ?>
+        <label for="description" value="">Pitch:</label>
         <textarea name="description" ></textarea>
 
-        <label for="debut">De:</label>
+        <label for="debut" value="">De:</label>
         <input type="datetime-local" name="debut">
 
-        <label for="fin">Jusqu'à</label>
+        <label for="fin" value="">Jusqu'à</label>
         <input type="datetime-local" name="fin">
 
         <input type="hidden" name="id_utilisateurs" > 

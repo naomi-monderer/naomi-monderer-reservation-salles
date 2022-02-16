@@ -43,16 +43,19 @@ $test = new Reservation();
                     <td style="background:purple";>
                        <a href="reservation.php?id=<?= $showResa[0]['id'] ?>"><?= $showResa[0]['login'].$showResa[0]['titre'] ?> </a> 
                     </td> 
-                       <?php  //var_dump($showResa) ?>
+                       <?php  var_dump($showResa) ?>
                         </pre>
                    <?php }
                     else
                     {
-                        echo '<td style ="background:green";>
-                        <form action="reservation-form.php">
-                           <button style ="background:green">LIBRE</button>
+                    ?> <td style ="background:green";>
+                        <a href="reservation-form.php?id="> LIBRE </a> 
+
+                        <!-- <form action="reservation-form.php">
+                           <button style ="background:green">LIBRE</button> -->
                         </form>
-                        </td>';
+                    </td>
+                    <?php
                     }
                 }  
                 // echo '<pre>';

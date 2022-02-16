@@ -36,11 +36,10 @@
         }
     }
 
-   
+   //créer une nouvelle réservation pour la page reservation-form.php
     public function insert_event($titre,$description,$debut,$fin,$id_utilisateurs)
     {
         // var_dump($_SESSION);
-       
        
         $query="INSERT INTO reservations (titre, description,debut,fin,id_utilisateurs) VALUES (:titre, :description, :debut, :fin, :id_utilisateurs)";
         $result=$this->bdd->prepare($query);
@@ -51,25 +50,26 @@
                 ':fin'=>$fin,
                 ':id_utilisateurs'=>$id_utilisateurs
             ));
-            
-    }
-    public function getDatas($date_debut)
-    {   
-        $query="SELECT * FROM reservations WHERE debut= :debut";
-        $result = $this->bdd->prepare($query);
-        $result->bindValue(':debut',$date_debut);
-        $result->execute();
-        $getDatas= $result->fetchAll();
-        return $getDatas;
     }
 
+    // public function getDatas($date_debut)
+    // {   
+    //     $query="SELECT * FROM reservations WHERE debut= :debut";
+    //     $result = $this->bdd->prepare($query);
+    //     $result->bindValue(':debut',$date_debut);
+    //     $result->execute();
+    //     $getDatas= $result->fetchAll();
+    //     return $getDatas;
+    // }
+
+    //Afficher la réservation avec le titre et le nom de l'utilisateur sur la page planning
     public function showResa($date_debut)
     {
-        $query = "SELECT *
+        $query = "SELECT reservations.id, reservations.titre, reservations.description, reservations.id_utilisateurs, utilisateurs.login
                  FROM reservations 
                  INNER JOIN utilisateurs
                  ON reservations.id_utilisateurs = utilisateurs.id
-                 WHERE debut= :debut";
+                 WHERE debut = :debut";
         $result = $this->bdd->prepare($query);
         $result->bindValue(':debut',$date_debut);
         $result->execute();
@@ -77,6 +77,7 @@
         return $showResa;
     }
 
+    //format de date en français sur la page planning
     public function formatDate($days)
     {
         // http://benjamin.leveque.me/formater-une-date-avec-php-5-3-l10n-partie-2.html
@@ -85,6 +86,7 @@
         return $format->format( $formatFrench);
     }
 
+    //Afficher les infos de la réservation sur la page planning
     public function displayReservation()
     {
         if(isset($_GET['id'])){
@@ -102,6 +104,21 @@
         var_dump($displayResa);
         return $displayResa;
 
+    }
+
+    public function getClickInfosReserv()
+    {
+        $query = "SELECT reservations.id,`titre`, `description`, 
+                  DATE_FORMAT(debut,'%d/%m/%Y à %Hh%imin%ss') AS `debut`, 
+                  DATE_FORMAT(fin,'%d/%m/%Y à %Hh%imin%ss') AS `fin`, `id_utilisateurs`,`login` 
+                  FROM `reservations` 
+                  INNER JOIN utilisateurs 
+                  ON reservations.id_utilisateurs = utilisateurs.id 
+                  ORDER BY debut";
+        $result = $this->bdd->prepare($query);
+        $result->execute();
+        $getClick = $result->fetchAll(PDO::FETCH_ASSOC);
+        // var_dump($getClick);
     }
 }
 ?>
