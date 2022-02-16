@@ -4,6 +4,8 @@ require_once('Class/Reservation.php');
 require('Include/header.php');
 
 $id_utilisateurs = $_SESSION['userId'];
+var_dump($_GET);
+
 $error = '';
 
 $reservation = new Reservation();
@@ -28,11 +30,10 @@ if(isset($_POST['submit']))
 }
 
 
-
 ?>
 <main>
     <h2>Faites votre réservation</h2>
-    <p>Vous devez reserver la salle avec des créneaux en heures plaines.</p>
+    <p>Vous devez reserver la salle avec des créneaux en heures pleines.</p>
     <form action="" method="post">
         <label for="titre">Titre du film:</label>   
         <input type="text" name="titre" placeholder="ex:Die Hard 3">
@@ -41,8 +42,13 @@ if(isset($_POST['submit']))
         <textarea name="description" ></textarea>
 
         <label for="debut">De:</label>
-        <input type="datetime-local" name="debut">
-
+        <?php 
+        if(isset($_GET['date'])){ ?>
+            <input type="datetime-local" name="debut" value="<?=$_GET['date']?>">
+        <?php }else{ ?>
+            <input type="datetime-local" name="debut"
+         <?php }?>
+         
         <label for="fin">Jusqu'à</label>
         <input type="datetime-local" name="fin">
 

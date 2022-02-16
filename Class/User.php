@@ -2,7 +2,7 @@
 
 class User
 {
-    private $id;
+    protected $id;
     public $login;
     public $password;
   
@@ -110,6 +110,7 @@ class User
                     
                 ));
                 $userData = $result->fetchAll();
+               
                 if (count($userData)===1)
                 {
                     if(password_verify($password,$userData[0]['password']))
@@ -202,5 +203,5 @@ class User
             //return $result;
         }
     }
-
+  
 }
