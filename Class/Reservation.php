@@ -47,25 +47,14 @@ require_once('Class/User.php');
     public function insert_event($titre,$description,$debut,$fin,$id_utilisateurs)
     // Permet d'insérer de nouveaux evènements en base de données
     // reservation-form.php
-    {    
-        // $date_fin = $debut;
-        // $date_fin_insert = strtotime($date_fin . "+1hour");
-        // $date_fin_insert = date('Y-m-d H:i', $date_fin_insert);
-       
-        // $hour_to_compare = $this->getPlageHorraire($debut);
-        // $creneau_exist = count($hour_to_compare);
-        // $strtotime = ("Monday to Friday");
-        // $weekend = intval(mixed $strtotime, $base = 5);
-
-
-
-       $now = $_SERVER['REQUEST_TIME'];
-        // je dois récupérer l'heure du début da ma reservation dans un fetch. 
-        // mettre ce fetch dans une variable que je vais appeler $debut 
-        // et créer ma condition 
-                    
-        
-
+    {  
+        //definir un creneau d'une heure. 
+        $date_debut = strtotime($debut);
+        $date_fin = strtotime($date_debut . "+1hour");
+        var_dump(strtotime($date_debut . "+1hour"));
+        var_dump($date_fin);
+        if(strtotime($debut . "+1hour")== strtotime($fin))
+        {
             $id_utilisateurs = $_SESSION['userId'];
 
        
@@ -79,7 +68,26 @@ require_once('Class/User.php');
                     ':fin'=>$fin,
                     ':id_utilisateurs'=>$id_utilisateurs
                 ));
-                
+                echo 'ok';
+        }
+        else
+        {
+            echo "veuillez resrver un crenau d'1h";
+        }
+        // $hour_to_compare = $this->getPlageHorraire($debut);
+        // $creneau_exist = count($hour_to_compare);
+        // $strtotime = ("Monday to Friday");
+        // $weekend = intval(mixed $strtotime, $base = 5);
+
+
+       $now = $_SERVER['REQUEST_TIME'];
+        // je dois récupérer l'heure du début da ma reservation dans un fetch. 
+        // mettre ce fetch dans une variable que je vais appeler $debut 
+        // et créer ma condition 
+                    
+        
+
+          
         
 
        
@@ -189,6 +197,10 @@ require_once('Class/User.php');
     //     return $resaPlanning;
 
     // }
+    public function PlageHoraire($debut,$fin)
+    {
+        
+    }
 }
  
 

@@ -4,8 +4,18 @@ require_once('Class/Reservation.php');
 require('Include/header.php');
 
 $id_utilisateurs = $_SESSION['userId'];
-var_dump($_GET);
-
+// var_dump($_GET);
+$i=0;
+$j=0;
+if(!empty($_GET['week']))
+{
+    $week = $_GET['week'];
+}
+else
+{   
+    $week = 0;
+}
+$temps_anterieur = strtotime(date('Y-m-d h:i:s',strtotime("Monday this week +$i days +$week weeks $j:00:00")));
 $error = '';
 
 $reservation = new Reservation();
@@ -32,7 +42,8 @@ if(isset($_POST['submit']))
 
 ?>
 <main>
-    <h2>Faites votre réservation</h2>
+    
+    <h2><?= $_GET['date'] ?></h2>
     <p>Vous devez reserver la salle avec des créneaux en heures pleines.</p>
     <form action="" method="post">
         <label for="titre">Titre du film:</label>   
@@ -46,7 +57,7 @@ if(isset($_POST['submit']))
         if(isset($_GET['date'])){ ?>
             <input type="datetime-local" name="debut" value="<?=$_GET['date']?>">
         <?php }else{ ?>
-            <input type="datetime-local" name="debut"
+            <input type="datetime-local" name="debut">
          <?php }?>
          
         <label for="fin">Jusqu'à</label>

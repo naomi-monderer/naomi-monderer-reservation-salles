@@ -5,14 +5,13 @@ require('Class/User.php');
 require('Class/Reservation.php');
 
 $now = $_SERVER['REQUEST_TIME'];
+var_dump($now);
 
 // $date_debut=date('Y-m-d h:i:s',strtotime("Monday this week +$i days +$week weeks $j:00:00"));
 $test = new Reservation();
-// $getDebut = $test->getDebut($debut);
-
-
-
-
+  
+// $i=0;
+// $j=0;
 if(!empty($_GET['week']))
 {
     $week = $_GET['week'];
@@ -21,9 +20,7 @@ else
 {   
     $week = 0;
 }
-$i=0;
-$j=0;
-$temps_anterieur = strtotime(date('Y-m-d h:i:s',strtotime("Monday this week +$i days +$week weeks $j:00:00")));
+// $temps_anterieur = strtotime(date('Y-m-d h:i:s',strtotime("Monday this week +$i days +$week weeks $j:00:00")));
 
 ?>
 
@@ -65,7 +62,7 @@ $temps_anterieur = strtotime(date('Y-m-d h:i:s',strtotime("Monday this week +$i 
                                 // var_dump($getDebut);
                                 if (!empty($showResa))
                                 {  ?>
-                                    <td style="background:purple";>
+                                    <td style="background:pink";>
                                         <a href="reservation.php?id=<?=$showResa[0]['id']?>>">
                                             <?= $showResa[0]['login'].' '.$showResa[0]['titre']?>
                                         </a> 
@@ -79,13 +76,7 @@ $temps_anterieur = strtotime(date('Y-m-d h:i:s',strtotime("Monday this week +$i 
                                 <?php
                                 }
 
-                                else if ($temps_anterieur < $now)
-                                { ?>
-
-                                    <td style ="background: yellow";>date antérieure</td>
-                                   
-                                   <?php 
-                                }
+                               
                                 else
                                 {  
                                     ?>
