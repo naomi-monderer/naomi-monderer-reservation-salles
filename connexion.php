@@ -1,6 +1,5 @@
 <?php
-// $title = 'Connexion';
-
+session_start();
 require('Include/header.php');
 require('Class/User.php');
 
@@ -10,7 +9,7 @@ if(isset($_POST['submit']))
 {var_dump($_POST['password']);
 
     $userData->connect($_POST['login'],$_POST['password']);
-
+    
 }
 
 

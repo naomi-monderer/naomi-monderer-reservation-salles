@@ -1,14 +1,9 @@
 <?php
+session_start();
 require('Include/header.php');
 require('Class/User.php');
-
-session_start();
 echo 'fgdfg';echo '<pre>';
 var_dump($_SESSION['user']);
-echo '</pre>';
-
-// echo '</pre>';
-
 $userData = new User();
 if(isset($_POST['submit']))
 {

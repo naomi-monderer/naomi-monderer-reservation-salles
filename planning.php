@@ -57,7 +57,7 @@ else
                                 if (!empty($showResa))
                                 {  ?>
                                     <td style="background:pink";>
-                                        <a href="reservation.php?id=<?=$showResa[0]['id']?>>">
+                                        <a href="reservation.php?id=<?=$showResa[0]['id']?>">
                                             <?= $showResa[0]['login'].' '.$showResa[0]['titre']?>
                                         </a> 
                                     </td> 
