@@ -17,14 +17,15 @@ if(isset($_POST['submit']))
     $description = $_POST['description'];
     $debut = $_POST['debut'];
     $fin = $_POST['fin'];
+    $now = date('Y-m-d h:i:s',strtotime("yesterday"));
+
   
 
-    if(!empty($_POST['titre']) && !empty($_POST['description']) && !empty($_POST['debut']) && !empty($_POST['fin']))
+    if(!empty($_POST['titre']) && !empty($_POST['description']) && !empty($_POST['debut']) && !empty($_POST['fin']) && ($_POST['debut'] <= $now))
     {
         $reservation->insert_event($titre,$description,$debut,$fin,$id_utilisateurs);
-            
-        
     }
+  
     else
     {
         $error = 'Veuillez remplir tous les champs';
@@ -41,8 +42,7 @@ if(isset($_POST['submit']))
        
         <input type="text" name="titre" value="">
         <?php  
-        // var_dump($reservation);  
-        var_dump($testResInfos);
+        // var_dump($testResInfos);
         ?>
         <label for="description" value="">Pitch:</label>
         <textarea name="description" ></textarea>

@@ -65,11 +65,8 @@ $temps_anterieur = strtotime(date('Y-m-d h:i:s',strtotime("Monday this week +$i 
                             {
                                 
                                 $date_debut = date('Y-m-d h:i:s',strtotime("Monday this week +$i days +$week weeks $j:00:00"));
-                            // $date_debut=date('Y-m-d h:i:s',strtotime("Monday this week +$i days +$week weeks $j:00:00"));
 
                                 $showResa = $test->showResa(date('Y-m-d',strtotime('Monday this week +'.$i."days +$week weeks")).' '.$j.':00:00'); 
-                                // $getDebut = $test->getDebut($date_debut);
-                                // var_dump($getDebut);
 
                                 if (!empty($showResa))
                                 {  ?>
