@@ -10,6 +10,7 @@ if(isset($_POST['submit']))
 {var_dump($_POST['password']);
 
     $userData->connect($_POST['login'],$_POST['password']);
+    var_dump($userData);
 }
 
 

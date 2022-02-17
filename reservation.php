@@ -10,7 +10,7 @@ $oneResa = new Reservation();
 
 $oneReservation = $oneResa->displayReservation();
 
-var_dump($_GET);
+// var_dump($oneReservation);
 ?>
 
 <h1>Réservé par <?= $oneReservation[0]['login'] ?> </h1>
@@ -18,5 +18,4 @@ var_dump($_GET);
     <p>DESCRIPTION - <?= $oneReservation[0]['description'] ?></p>
     <p>DEBUT - <?= $oneReservation[0]['debut'] ?></p>
     <p>FIN - <?= $oneReservation[0]['fin'] ?></p>
-
 

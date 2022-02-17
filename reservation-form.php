@@ -4,6 +4,8 @@ require_once('Class/Reservation.php');
 require('Include/header.php');
 
 $id_utilisateurs = $_SESSION['userId'];
+var_dump($_GET);
+
 $error = '';
 
 $reservation = new Reservation();
@@ -45,10 +47,15 @@ if(isset($_POST['submit']))
         <label for="description" value="">Pitch:</label>
         <textarea name="description" ></textarea>
 
-        <label for="debut" value="">De:</label>
-        <input type="datetime-local" name="debut">
-
-        <label for="fin" value="">Jusqu'à</label>
+        <label for="debut">De:</label>
+        <?php 
+        if(isset($_GET['date'])){ ?>
+            <input type="datetime-local" name="debut" value="<?=$_GET['date']?>">
+        <?php }else{ ?>
+            <input type="datetime-local" name="debut"
+         <?php }?>
+         
+        <label for="fin">Jusqu'à</label>
         <input type="datetime-local" name="fin">
 
         <input type="hidden" name="id_utilisateurs" > 
