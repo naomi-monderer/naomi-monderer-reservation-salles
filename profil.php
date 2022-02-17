@@ -1,5 +1,4 @@
 <?php
-session_start();
 require('Include/header.php');
 require('Class/User.php');
 echo 'fgdfg';echo '<pre>';

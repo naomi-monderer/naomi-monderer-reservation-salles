@@ -1,12 +1,10 @@
 <?php
-session_start();
 require('Include/header.php');
 require('Class/User.php');
 require('Class/Reservation.php');
-$test = new Reservation();
-$now =  date('Y-m-d h:i:s',strtotime("yesterday"));
-// var_dump($now);
 
+$test = new Reservation();
+$now = date('Y-m-d h:i:s',strtotime("yesterday"));
 if(!empty($_GET['week']))
 {
     $week = $_GET['week'];
@@ -15,6 +13,9 @@ else
 {   
     $week = 0;
 }
+$i=0;
+$j=0;
+$temps_anterieur = strtotime(date('Y-m-d h:i:s',strtotime("Monday this week +$i days + weeks $j:00:00")));
 
 
 ?>
@@ -29,8 +30,7 @@ else
         <form action="" method="get">
             <button style ="background:green">précédent</button>
             <input type="hidden" value="<?= $week - 1 ?>" name="week">
-        </form> 
-        
+        </form>         
 
         <table>
             <thead>
@@ -52,6 +52,8 @@ else
                             {
                                 
                                 $date_debut = date('Y-m-d h:i:s',strtotime("Monday this week +$i days +$week weeks $j:00:00"));
+                            // $date_debut=date('Y-m-d h:i:s',strtotime("Monday this week +$i days +$week weeks $j:00:00"));
+
                                 $showResa = $test->showResa(date('Y-m-d',strtotime('Monday this week +'.$i."days +$week weeks")).' '.$j.':00:00'); 
                                 
                                 if (!empty($showResa))

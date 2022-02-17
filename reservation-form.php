@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once('Class/Reservation.php');
 require('Include/header.php');
 
@@ -19,6 +18,8 @@ $temps_anterieur = strtotime(date('Y-m-d h:i:s',strtotime("Monday this week +$i 
 $error = '';
 
 $reservation = new Reservation();
+$testResInfos = $reservation->getClickInfosReserv();
+
 if(isset($_POST['submit']))
 {  
     $titre = $_POST['titre'];
@@ -47,9 +48,13 @@ if(isset($_POST['submit']))
     
     <form action="" method="post">
         <label for="titre">Titre du film:</label>   
-        <input type="text" name="titre" placeholder="ex:Die Hard 3">
-
-        <label for="description">Pitch:</label>
+       
+        <input type="text" name="titre" value="">
+        <?php  
+        // var_dump($reservation);  
+        var_dump($testResInfos);
+        ?>
+        <label for="description" value="">Pitch:</label>
         <textarea name="description" ></textarea>
 
         <label for="debut">De:</label>

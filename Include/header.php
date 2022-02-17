@@ -19,23 +19,22 @@ $title;
             <!-- <h id="h1_header">SAISON</h></a></li> -->
                 
                 <li><a href="index.php">Accueil</a></li>
-                <a href="deconnexion.php">deco
-                </a>
                 <?php 
                     
                     //Vérification de la connexion
                     if(isset($_SESSION['user']['login'])){  ?>
                         <!-- //si connecté  -->
-                        <!-- <li><a href="deconnexion.php">Déconnexion</a></li> -->
+                        <li><a href="deconnexion.php">Déconnexion</a></li>
                         <li><a href="profil.php">Profil</a></li>
-                        <li><a href="reservation.php">Réservation</a></li>
-                        <li><a href="reservation-form.php">Réservation de Salle</a></li>
+                        <li><a href="planning.php">Planning</a></li>
+
+                        <!-- <li><a href="reservation.php">Réservation</a></li> -->
+                        <!-- <li><a href="reservation-form.php">Réservation de Salle</a></li> -->
                             <?php }
                       else { ?>
                         <!-- //Non connecté -->
                         <li><a href="inscription.php">Inscription</a></li>
                         <li><a href="connexion.php">Connexion</a></li>
                 <?php } ?>
-                <li><a href="planning.php">Planning</a></li>
             <!-- </div> -->
     </header>
