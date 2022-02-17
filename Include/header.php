@@ -1,12 +1,8 @@
-<?php
-$title;
-
-?>
 <!DOCTYPE html>
 <html lang="fr"> 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/include/style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,9 +22,8 @@ $title;
                 <?php if(isset($_SESSION['user']['login'])){  ?>
                                         
 
-      <a class="nav-item nav-link active" href="reservation-form.php">Réservation de Salle<span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link active" href="planning.php">Réservation de Salle<span class="sr-only">(current)</span></a>
       <a class="nav-item nav-link" href="profil.php">Profil</a>
-      <a class="nav-item nav-link" href="reservation.php">Réservation</a>
       <a class="nav-item nav-link disabled" href="deconnexion.php">Déconnexion</a>
           <?php }else { ?>
                         <!-- //Non connecté -->
