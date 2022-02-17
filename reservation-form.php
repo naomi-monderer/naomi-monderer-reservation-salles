@@ -4,6 +4,18 @@ require_once('Class/Reservation.php');
 require('Include/header.php');
 
 $id_utilisateurs = $_SESSION['userId'];
+// var_dump($_GET);
+$i=0;
+$j=0;
+if(!empty($_GET['week']))
+{
+    $week = $_GET['week'];
+}
+else
+{   
+    $week = 0;
+}
+$temps_anterieur = strtotime(date('Y-m-d h:i:s',strtotime("Monday this week +$i days +$week weeks $j:00:00")));
 $error = '';
 
 $reservation = new Reservation();
@@ -27,29 +39,44 @@ if(isset($_POST['submit']))
     }
 }
 
-
-
 ?>
 <main>
-    <h2>Faites votre réservation</h2>
-    <p>Vous devez reserver la salle avec des créneaux en heures plaines.</p>
+    
+    <h2><?= $_GET['date'] ?></h2>
+    
     <form action="" method="post">
+    <div class="form-group">
         <label for="titre">Titre du film:</label>   
-        <input type="text" name="titre" placeholder="ex:Die Hard 3">
+        <input type="text" class="form-control" name="titre" placeholder="ex:Die Hard 3">
 
-        <label for="description">Pitch:</label>
-        <textarea name="description" ></textarea>
-
+        <div class="form-group">
+        <label for="description">Description:</label>
+        <textarea name="description"  class="form-control" ></textarea>
+        </div>
+        <div class="form-group">
         <label for="debut">De:</label>
-        <input type="datetime-local" name="debut">
+        <?php 
+        if(isset($_GET['date'])){ 
+            $date_debut=date("Y-m-d",strtotime($_GET['date']));
+            $heure_debut=date("H:i",strtotime($_GET['date']));
+            $event_debut=$date_debut.'T'.$heure_debut;
+            // var_dump($event_debut);?>
+            
+            <input type="datetime-local" class="form-control" name="debut" value="<?=$event_debut?>">
+        <?php }else{ ?>
+            <input type="datetime-local" name="debut">
+         <?php }
+                $date_fin=date("Y-m-d",strtotime($_GET['date']));
+                $getDate = $_GET['date']."+1hour";
+                $heure_fin=date("H:i",strtotime($getDate));
+                $event_fin=$date_fin.'T'.$heure_fin;
+         ?>
 
-        <label for="fin">Jusqu'à</label>
-        <input type="datetime-local" name="fin">
-
-        <input type="hidden" name="id_utilisateurs" > 
-
-        
-        <input type="submit" name="submit" >
+         <label for = "fin">jusqu'à :</label>
+         <input type="datetime-local" class="form-control" name="fin" value="<?=$event_fin?>">
+        </div>
+    
+        <input type="submit" class="btn btn-primary" name="submit" >
 
 
     </form>

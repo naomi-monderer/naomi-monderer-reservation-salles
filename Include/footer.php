@@ -1,4 +1,4 @@
-<footer>
+<!-- <footer>
 <div class="card">
   <div class="card-header">
     Featured
@@ -12,4 +12,4 @@
 </footer>
     <script src="https://kit.fontawesome.com/225d5fd287.js" crossorigin="anonymous"></script>
 
-    
+     -->
