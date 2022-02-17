@@ -34,3 +34,4 @@ if(isset($_POST['submit']))
 </body>
 <?php
 require('Include/footer.php');
+?>

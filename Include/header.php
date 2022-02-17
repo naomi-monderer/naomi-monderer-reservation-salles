@@ -16,6 +16,7 @@ $title;
              <!-- <div id="menu-header"> -->
                  <!-- <li><a id="link_accueil" href="index.php"><img id="logo_header" src="assets/images/logo/stars-sky.ico"> -->
             <!-- <h id="h1_header">SAISON</h></a></li> -->
+                
                 <li><a href="index.php">Accueil</a></li>
                 <a href="deconnexion.php">deco
                 </a>

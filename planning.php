@@ -3,15 +3,10 @@ session_start();
 require('Include/header.php');
 require('Class/User.php');
 require('Class/Reservation.php');
-
-$now = $_SERVER['REQUEST_TIME'];
-var_dump($now);
-
-// $date_debut=date('Y-m-d h:i:s',strtotime("Monday this week +$i days +$week weeks $j:00:00"));
 $test = new Reservation();
-  
-// $i=0;
-// $j=0;
+$now =  date('Y-m-d h:i:s',strtotime("yesterday"));
+// var_dump($now);
+
 if(!empty($_GET['week']))
 {
     $week = $_GET['week'];
@@ -20,7 +15,7 @@ else
 {   
     $week = 0;
 }
-// $temps_anterieur = strtotime(date('Y-m-d h:i:s',strtotime("Monday this week +$i days +$week weeks $j:00:00")));
+
 
 ?>
 
@@ -58,8 +53,7 @@ else
                                 
                                 $date_debut = date('Y-m-d h:i:s',strtotime("Monday this week +$i days +$week weeks $j:00:00"));
                                 $showResa = $test->showResa(date('Y-m-d',strtotime('Monday this week +'.$i."days +$week weeks")).' '.$j.':00:00'); 
-                                // $getDebut = $test->getDebut($date_debut);
-                                // var_dump($getDebut);
+                                
                                 if (!empty($showResa))
                                 {  ?>
                                     <td style="background:pink";>
@@ -75,7 +69,15 @@ else
                                     <td style ="background:red";></td>
                                 <?php
                                 }
-
+                                else if($date_debut <= $now )
+                                {
+                                    ?>
+                                 
+                                    <td style ="background:yellow";>
+                                    </td>
+                                <?php
+                                }
+                                
                                
                                 else
                                 {  

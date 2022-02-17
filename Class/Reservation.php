@@ -48,7 +48,10 @@ require_once('Class/User.php');
     // Permet d'insérer de nouveaux evènements en base de données
     // reservation-form.php
     {  
-        //definir un creneau d'une heure. 
+        if (isset($debut) == 0)
+        { 
+
+            //definir un creneau d'une heure. 
         $date_debut = strtotime($debut);
         $date_fin = strtotime($date_debut . "+1hour");
         var_dump(strtotime($date_debut . "+1hour"));
@@ -74,6 +77,13 @@ require_once('Class/User.php');
         {
             echo "veuillez resrver un crenau d'1h";
         }
+
+        }
+        else
+        {
+            echo "Ce crénau est déjà utiisé. Veuillez choisir un autre horaire";
+        }
+        
         // $hour_to_compare = $this->getPlageHorraire($debut);
         // $creneau_exist = count($hour_to_compare);
         // $strtotime = ("Monday to Friday");

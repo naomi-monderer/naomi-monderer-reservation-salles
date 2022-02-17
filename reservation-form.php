@@ -44,7 +44,7 @@ if(isset($_POST['submit']))
 <main>
     
     <h2><?= $_GET['date'] ?></h2>
-    <p>Vous devez reserver la salle avec des créneaux en heures pleines.</p>
+    
     <form action="" method="post">
         <label for="titre">Titre du film:</label>   
         <input type="text" name="titre" placeholder="ex:Die Hard 3">

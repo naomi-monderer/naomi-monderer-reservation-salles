@@ -8,7 +8,7 @@ if(isset($_POST['submit']))
     $Datas= $userData->register($_POST['login'],$_POST['password'],$_POST['passwordConfirm']);
    
 }
-var_dump($userData);
+// var_dump($userData);
 
 
 ?>
