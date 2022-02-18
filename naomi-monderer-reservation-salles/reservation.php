@@ -12,7 +12,7 @@ $oneResa = new Reservation();
 
 $oneReservation = $oneResa->displayReservation();
 
-// var_dump($oneReservation);
+
 ?>
 
 <h1>Réservé par <?= $oneReservation[0]['login'] ?> </h1>
