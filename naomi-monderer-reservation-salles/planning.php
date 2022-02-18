@@ -18,13 +18,15 @@ if (!empty($_GET['week'])) {
             <button class="btn btn-info">suivant</button>
             <input type="hidden" value="<?= $week + 1 ?>" name="week">
         </form>
-        <div class="planing-vide">XJJDDJ</div>
+
         <form action="" method="get">
             <button class="btn btn-info">précédent</button>
             <input type="hidden" value="<?= $week - 1 ?>" name="week">
         </form>
+    </section>
 
-        <table class="table table-bordered table-dark">
+    <section>
+        <table class="table-bordered table-dark">
             <thead>
                 <th>
 
@@ -82,11 +84,11 @@ if (!empty($_GET['week'])) {
 
                     </tr>
                 <?php endfor; ?>
-            </tbody>
-        </table>
     </section>
-<<<<<<< HEAD:naomi-monderer-reservation-salles/planning.php
-</main> 
-=======
+    </tbody>
+    </table>
+    </section>
 </main>
->>>>>>> 5b61d34b53cab4d6101282b791d6380429a9f05b:planning.php
+<?php
+require_once('../naomi-monderer-reservation-salles/Include/footer.php');
+?>

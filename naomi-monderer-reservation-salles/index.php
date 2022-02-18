@@ -20,8 +20,6 @@ require('Include/header.php');
     <?php if (isset($_SESSION['user']['login'])) {  ?>
         <h1>Bienvenue <?php echo $_SESSION['user']['login'];
                     } ?> </h1>
-
-
 </body>
 
 </html>

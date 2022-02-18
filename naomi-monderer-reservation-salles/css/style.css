@@ -146,3 +146,10 @@ a.btn.btn-secondary {
 .Profil h2 {
   text-align: center;
 }
+
+/*-----------/PLANNING----------*/
+
+.table-bordered {
+  max-width: 50vw;
+  text-align: center;
+}
