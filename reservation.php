@@ -1,5 +1,7 @@
+
 <?php
 session_start();
+$title = "Reservation";
 require_once('Class/Reservation.php');
 require_once('Class/User.php');
 require('Include/header.php');
@@ -12,4 +14,3 @@ $oneReservation = $oneResa->displayReservation();
     <p>DESCRIPTION - <?= $oneReservation[0]['description'] ?></p>
     <p>DEBUT - <?= $oneReservation[0]['debut'] ?></p>
     <p>FIN - <?= $oneReservation[0]['fin'] ?></p>
-

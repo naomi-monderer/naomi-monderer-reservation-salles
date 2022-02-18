@@ -1,6 +1,7 @@
-<?php
+<?php 
 session_start();
-require('Include/header.php');
+$title = "Accueil";
+require('Include/header.php'); 
 ?>
 <main class="main-index">
     <section>

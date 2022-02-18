@@ -40,57 +40,34 @@ require_once('Class/User.php');
    //créer une nouvelle réservation pour la page reservation-form.php
     public function insert_event($titre,$description,$debut,$fin,$id_utilisateurs)
     // Permet d'insérer de nouveaux evènements en base de données
-    // reservation-form.php
     {  
-        if (isset($debut) == 0)
-        { 
-
-            //definir un creneau d'une heure. 
+         //definir un creneau d'une heure. 
         $date_debut = strtotime($debut);
         $date_fin = strtotime($date_debut . "+1hour");
         var_dump(strtotime($date_debut . "+1hour"));
         var_dump($date_fin);
-        if(strtotime($debut . "+1hour")== strtotime($fin))
-        {
-            $id_utilisateurs = $_SESSION['userId'];
+            if(strtotime($debut . "+1hour")== strtotime($fin))
+            {
+                $id_utilisateurs = $_SESSION['userId'];
 
-       
-       
-            $query2="INSERT INTO reservations (titre, description,debut,fin,id_utilisateurs) VALUES (:titre, :description, :debut, :fin, :id_utilisateurs)";
-            $result2=$this->bdd->prepare($query2);
-            $result2->execute(array(
-                    ':titre'=>$titre,
-                    ':description'=>$description,
-                    ':debut'=>$debut,
-                    ':fin'=>$fin,
-                    ':id_utilisateurs'=>$id_utilisateurs
-                ));
-                echo 'ok';
-        }
-        else
-        {
-            echo "veuillez resrver un crenau d'1h";
-        }
-
-        }
-        else
-        {
-            echo "Ce crénau est déjà utiisé. Veuillez choisir un autre horaire";
-        }
         
-        // $hour_to_compare = $this->getPlageHorraire($debut);
-        // $creneau_exist = count($hour_to_compare);
-        // $strtotime = ("Monday to Friday");
-        // $weekend = intval(mixed $strtotime, $base = 5);
-
-
-       $now = $_SERVER['REQUEST_TIME'];
-        // je dois récupérer l'heure du début da ma reservation dans un fetch. 
-        // mettre ce fetch dans une variable que je vais appeler $debut 
-        // et créer ma condition 
-                    
         
-
+                $query2="INSERT INTO reservations (titre, description,debut,fin,id_utilisateurs) VALUES (:titre, :description, :debut, :fin, :id_utilisateurs)";
+                $result2=$this->bdd->prepare($query2);
+                $result2->execute(array(
+                        ':titre'=>$titre,
+                        ':description'=>$description,
+                        ':debut'=>$debut,
+                        ':fin'=>$fin,
+                        ':id_utilisateurs'=>$id_utilisateurs
+                    ));
+                    echo 'ok';
+            }
+            else
+            {
+                echo "veuillez reserver un crenau d'1h";
+            }
+            $now = $_SERVER['REQUEST_TIME'];
     }
 
     public function getDebut($date_debut)
@@ -135,7 +112,6 @@ require_once('Class/User.php');
    
     public function formatDate($days, $week = 0)
     {
-        // http://benjamin.leveque.me/formater-une-date-avec-php-5-3-l10n-partie-2.html
         $format = new IntlDateFormatter('fr_FR', IntlDateFormatter::FULL, IntlDateFormatter::NONE);
         $formatFrench = new DateTime("Monday this week +$days days +$week weeks");
         return $format->format( $formatFrench);
@@ -190,6 +166,7 @@ require_once('Class/User.php');
 
         return $resultIdResa;
     }
+
 }
  
 
