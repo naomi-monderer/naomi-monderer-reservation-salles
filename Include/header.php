@@ -1,40 +1,41 @@
-<?php
-session_start();
-$title;
-
-?>
 <!DOCTYPE html>
 <html lang="fr"> 
 <head>
     <meta charset="UTF-8">
+    <script src="https://kit.fontawesome.com/225d5fd287.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/include/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link id="favicon" rel="shortcut icon" href="assets/images/logo/stars-sky.ico" type="image/x-con">
     <link rel="stylesheet" href="assets/styles/reservation-salles.css">
+    <link rel="stylesheet" href="css/style.css">
     <title><?php echo $title; ?> </title>
 </head>
-    <header>
-             <!-- <div id="menu-header"> -->
-                 <!-- <li><a id="link_accueil" href="index.php"><img id="logo_header" src="assets/images/logo/stars-sky.ico"> -->
-            <!-- <h id="h1_header">SAISON</h></a></li> -->
-                
-                <li><a href="index.php">Accueil</a></li>
-                <?php 
-                    
-                    //Vérification de la connexion
-                    if(isset($_SESSION['user']['login'])){  ?>
-                        <!-- //si connecté  -->
-                        <li><a href="deconnexion.php">Déconnexion</a></li>
-                        <li><a href="profil.php">Profil</a></li>
-                        <li><a href="planning.php">Planning</a></li>
 
-                        <!-- <li><a href="reservation.php">Réservation</a></li> -->
-                        <!-- <li><a href="reservation-form.php">Réservation de Salle</a></li> -->
-                            <?php }
-                      else { ?>
-                        <!-- //Non connecté -->
-                        <li><a href="inscription.php">Inscription</a></li>
-                        <li><a href="connexion.php">Connexion</a></li>
-                <?php } ?>
-            <!-- </div> -->
+<body>    
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+                </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="navbar-brand" href="index.php">Accueil</a>
+                    <!-- Utilisateur connecté -->
+                    <?php if(isset($_SESSION['user']['login']))
+                    {  ?>
+                    <a class="nav-item nav-link active" href="planning.php">Réservation de Salle<span class="sr-only">(current)</span></a>
+                    <a class="nav-item nav-link" href="profil.php">Profil</a>
+                    <a class="nav-item nav-link disabled" href="deconnexion.php">Déconnexion</a>
+                    <?php 
+                    }else 
+                    { ?>
+                        <!-- Utilisateur non connecté -->
+                        <a href="inscription.php" class="nav-item nav-link">Inscription</a>
+                        <a href= "connexion.php" class="nav-item nav-link">Connexion</a>
+                    <?php } ?>
+                </div>
+            </div>
+        </nav>
     </header>

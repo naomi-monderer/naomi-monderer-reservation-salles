@@ -1,4 +1,5 @@
 <?php
+
 require('Include/header.php');
 require('Class/User.php');
 
@@ -15,16 +16,18 @@ if(isset($_POST['submit']))
 <body>
         <main>    
             <section>
-                <h3>INSCRIPTION</h3>
-                <form method="post">
-                    <input type="text" name="login" placeholder="identifiant">
-                   
-                    <input type="password" name="password" placeholder="MDP">
-                    <input type="password" name="passwordConfirm" placeholder="confirmez MDP">
+                <div>
+                    <h3>INSCRIPTION</h3>
+                    <form method="post">
+                        <input type="text" name="login" placeholder="identifiant">
+                        
+                        <input type="password" name="password" placeholder="MDP">
+                        <input type="password" name="passwordConfirm" placeholder="confirmez MDP">
 
-                    <input type="submit" name="submit" value="s'inscrire">
-                               
-                </form> 
+                        <input type="submit" name="submit" value="s'inscrire">
+                                    
+                    </form>
+                </div>    
             </section>
         </main>
 </body>

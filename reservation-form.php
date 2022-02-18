@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once('Class/Reservation.php');
 require('Include/header.php');
 
@@ -60,7 +61,7 @@ if(isset($_POST['submit']))
         <label for="debut">De:</label>
         <?php 
         if(isset($_GET['date'])){ ?>
-            <input type="datetime-local" name="debut" value="<?=$_GET['date']?>">
+            <input type="time" name="debut" value="<?=$_GET['date']?>">
         <?php }else{ ?>
             <input type="datetime-local" name="debut">
          <?php }?>

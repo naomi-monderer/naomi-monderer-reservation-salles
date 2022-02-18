@@ -1,10 +1,13 @@
 <?php
+session_start();
 require('Include/header.php');
 require('Class/User.php');
 require('Class/Reservation.php');
 
 $test = new Reservation();
-$now = date('Y-m-d h:i:s',strtotime("yesterday"));
+$now = date('Y-m-d h:i:s',strtotime("tomorrow"));
+var_dump($now);
+
 if(!empty($_GET['week']))
 {
     $week = $_GET['week'];

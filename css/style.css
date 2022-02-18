@@ -1,0 +1,96 @@
+/*-----------BASES----------*/
+body
+{
+    margin:0;
+    padding: 0;
+}
+
+footer
+{
+    background-color: #f9f9f9;
+    height: 20%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+}
+
+/*-----------BASES----------*/
+
+
+/*-----------LAYOUT----------*/
+.main-index
+{   display: flex;
+    justify-content: right;
+    align-items: center;
+    height: 70vh;
+    background-image: url('../css/image/batiment.jpg');
+    background-size: cover;
+ 
+}
+
+.footer-box
+{
+    color:#041424;
+    font-size: 0.9rem;
+    line-height: 0.3em;
+    margin-right: 2rem;
+}
+
+.footer-titre-box
+{
+    font-style: bold;
+    font-size: 1.1rem;
+}
+a i .fab fa-github
+{
+    color: black;
+}
+
+
+
+
+/*-----------LAYOUT----------*/
+
+
+/*-----------MODULE----------*/
+.index-conteneur
+{
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end; 
+  
+}
+.index-box
+{   
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: cornsilk;
+    
+    width: 50%;
+    height: 70%;
+
+}
+
+.index-pres
+{   
+    /* display: flex; */
+    
+    padding-top: 2rem;
+    height: 80%;
+    width: 50%;
+   
+
+}
+
+
+
+/*-----------MODULE----------*/
+
+
+
+
+
