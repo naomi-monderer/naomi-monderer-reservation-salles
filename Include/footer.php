@@ -1,15 +1,29 @@
-<!-- <footer>
-<div class="card">
-  <div class="card-header">
-    Featured
-  </div>
-  <div class="card-body">
-    <h5 class="card-title">Marseille</h5>
-    <p class="card-text">Suivez-nous et Retrouvez notre repos de réservation de salle</p>
-    <a href="https://github.com/naomie-monderer/naomi-monderer-reservation-salles" class="btn btn-primary">Github</a>
-  </div>
-</div>
-</footer>
-    <script src="https://kit.fontawesome.com/225d5fd287.js" crossorigin="anonymous"></script>
+  <footer>
 
-     -->
+                 
+            <div class="footer-box">  
+              
+              <!-- <div class="bloc footer-services" id="logos-resaux">    -->
+                <li>
+                  <ul>
+                    <h2 class="footer-titre-box">Retrouvez-nous sur Github </h2>
+                  </ul>
+                  <ul>
+                    <a href="https://github.com/naomie-monderer" target="blank">
+                    <i class="fab fa-github">Naomi Monderer</i></a>
+                  </ul>
+                  <ul>
+                    <a href="https://github.com/chadhilati-mansoibou" target="blank">
+                    <i class="fab fa-github">chadhilati Mansoibou</i></a>
+                  </ul>
+                  <ul>
+                    <a href="https://github.com/sofiane-ziri" target="blank">
+                    <i class="fab fa-github">Sofiane Ziri</i></a>
+                  </ul>
+                 
+                </li>
+              </div>
+          </div>  
+    </footer>
+  </body> 
+</html>

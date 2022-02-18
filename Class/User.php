@@ -174,7 +174,7 @@ class User
 
                 }
                 if(isset($verifyLogin[0]) && $verifyLogin[0]['login']==$_SESSION['user']['login']){
-                    $cryptedpass=password_hash($passwordConfirm,PASSWORD_BCRYPT);
+                    // $cryptedpass=password_hash($passwordConfirm,PASSWORD_BCRYPT);
                         $update = "UPDATE utilisateurs SET login= :login  id = :id ";
                         $result = $this->bdd->prepare($update);
                         

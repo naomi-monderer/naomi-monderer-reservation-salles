@@ -2,7 +2,7 @@
 $title = "Connexion";
 require('Include/header.php');
 require('Class/User.php');
-
+$title= 'connexion';
 
 
 ?>
@@ -38,20 +38,22 @@ require('Class/User.php');
                 ?>
         <main>    
             <section>
-                <h3>CONNEXION</h3>
-                <form method="post">
-                <div class="form-group">
-                <label for="InputLogin">Login</label>
-                    <input type="text" class="form-control" name="login" placeholder="identifiant">
-                    </div>
+                <div>
+                    <h3>CONNEXION</h3>
+                    <form method="post">
                     <div class="form-group">
-                    <label for="InputPassword1">Password</label>
-                    <input type="password" class="form-control"  name="password" placeholder="MDP">
+                        <label for="InputLogin">Login</label>
+                        <input type="text" class="form-control" name="login" placeholder="identifiant">
+                        </div>
+                    <div class="form-group">
+                        <label for="InputPassword1">Password</label>
+                        <input type="password" class="form-control"  name="password" placeholder="MDP">
                     </div>
 
-                    <button type="submit" class="btn btn-primary" name="submit" value="se connecter">Connexion</button>
-                               
-                </form> 
+                        <button type="submit" class="btn btn-primary" name="submit" value="se connecter">Connexion</button>
+                                
+                    </form>
+                </div> 
             </section>
         </main>
         <?php $userData = new User();

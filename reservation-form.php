@@ -28,16 +28,20 @@ if (isset($_POST['submit'])) {
 
 
 
-    if (!empty($_POST['titre']) && !empty($_POST['description']) && !empty($_POST['debut']) && !empty($_POST['fin'])) {
-
-        $reservation->insert_event($titre, $description, $debut, $fin, $id_utilisateurs);
-    } elseif ($_POST['debut'] <= $now) {
-        var_dump($_POST['debut']);
-        echo "cela fonctionne";
-    } {
+        $reservation->insert_event($titre,$description,$debut,$fin,$id_utilisateurs);
+        
+    }
+    // elseif($_POST['debut'] <= $now){
+    //     var_dump($_POST['debut']);
+    //     echo "cela fonctionne";
+    // }
+  
+    
+    else
+    {
         $error = 'Veuillez remplir tous les champs';
     }
-}
+
 
 ?>
 <main>
@@ -85,7 +89,5 @@ if (isset($_POST['submit'])) {
     <?php echo $error; ?>
 </main>
 <?php
-
-
 require 'Include/footer.php';
 ?>

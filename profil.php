@@ -1,6 +1,6 @@
 <?php
-$title = "Profil";
 session_start();
+$title = "Profil";
 require('Include/header.php');
 require('Class/User.php');
 
@@ -39,13 +39,8 @@ if(isset($_POST['register']))
             <section>
         <h2>Mes réservations</h2>
             <?php 
-            // $userReser->displayReservation();($_SESSION['user']['login']);
             $getUserInfos->getAllInfos();
-        //    var_dump($a);
-            // echo '<input type="submit" name="supprimer" value="supprimer" class = " validation ">';
-            // if(isset($_POST['supprimer'])){
-            //     $user->suppression($_SESSION['user']['id']);
-            // }
+     
             ?> 
         </section>
         </main>
@@ -53,3 +48,4 @@ if(isset($_POST['register']))
 </body>
 <?php
 require('Include/footer.php');
+?>

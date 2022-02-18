@@ -1,5 +1,4 @@
 <?php
-
 require_once('Class/User.php');
 
  class Reservation
@@ -41,38 +40,34 @@ require_once('Class/User.php');
    //créer une nouvelle réservation pour la page reservation-form.php
     public function insert_event($titre,$description,$debut,$fin,$id_utilisateurs)
     // Permet d'insérer de nouveaux evènements en base de données
-    // reservation-form.php
     {  
-        //definir un creneau d'une heure. 
+         //definir un creneau d'une heure. 
         $date_debut = strtotime($debut);
         $date_fin = strtotime($date_debut . "+1hour");
         var_dump(strtotime($date_debut . "+1hour"));
         var_dump($date_fin);
-        if(strtotime($debut . "+1hour")== strtotime($fin))
-        {
-            $id_utilisateurs = $_SESSION['userId'];
+            if(strtotime($debut . "+1hour")== strtotime($fin))
+            {
+                $id_utilisateurs = $_SESSION['userId'];
 
-       
-       
-            $query2="INSERT INTO reservations (titre, description,debut,fin,id_utilisateurs) VALUES (:titre, :description, :debut, :fin, :id_utilisateurs)";
-            $result2=$this->bdd->prepare($query2);
-            $result2->execute(array(
-                    ':titre'=>$titre,
-                    ':description'=>$description,
-                    ':debut'=>$debut,
-                    ':fin'=>$fin,
-                    ':id_utilisateurs'=>$id_utilisateurs
-                ));
-                echo 'ok';
-        }
-        else
-        {
-            echo "veuillez resrver un crenau d'1h";
-        }
-       
-
-
-       $now = $_SERVER['REQUEST_TIME'];
+        
+        
+                $query2="INSERT INTO reservations (titre, description,debut,fin,id_utilisateurs) VALUES (:titre, :description, :debut, :fin, :id_utilisateurs)";
+                $result2=$this->bdd->prepare($query2);
+                $result2->execute(array(
+                        ':titre'=>$titre,
+                        ':description'=>$description,
+                        ':debut'=>$debut,
+                        ':fin'=>$fin,
+                        ':id_utilisateurs'=>$id_utilisateurs
+                    ));
+                    echo 'ok';
+            }
+            else
+            {
+                echo "veuillez reserver un crenau d'1h";
+            }
+            $now = $_SERVER['REQUEST_TIME'];
     }
 
     public function getDebut($date_debut)
@@ -89,15 +84,7 @@ require_once('Class/User.php');
     }
     
 
-    // public function getDatas($date_debut)
-    // {   
-    //     $query="SELECT * FROM reservations WHERE debut= :debut";
-    //     $result = $this->bdd->prepare($query);
-    //     $result->bindValue(':debut',$date_debut);
-    //     $result->execute();
-    //     $getDatas= $result->fetchAll();
-    //     return $getDatas;
-    // }
+
 
     //Afficher la réservation avec le titre et le nom de l'utilisateur sur la page planning
     public function showResa($date_debut)
@@ -146,8 +133,8 @@ require_once('Class/User.php');
         $result->execute(array('id'=> $id_reserv));
         $displayResa = $result->fetchAll(PDO::FETCH_ASSOC);
 
-        var_dump($displayResa);
-        var_dump($_GET['id']);
+        // var_dump($displayResa);
+        // var_dump($_GET['id']);
         
         return $displayResa;
         
@@ -179,11 +166,8 @@ require_once('Class/User.php');
 
         return $resultIdResa;
     }
+    
 
-    public function PlageHoraire($debut,$fin)
-    {
-        
-    }
 }
  
 

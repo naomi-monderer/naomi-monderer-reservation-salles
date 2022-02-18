@@ -1,0 +1,27 @@
+HTML
+    OUI
+    balise sémantique au lieu des div
+
+        NON
+
+MARGING : entre des élèment ex main , on veut header 
+PADDING : à l'intérieur des élèments
+
+Placer le main en dessous de header 
+    main margin top
+
+    FOOTER
+        bas de la page
+        bottom 0 position ...
+
+CSS
+    OUI
+        stylisé les td de la reservation
+       Sofiane Police
+        Cases
+        Centrer le tableau
+        changer les rayures
+        arranger le bouton suivant précédent
+        Chadhi footer en bas
+    NON
+
