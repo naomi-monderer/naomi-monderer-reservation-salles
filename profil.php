@@ -43,7 +43,7 @@ if(isset($_POST['submit']))
         <article>
             <h2>Mes réservations</h2>
            
-        <table>   <?php $getUserInfos->getAllInfos();?></table>
+        <table><?php $getUserInfos->getAllInfos();?></table>
         </article>
     </section>
 </main>

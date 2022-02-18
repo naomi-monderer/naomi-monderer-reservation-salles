@@ -95,7 +95,5 @@ if(isset($_POST['submit']))
     <?php echo $error;?>
 </main>
 <?php
-
-   
-require 'Include/footer.php';
+require_once('../naomi-monderer-reservation-salles/Include/footer.php');
 ?>

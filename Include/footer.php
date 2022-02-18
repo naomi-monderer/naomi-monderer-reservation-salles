@@ -21,9 +21,8 @@
               </li>
             </div>
 
-            <div>
-              <img src="../css/image/logo.png">
-            </div>          
+            
+                   
             <div class="footer-box">  
               
               <!-- <div class="bloc footer-services" id="logos-resaux">    -->
