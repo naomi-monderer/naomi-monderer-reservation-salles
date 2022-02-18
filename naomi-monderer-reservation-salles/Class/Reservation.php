@@ -43,7 +43,7 @@ require_once('Class/User.php');
         }
     }
 
-   
+   //créer une nouvelle réservation pour la page reservation-form.php
     public function insert_event($titre,$description,$debut,$fin,$id_utilisateurs)
     // Permet d'insérer de nouveaux evènements en base de données
     // reservation-form.php
@@ -78,14 +78,6 @@ require_once('Class/User.php');
 
 
        $now = $_SERVER['REQUEST_TIME'];
-   
-                    
-        
-
-          
-        
-
-       
     }
 
     public function getDebut($date_debut)
@@ -102,10 +94,23 @@ require_once('Class/User.php');
     }
     
 
+    // public function getDatas($date_debut)
+    // {   
+    //     $query="SELECT * FROM reservations WHERE debut= :debut";
+    //     $result = $this->bdd->prepare($query);
+    //     $result->bindValue(':debut',$date_debut);
+    //     $result->execute();
+    //     $getDatas= $result->fetchAll();
+    //     return $getDatas;
+    // }
+
+    //Afficher la réservation avec le titre et le nom de l'utilisateur sur la page planning
     public function showResa($date_debut)
     {
     // affiche le titre de la réservation et le nom de l'utilisateur  dans le planning
     // planning.php
+
+     
 
         $query="SELECT reservations.id, reservations.titre , reservations.description, reservations.id_utilisateurs,
         utilisateurs.login
@@ -130,6 +135,7 @@ require_once('Class/User.php');
         return $format->format( $formatFrench);
     }
 
+    //Afficher les infos de la réservation sur la page planning
     public function displayReservation()
     {
         if(isset($_GET['id'])){
@@ -150,6 +156,21 @@ require_once('Class/User.php');
         
         return $displayResa;
         
+    }
+
+    public function getClickInfosReserv()
+    {
+        $query = "SELECT reservations.id,`titre`, `description`, 
+                  DATE_FORMAT(debut,'%d/%m/%Y à %Hh%imin%ss') AS `debut`, 
+                  DATE_FORMAT(fin,'%d/%m/%Y à %Hh%imin%ss') AS `fin`, `id_utilisateurs`,`login` 
+                  FROM `reservations` 
+                  INNER JOIN utilisateurs 
+                  ON reservations.id_utilisateurs = utilisateurs.id 
+                  ORDER BY debut";
+        $result = $this->bdd->prepare($query);
+        $result->execute();
+        $getClick = $result->fetchAll(PDO::FETCH_ASSOC);
+        // var_dump($getClick);
     }
 
      public function getIdResa()

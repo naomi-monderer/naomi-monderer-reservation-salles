@@ -1,5 +1,6 @@
 
 <?php
+
 session_start();
 $title = "Reservation";
 require_once('Class/Reservation.php');
@@ -11,6 +12,7 @@ $oneResa = new Reservation();
 
 $oneReservation = $oneResa->displayReservation();
 
+// var_dump($oneReservation);
 ?>
 
 <h1>Réservé par <?= $oneReservation[0]['login'] ?> </h1>

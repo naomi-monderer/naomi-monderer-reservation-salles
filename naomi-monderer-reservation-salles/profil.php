@@ -6,6 +6,8 @@ require('Class/User.php');
 
 
 $userData = new User();
+$getUserInfos = new User();
+
 if(isset($_POST['submit']))
 {
     $userData->updatelogin($_POST['login']);
@@ -34,6 +36,18 @@ if(isset($_POST['register']))
                 </form>
                
             </section>
+            <section>
+        <h2>Mes réservations</h2>
+            <?php 
+            // $userReser->displayReservation();($_SESSION['user']['login']);
+            $getUserInfos->getAllInfos();
+        //    var_dump($a);
+            // echo '<input type="submit" name="supprimer" value="supprimer" class = " validation ">';
+            // if(isset($_POST['supprimer'])){
+            //     $user->suppression($_SESSION['user']['id']);
+            // }
+            ?> 
+        </section>
         </main>
         
 </body>

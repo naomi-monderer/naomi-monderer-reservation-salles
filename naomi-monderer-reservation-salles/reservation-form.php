@@ -19,21 +19,29 @@ $temps_anterieur = strtotime(date('Y-m-d h:i:s',strtotime("Monday this week +$i 
 $error = '';
 
 $reservation = new Reservation();
+$testResInfos = $reservation->getClickInfosReserv();
+
 if(isset($_POST['submit']))
 {  
     $titre = $_POST['titre'];
     $description = $_POST['description'];
     $debut = $_POST['debut'];
     $fin = $_POST['fin'];
+    $now = date('Y-m-d h:i:s',strtotime("yesterday"));
+    var_dump($now);
+
   
 
     if(!empty($_POST['titre']) && !empty($_POST['description']) && !empty($_POST['debut']) && !empty($_POST['fin']))
     {
+
         $reservation->insert_event($titre,$description,$debut,$fin,$id_utilisateurs);
-            
-        
     }
-    else
+  
+    elseif($_POST['debut'] <= $now){
+        var_dump($_POST['debut']);
+        echo "cela fonctionne";
+    }
     {
         $error = 'Veuillez remplir tous les champs';
     }

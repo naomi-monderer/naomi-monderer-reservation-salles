@@ -217,4 +217,39 @@ class User
                 echo "les informations de l'utilisateurs ont bien été modifiées";
         
     }
+    public function getAllInfos() 
+    {
+        $id = $_SESSION['user']['id'];
+        // var_dump($id);
+        $query = "SELECT reservations.id,`titre`, `description`,`debut`, `fin`, `id_utilisateurs`,`login` 
+                FROM `utilisateurs` 
+                INNER JOIN reservations 
+                ON utilisateurs.id = reservations.id_utilisateurs 
+                WHERE utilisateurs.id = :id
+                ORDER BY `debut` DESC"; 
+        $result = $this->bdd->prepare($query);
+        $result->bindValue(":id", $id);
+        // var_dump($result);
+
+        $result->execute();
+        // var_dump($result);
+
+        $getAllInf = $result->fetchAll(PDO::FETCH_ASSOC);
+        // var_dump($getAllInf);
+
+        echo "<table>";
+        echo '<tr>' . '<th>' . 'Titre' . '</th>';
+        echo '<th>' . 'Description' . '</th>';
+        echo '<th>' . 'Date' . '</th>';
+        echo '<th>' . 'Début' . '</th>';
+        echo '<th>' . 'Fin' . '</th>' . '</tr>';
+        foreach($getAllInf as $AllInf){
+        echo '<tr>' . '<td>' .$AllInf['titre'] . '</td>';
+        echo '<td>' . $AllInf['description'] . '</td>';
+        echo '<td>' . date_format(date_create($AllInf['debut'] ), 'd/m/Y'). '</td>';
+        echo '<td>' . date_format(date_create($AllInf['debut'] ), 'H:i'). '</td>';
+        echo '<td>' . date_format(date_create($AllInf['fin'] ), 'H:i'). '</td>';
+        }
+        echo '</table>';
+    }
 }
