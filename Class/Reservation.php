@@ -217,10 +217,15 @@ require_once('Class/User.php');
 
     // }
 
-    // public function timeslots
+    // public function suppression($_id) {
 
-
+    //     $link = $this->_link;
+    //     $SQL = $link->prepare("DELETE FROM reservations WHERE id_utilisateur = $_id");
+    //     $SQL->execute();
+    //     echo "<div class = ''><h2>Annulation prise en compte</h2></div>";
+    //   }     
 }
+
  
 
 

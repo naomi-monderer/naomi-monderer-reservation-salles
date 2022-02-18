@@ -203,5 +203,84 @@ class User
             //return $result;
         }
     }
-  
+    
+    // public function getAllInfos() {
+        // $login = $this->login;
+        // $query = "SELECT * FROM reservations where login = :login";
+        // $result = $this->bdd->prepare($query);
+        // $result->bindValue(":login", $login);
+        // var_dump($result);
+        
+        // $result->execute();
+        // var_dump($result);
+        
+        // $getClick = $result->fetchAll(PDO::FETCH_ASSOC);
+        // var_dump($getClick);
+        
+        // var_dump($_SESSION['user']);
+
+//         // $link = $this->_link;
+//         $SQL = $link->prepare("SELECT * FROM reservations");
+//         $SQL->execute();
+//         echo "<table class = 'tableau' >";
+//         echo '<tr>' . '<th>' . 'Titre' . '</th>';
+//         echo '<th>' . 'Description' . '</th>';
+//         echo '<th>' . 'Debut' . '</th>';
+//         echo '<th>' . 'Fin' . '</th>' . '</tr>';
+//         foreach($SQL as $key){
+//          echo '<tr>' . '<td>' . $key['titre'] . '</td>';
+//          echo '<td>' . $key['description'] . '</td>';
+//          echo '<td>' . $key['debut'] . '</td>';
+//          echo '<td>' . $key['fin'] . '</td>' . '</tr>';
+        // }
+//         echo '</table>';
+//       }
+        public function getAllInfos() {
+
+//     // $query = "SELECT reservations.id,`titre`, `description`, 
+//     // DATE_FORMAT(debut,'%d/%m/%Y à %Hh%imin%ss') AS `debut`, 
+//     // DATE_FORMAT(fin,'%d/%m/%Y à %Hh%imin%ss') AS `fin`, `id_utilisateurs`,`login` 
+//     // FROM `reservations` 
+//     // INNER JOIN utilisateurs 
+//     // ON reservations.id_utilisateurs = utilisateurs.id 
+//     // ORDER BY debut";
+//     // $result = $this->bdd->prepare($query);
+//     // $result->execute();
+//     // $getClick = $result->fetchAll(PDO::FETCH_ASSOC);
+    $id = $this->id;
+    $id = $_SESSION['user']['id'];
+    var_dump($id);
+    $query = "SELECT reservations.id,`titre`, `description`,`debut`, `fin`, `id_utilisateurs`,`login` 
+              FROM `utilisateurs` 
+              INNER JOIN reservations 
+              ON utilisateurs.id = reservations.id_utilisateurs 
+              WHERE utilisateurs.id = :id
+              ORDER BY `debut` DESC"; 
+    $result = $this->bdd->prepare($query);
+    $result->bindValue(":id", $id);
+    // var_dump($result);
+
+    $result->execute();
+    // var_dump($result);
+
+    $getAllInf = $result->fetchAll(PDO::FETCH_ASSOC);
+    // var_dump($getAllInf);
+
+    echo "<table>";
+    echo '<tr>' . '<th>' . 'Titre' . '</th>';
+    echo '<th>' . 'Description' . '</th>';
+    echo '<th>' . 'Date' . '</th>';
+    echo '<th>' . 'Début' . '</th>';
+    echo '<th>' . 'Fin' . '</th>' . '</tr>';
+    foreach($getAllInf as $AllInf){
+     echo '<tr>' . '<td>' .$AllInf['titre'] . '</td>';
+     echo '<td>' . $AllInf['description'] . '</td>';
+     echo '<td>' . date_format(date_create($AllInf['debut'] ), 'd/m/Y'). '</td>';
+     echo '<td>' . date_format(date_create($AllInf['debut'] ), 'H:i'). '</td>';
+     echo '<td>' . date_format(date_create($AllInf['fin'] ), 'H:i'). '</td>';
+     }
+    echo '</table>';
+
+  }
+ 
 }

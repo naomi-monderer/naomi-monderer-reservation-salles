@@ -18,15 +18,20 @@ if(isset($_POST['submit']))
     $debut = $_POST['debut'];
     $fin = $_POST['fin'];
     $now = date('Y-m-d h:i:s',strtotime("yesterday"));
+    var_dump($now);
 
   
 
-    if(!empty($_POST['titre']) && !empty($_POST['description']) && !empty($_POST['debut']) && !empty($_POST['fin']) && ($_POST['debut'] <= $now))
+    if(!empty($_POST['titre']) && !empty($_POST['description']) && !empty($_POST['debut']) && !empty($_POST['fin']))
     {
+
         $reservation->insert_event($titre,$description,$debut,$fin,$id_utilisateurs);
     }
   
-    else
+    elseif($_POST['debut'] <= $now){
+        var_dump($_POST['debut']);
+        echo "cela fonctionne";
+    }
     {
         $error = 'Veuillez remplir tous les champs';
     }
