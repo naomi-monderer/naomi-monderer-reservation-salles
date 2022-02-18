@@ -90,5 +90,5 @@ if (!empty($_GET['week'])) {
     </section>
 </main>
 <?php
-require_once('../naomi-monderer-reservation-salles/Include/footer.php');
+require_once('Include/footer.php');
 ?>
