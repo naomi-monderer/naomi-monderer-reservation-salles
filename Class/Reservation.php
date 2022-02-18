@@ -1,9 +1,4 @@
 <?php
-// date();
-//time();
-//datetime();
-//timestamp ();
-//date(w) lundi = 1 et samedi = 6
 
 require_once('Class/User.php');
 
