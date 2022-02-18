@@ -144,6 +144,7 @@ class Reservation
         $result = $this->bdd->prepare($query);
         $result->execute();
         $getClick = $result->fetchAll(PDO::FETCH_ASSOC);
+        
     }
 
     public function getIdResa()
@@ -157,8 +158,5 @@ class Reservation
 
         return $resultIdResa;
     }
-
-    public function PlageHoraire($debut, $fin)
-    {
-    }
+    
 }

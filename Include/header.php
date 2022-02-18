@@ -2,13 +2,20 @@
 <html lang="fr">
 
 <head>
-  <meta charset="UTF-8">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link id="favicon" rel="shortcut icon" href="assets/images/logo/stars-sky.ico" type="image/x-con">
-  <title><?php echo $title; ?> </title>
+    <meta charset="UTF-8">
+    <script src="https://kit.fontawesome.com/225d5fd287.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/include/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300&display=swap" rel="stylesheet"> 
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link id="favicon" rel="shortcut icon" href="assets/images/logo/stars-sky.ico" type="image/x-con">
+    <link rel="stylesheet" href="assets/styles/reservation-salles.css">
+    <link rel="stylesheet" href="css/style.css">
+    <title><?php echo $title; ?> </title>
 </head>
 
 <header>

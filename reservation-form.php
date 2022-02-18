@@ -4,7 +4,6 @@ require_once('Class/Reservation.php');
 require('Include/header.php');
 
 $id_utilisateurs = $_SESSION['userId'];
-
 $i = 0;
 $j = 0;
 if (!empty($_GET['week'])) {
@@ -74,7 +73,11 @@ if (isset($_POST['submit'])) {
                     <input type="datetime-local" class="form-control" name="fin" value="<?= $event_fin ?>">
                 </div>
 
-                <input type="submit" class="btn btn-primary" name="submit">
+                <input type="submit" class="btn btn-primary" value="Réserver" name="submit">
+                <?php if (isset($_POST["submit"])) {
+                    header('Location: planning.php');
+                    die();
+                } ?>
 
 
         </form>
@@ -82,7 +85,5 @@ if (isset($_POST['submit'])) {
         <?php echo $error; ?>
 </main>
 <?php
-
-
-require 'Include/footer.php';
+require('Include/footer.php');
 ?>

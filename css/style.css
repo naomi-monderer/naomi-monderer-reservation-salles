@@ -3,31 +3,40 @@ body {
   margin: 0;
   padding: 0;
   max-width: 100vw;
-  max-height: 100vh;
 }
+
 
 footer {
   background-color: #f9f9f9;
+
   height: 20%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   list-style: none;
+  bottom: 0;
+  position: relative;
+  width: 100%;
+
 }
 .hachure {
   background: linear-gradient(
     45deg,
-    #00f 1%,
-    #fff 1%,
-    #fff 49%,
-    #00f 49%,
-    #00f 51%,
-    #fff 51%,
-    #fff 99%,
-    #00f 99%
+    #041424 1%,
+  grey 1%,
+  grey 49%,
+    #041424 49%,
+    #041424 51%,
+  grey 51%,
+  grey 99%,
+    #041424 99%
   );
   background-size: 6px 6px;
   background-position: 50px 50px;
+}
+th 
+{
+  width: 12vw;
 }
 /*-----------/BASES----------*/
 
@@ -60,6 +69,27 @@ a .fab {
 /*-----------/LAYOUT----------*/
 
 /*-----------MODULE----------*/
+/*-----------reservation.php----------*/
+.res-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+.res-box{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    /* background-color: #00f; */
+    width: 25%;
+    margin: 2rem;
+}
+.res-titres{
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+}
+
+/*-----------/reservation.php----------*/
 
 /*-----------index----------*/
 
@@ -88,10 +118,25 @@ a .fab {
 /*-----------/index----------*/
 
 /*-----------planing--------*/
-.planing-vide {
-  background-color: darkblue;
-  width: 70%;
+button
+{
+  margin: 1rem;
+  border-radius: 2rem;
+ 
 }
+.btn-container
+{
+  display: flex;
+  justify-content: space-between;
+}
+
+.table-container
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 /*-----------/planing--------*/
 
 /*-----------/MODULE----------*/
@@ -110,14 +155,12 @@ a .fab {
 .login-form h2 {
   margin: 0 0 15px;
 }
-.form-control,
-.btn {
-  min-height: 38px;
-  border-radius: 2px;
-}
+
 .btn {
   font-size: 15px;
+  min-height: 38px;
   font-weight: bold;
+  border-radius: 2rem;
 }
 table {
   border-collapse: collapse;
@@ -149,6 +192,8 @@ a.btn.btn-secondary {
 /*-----------/PLANNING----------*/
 
 .table-bordered {
-  max-width: 50vw;
+  max-width: 80vw;
+
   text-align: center;
+
 }
