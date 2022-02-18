@@ -2,6 +2,7 @@
 body {
   margin: 0;
   padding: 0;
+  max-width: 100vw;
 }
 
 footer {
@@ -121,7 +122,6 @@ a .fab {
 }
 table {
   border-collapse: collapse;
-  margin-left: 4%;
 }
 .title {
   padding: 1.1rem !important;
@@ -134,4 +134,15 @@ a.btn.btn-secondary {
   padding: 0.4em !important;
   border: solid 1px #f9c132;
   font-size: 16px;
+}
+
+/*-----------/PROFIL----------*/
+
+.Profil {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.Profil h2 {
+  text-align: center;
 }

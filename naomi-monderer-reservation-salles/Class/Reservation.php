@@ -83,23 +83,11 @@ class Reservation
     }
 
 
-    // public function getDatas($date_debut)
-    // {   
-    //     $query="SELECT * FROM reservations WHERE debut= :debut";
-    //     $result = $this->bdd->prepare($query);
-    //     $result->bindValue(':debut',$date_debut);
-    //     $result->execute();
-    //     $getDatas= $result->fetchAll();
-    //     return $getDatas;
-    // }
+
 
     //Afficher la réservation avec le titre et le nom de l'utilisateur sur la page planning
     public function showResa($date_debut)
     {
-        // affiche le titre de la réservation et le nom de l'utilisateur  dans le planning
-        // planning.php
-
-
 
         $query = "SELECT reservations.id, reservations.titre , reservations.description, reservations.id_utilisateurs,
         utilisateurs.login

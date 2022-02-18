@@ -215,12 +215,12 @@ class User
         $getAllInf = $result->fetchAll(PDO::FETCH_ASSOC);
         // var_dump($getAllInf);
 
-        echo "<table>";
-        echo '<tr>' . '<th>' . 'Titre' . '</th>';
-        echo '<th>' . 'Description' . '</th>';
-        echo '<th>' . 'Date' . '</th>';
-        echo '<th>' . 'Début' . '</th>';
-        echo '<th>' . 'Fin' . '</th>' . '</tr>';
+        echo "<table class='table'>";
+        echo '<tr>' . '<th scope="row">' . 'Titre' . '</th>';
+        echo '<th scope="row">' . 'Description' . '</th>';
+        echo '<th scope="row">' . 'Date' . '</th>';
+        echo '<th scope="row">' . 'Début' . '</th>';
+        echo '<th scope="row">' . 'Fin' . '</th>' . '</tr>';
         foreach ($getAllInf as $AllInf) {
             echo '<tr>' . '<td>' . $AllInf['titre'] . '</td>';
             echo '<td>' . $AllInf['description'] . '</td>';
