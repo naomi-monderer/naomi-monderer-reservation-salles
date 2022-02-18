@@ -1,5 +1,4 @@
-  <footer>
-
+<footer>
             <div class="footer-box">
               
               <li>
@@ -20,7 +19,6 @@
                 </ul>
               </li>
             </div>
-
             
                    
             <div class="footer-box">  

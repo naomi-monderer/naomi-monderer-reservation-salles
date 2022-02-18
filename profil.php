@@ -12,38 +12,47 @@ if(isset($_POST['submit']))
 }
 ?>
 
-<main>    
-    <section>
+<main>
+    <section class="Profil">
         <article>
-            <h3>PROFIL</h3>
-            <form method="post">
-                <input type="text" name ="login" value="<?= $_SESSION['user']['login']; ?>" placeholder="Identifiant">
-                <input type="submit" name="submit" class="btn btn-info" value="mise à jour du login">
-            </form> 
+            <div class="login-form">
+                <form method="post">
+                    <div class="form-group">
+                        <input type="text" name="login" value="<?= $_SESSION['user']['login']; ?>" placeholder="Identifiant">
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" name="submit" class="btn btn-info" value="mise à jour du login">
+                    </div>
+                </form>
+            </div>
         </article>
-        
-         <?php
-            $userData = new User();
-            if(isset($_POST['register']))
-            {
-                $userData->updatepassword($_POST['password'],$_POST['passwordConfirm']);
-            }
-            ?>
-        <article>    
-            <form method="post">     
-                <input type="password" name ="password" value="" placeholder="password">
-                <input type="password" name ="passwordConfirm" value="" placeholder="passwordConfirm">
-                <button type="register" name="register" class="btn btn-info" value="mise à jour du password">Mise à jour du password</button>
-            </form>
-        </article>    
+
+        <?php
+        $userData = new User();
+        if (isset($_POST['register'])) {
+            $userData->updatepassword($_POST['password'], $_POST['passwordConfirm']);
+        }
+        ?>
+        <article>
+            <div class="login-form">
+                <form method="post">
+                    <div class="form-group">
+                        <input type="password" name="password" value="" placeholder="password">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="passwordConfirm" value="" placeholder="passwordConfirm">
+                    </div>
+                    <button type="register" name="register" class="btn btn-info" value="mise à jour du password">Mise à jour du password</button>
+                </form>
+            </div>
+        </article>
     </section>
 
 
     <section>
         <article>
-            <h2>Mes réservations</h2>
-           
-        <table><?php $getUserInfos->getAllInfos();?></table>
+            <h2 class="Profil">Mes réservations</h2>
+            <table> <?php $getUserInfos->getAllInfos(); ?></table>
         </article>
     </section>
 </main>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="fr"> 
+<html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <script src="https://kit.fontawesome.com/225d5fd287.js" crossorigin="anonymous"></script>
@@ -17,29 +18,24 @@
     <title><?php echo $title; ?> </title>
 </head>
 
-<body>    
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-                </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav">
-                    <a class="navbar-brand" href="index.php">Accueil</a>
-                    <!-- Utilisateur connecté -->
-                    <?php if(isset($_SESSION['user']['login']))
-                    {  ?>
-                    <a class="nav-item nav-link active" href="planning.php">Réservation de Salle<span class="sr-only">(current)</span></a>
-                    <a class="nav-item nav-link" href="profil.php">Profil</a>
-                    <a class="nav-item nav-link disabled" href="deconnexion.php">Déconnexion</a>
-                    <?php 
-                    }else 
-                    { ?>
-                        <!-- Utilisateur non connecté -->
-                        <a href="inscription.php" class="nav-item nav-link">Inscription</a>
-                        <a href= "connexion.php" class="nav-item nav-link">Connexion</a>
-                    <?php } ?>
-                </div>
-            </div>
-        </nav>
-    </header>
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="navbar-brand" href="index.php">Accueil</a>
+        <?php if (isset($_SESSION['user']['login'])) {  ?>
+          <a class="nav-item nav-link active" href="planning.php">Réservation de Salle<span class="sr-only">(current)</span></a>
+          <a class="nav-item nav-link" href="profil.php">Profil</a>
+          <a class="nav-item nav-link disabled" href="deconnexion.php">Déconnexion</a>
+        <?php } else { ?>
+          <!-- //Non connecté -->
+          <a href="inscription.php" class="nav-item nav-link">Inscription</a>
+          <a href="connexion.php" class="nav-item nav-link">Connexion</a>
+        <?php } ?>
+      </div>
+    </div>
+  </nav>
+</header>

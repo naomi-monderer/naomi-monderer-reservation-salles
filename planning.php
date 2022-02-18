@@ -13,22 +13,25 @@ if (!empty($_GET['week'])) {
 }
 ?>
 <main>
-    <section >
-        <form action="" method="get">
-            <button class="btn btn-info">suivant</button>
-            <input type="hidden" value="<?= $week + 1 ?>" name="week">
-        </form>
-        
-        <form action="" method="get">
-            <button class="btn btn-info">précédent</button>
-            <input type="hidden" value="<?= $week - 1 ?>" name="week">
-        </form>
+    <section  class="btn-container">
+        <div class="btn">
+            <form action="" method="get">
+                <button class="btn btn-warning">Précédent</button>
+                <input type="hidden" value="<?= $week - 1 ?>" name="week">
+            </form>
+        </div>
+            <div class="btn">
+            <form action="" method="get">
+                <button class="btn btn-warning">Suivant</button>
+                <input type="hidden" value="<?= $week + 1 ?>" name="week">
+            </form>
+        </div>
     </section>
 
-    <section>
-            <table class="table table-bordered table-dark">
-                <thead>
-                    <th>
+    <section class="table-container">
+        <table class="table-bordered table-dark">
+            <thead>
+                <th>
 
                     </th>
                     <?php
@@ -50,7 +53,7 @@ if (!empty($_GET['week'])) {
                                 $showResa = $test->showResa(date('Y-m-d', strtotime('Monday this week +' . $i . "days +$week weeks")) . ' ' . $j . ':00:00');
 
                                 if (!empty($showResa)) {  ?>
-                                    <td style="background:#FCDC28;">
+                                    <td>
                                         <a href="reservation.php?id=<?= $showResa[0]['id'] ?>>">
                                             <?= $showResa[0]['login'] . ' </br>' . $showResa[0]['titre'] ?>
                                         </a>
