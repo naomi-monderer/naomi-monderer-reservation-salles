@@ -133,8 +133,8 @@ require_once('Class/User.php');
         $result->execute(array('id'=> $id_reserv));
         $displayResa = $result->fetchAll(PDO::FETCH_ASSOC);
 
-        var_dump($displayResa);
-        var_dump($_GET['id']);
+        // var_dump($displayResa);
+        // var_dump($_GET['id']);
         
         return $displayResa;
         
@@ -166,6 +166,7 @@ require_once('Class/User.php');
 
         return $resultIdResa;
     }
+    
 
 }
  

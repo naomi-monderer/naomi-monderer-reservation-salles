@@ -3,6 +3,7 @@ body
 {
     margin:0;
     padding: 0;
+    font-family: 'Fira Sans', sans-serif;
 }
 
 footer
@@ -43,7 +44,7 @@ a
 }
 a .fab
 {
-   
+   position: center;
     color: black;
 }
 /*-----------index----------*/
@@ -64,6 +65,27 @@ a .fab
 
 
 /*-----------MODULE----------*/
+/*-----------reservation.php----------*/
+.res-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+.res-box{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    /* background-color: #00f; */
+    width: 25%;
+    margin: 2rem;
+}
+.res-titres{
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+}
+
+/*-----------/reservation.php----------*/
 
 /*-----------index----------*/
 
