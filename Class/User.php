@@ -2,7 +2,7 @@
 
 class User
 {
-    protected $id;
+    private $id;
     public $login;
     public $password;
   
@@ -33,64 +33,66 @@ class User
 
     public function register($login,$password,$passwordConfirm)
     {
+        
+
+      
         $_login = htmlspecialchars($login);
         $_password = htmlspecialchars($password);
         $_passwordConfirm = htmlspecialchars($passwordConfirm);
 
+
+      
         $login = trim($_login);
         $passwordConfirm = trim($_passwordConfirm);
         $password = trim($_password);
      
-       if (!empty($login) && !empty($password) && !empty($passwordConfirm)) 
+
+        if (!empty($login) && !empty($password) && !empty($passwordConfirm)) 
         {
-            $infos = "SELECT * FROM utilisateurs WHERE login = :login ";
-            $result = $this->bdd->prepare($infos);
-            $result->execute(array('login'=>$login));
-            $userData = $result->fetchAll(PDO::FETCH_ASSOC);
-
-            if ((count($userData)) === 0)
-
-            {  
-                if ($password == $passwordConfirm) 
-                {
-                    
-                    $cost = ['cost' => 12];
-                    $password = password_hash($password,PASSWORD_BCRYPT);
-                        
-            
-                    $query = "INSERT INTO utilisateurs(login, password)
-                    VALUES(:login, :password)";
-                    $result=$this->bdd->prepare($query);
-                    $result->bindvalue(':login', $login);
-                    $result->bindvalue(':password', $password);
-                    $result->execute(array(
-                        ":login" => $login,
-                        ":password" => $password,
-                    
-                    ));
-                    header('Location:connexion.php');
-                    return $userData;
+          
                 
-                }
-                else
-                {
-                    echo  "Les mots de passe doivent être identiques";
-                }
-            }
-            else
-            {
-                echo "Ce login est déjà utilisé";
-            }
-        }
-        else
-        {
-            echo "Tous les champs doivent être remplis.";
+                $infos = "SELECT * FROM utilisateurs WHERE login = :login ";
+                $result = $this->bdd->prepare($infos);
+                $result->bindvalue(':login',$login);
+                $result->setFetchMode(PDO:: FETCH_ASSOC);// j'utilise fetch_assoc pour récuperer les key d'un tableau associatif 
+                $result->execute();
+                $userData = $result->fetchAll();
+
+
+                if ((count($userData)) === 0)
+                    {
+                         if ($password == $passwordConfirm) 
+                        {
+                            
+                            $cost = ['cost' => 12];
+                            $password = password_hash($password,PASSWORD_BCRYPT);
+                             
+                    
+                            $query = "INSERT INTO utilisateurs(login, password)
+                            VALUES(:login, :password)";
+                            $result=$this->bdd->prepare($query);
+                            $result->bindvalue(':login', $login);
+                            $result->bindvalue(':password', $password);
+                            $result->execute(array(
+                                ":login" => $login,
+                                ":password" => $password,
+                            
+                            ));
+                            header('Location:connexion.php?reg_err=success');
+                           
+                        
+                        }
+                            else {
+                            header('Location: inscription.php?reg_err=password');
+                            die();}
+                    }else {
+                        header('Location: inscription.php?reg_err=already');
+                        die();
+                    }
+
         }
     }
-
-
-    public function connect($login,$password)
-    {
+    public function connect($login,$password){
 
         $_login = htmlspecialchars($login);
         $_password = htmlspecialchars($password);
@@ -109,178 +111,145 @@ class User
                     ":login"=> $login,
                     
                 ));
+                
+
                 $userData = $result->fetchAll();
-               
-                if (count($userData)===1)
-                {
-                    if(password_verify($password,$userData[0]['password']))
-                    {
-                        session_start();
-                            $_SESSION["user"]= $userData[0];
-                            $_SESSION["userId"] = $userData[0]["id"];
-                            $_SESSION["userLogin"]= $userData[0]["login"];
-                            $_SESSION["userPassword"] = $userData[0]["password"];
-                            // // [
-                            //     $_SESSION["user"]= [
-                            //     $this->id = $userData[0]["id"],
-                            //     $this->login = $userData[0]["login"],
-                            //     $this->password = $userData[0]["password"],
-                            
-                            // ];
-                             header('Location:profil.php');
-                            exit();
-                            return $userData;
-                    }
-                    else
-                    {
-                        echo "Les mots de passent doivent être identiques.";
-                    }
-                            
-                }
-                else
-                {
-                    echo "Ce login est incorrect.";
-                }
+                
+                if(password_verify($password,$userData[0]['password']))
+                        {
+                            session_start();
+                                $_SESSION["user"]= $userData[0];
+                                $_SESSION["userId"] = $userData[0]["id"];
+                                $_SESSION["userLogin"]= $userData[0]["login"];
+                                $_SESSION["userPassword"] = $userData[0]["password"];
+                               
+                                 header('Location:profil.php');
+                                exit();
+                                return $userData;
+                        }else {
+                            header('Location: connexion.php?login_err=password');
+                            die();
+                        }
+                                
             }
-            else
-            {
-                echo "Tous les champs doivent être remplis.";
-            }
-    }
+
+        }
     
     public function disconnect()
     {
-        session_destroy();
+        session_start(); // demarrage de la session
+        session_destroy(); // on détruit la/les session(s), soit si vous utilisez une autre session, utilisez de préférence le unset()
         header('Location: connexion.php');
+        die();
     }
 
-    public function update($login, $password, $passwordConfirm)
+    public function updatelogin($login)
     {
        
         if(isset($_SESSION['user']))
         {       $this->login = $login;
-                $this->password = $password;
-                
-
+             
                 $infos2 = "SELECT * FROM utilisateurs WHERE login = :login ";
                 $result2 =$this->bdd->prepare($infos2);
                 $result2->setFetchMode(PDO:: FETCH_ASSOC);  
                 $result2->execute(array(
-                    ":login"=> $login,
+                    ":login"=> $login,   
                 ));
+                
                 $verifyLogin = $result2->fetchAll();
                 
-                if(!$verifyLogin && $_SESSION['user']['login'])
+                
+                if(!$verifyLogin)
                 {   
-                    if($password == $passwordConfirm)
-                    {
-                        $cryptedpass=password_hash($passwordConfirm,PASSWORD_BCRYPT);
-                        $update = "UPDATE utilisateurs SET login = :login , password= :password WHERE id = :id ";
+                    
+                        $update = "UPDATE utilisateurs SET login= :login  WHERE id = :id ";
                         $result = $this->bdd->prepare($update);
                         
                         $result->execute(array(
-                            ":id"=>$_SESSION['user']['id'],
-                           ":login"=> $login,
-                           ":password"=> $cryptedpass));
-                        $updateProfil = $result->fetchAll();
+                           ":id"=>$_SESSION['user']['id'],
+                           ":login"=>$login,
+                        ));
 
-                    }
+                    
 
                 }
+                if(isset($verifyLogin[0]) && $verifyLogin[0]['login']==$_SESSION['user']['login']){
+                    $cryptedpass=password_hash($passwordConfirm,PASSWORD_BCRYPT);
+                        $update = "UPDATE utilisateurs SET login= :login  id = :id ";
+                        $result = $this->bdd->prepare($update);
+                        
+                        $result->execute(array(
+                           ":id"=>$_SESSION['user']['id'],
+                           ":login"=>$login,
+                        ));
+                }
+
            
 
         
                 if(!$result2 && $_SESSION['user'])
 
            
-                var_dump($result2);
             
            
-                //$user = $result2->fetchAll();
                 $_SESSION["user"]['login'] =$login;
                 echo "les informations de l'utilisateurs ont bien été modifiées";
             
-            //return $result;
         }
     }
-    
-    // public function getAllInfos() {
-        // $login = $this->login;
-        // $query = "SELECT * FROM reservations where login = :login";
-        // $result = $this->bdd->prepare($query);
-        // $result->bindValue(":login", $login);
+
+    public function updatepassword($password, $passwordConfirm)
+    {
+       
+       
+                    if($password == $passwordConfirm)
+                    {
+                        $cryptedpass=password_hash($passwordConfirm,PASSWORD_BCRYPT);
+                        $update = "UPDATE utilisateurs SET password= :password WHERE id = :id ";
+                        $result = $this->bdd->prepare($update);
+
+                        $result->execute(array(
+                           ":id"=>$_SESSION['user']['id'],
+                           ":password"=> $cryptedpass,
+                        ));
+
+                    }
+                echo "les informations de l'utilisateurs ont bien été modifiées";
+        
+    }
+    public function getAllInfos() 
+    {
+        $id = $_SESSION['user']['id'];
+        // var_dump($id);
+        $query = "SELECT reservations.id,`titre`, `description`,`debut`, `fin`, `id_utilisateurs`,`login` 
+                FROM `utilisateurs` 
+                INNER JOIN reservations 
+                ON utilisateurs.id = reservations.id_utilisateurs 
+                WHERE utilisateurs.id = :id
+                ORDER BY `debut` DESC"; 
+        $result = $this->bdd->prepare($query);
+        $result->bindValue(":id", $id);
         // var_dump($result);
-        
-        // $result->execute();
+
+        $result->execute();
         // var_dump($result);
-        
-        // $getClick = $result->fetchAll(PDO::FETCH_ASSOC);
-        // var_dump($getClick);
-        
-        // var_dump($_SESSION['user']);
 
-//         // $link = $this->_link;
-//         $SQL = $link->prepare("SELECT * FROM reservations");
-//         $SQL->execute();
-//         echo "<table class = 'tableau' >";
-//         echo '<tr>' . '<th>' . 'Titre' . '</th>';
-//         echo '<th>' . 'Description' . '</th>';
-//         echo '<th>' . 'Debut' . '</th>';
-//         echo '<th>' . 'Fin' . '</th>' . '</tr>';
-//         foreach($SQL as $key){
-//          echo '<tr>' . '<td>' . $key['titre'] . '</td>';
-//          echo '<td>' . $key['description'] . '</td>';
-//          echo '<td>' . $key['debut'] . '</td>';
-//          echo '<td>' . $key['fin'] . '</td>' . '</tr>';
-        // }
-//         echo '</table>';
-//       }
-        public function getAllInfos() {
+        $getAllInf = $result->fetchAll(PDO::FETCH_ASSOC);
+        // var_dump($getAllInf);
 
-//     // $query = "SELECT reservations.id,`titre`, `description`, 
-//     // DATE_FORMAT(debut,'%d/%m/%Y à %Hh%imin%ss') AS `debut`, 
-//     // DATE_FORMAT(fin,'%d/%m/%Y à %Hh%imin%ss') AS `fin`, `id_utilisateurs`,`login` 
-//     // FROM `reservations` 
-//     // INNER JOIN utilisateurs 
-//     // ON reservations.id_utilisateurs = utilisateurs.id 
-//     // ORDER BY debut";
-//     // $result = $this->bdd->prepare($query);
-//     // $result->execute();
-//     // $getClick = $result->fetchAll(PDO::FETCH_ASSOC);
-    $id = $this->id;
-    $id = $_SESSION['user']['id'];
-    var_dump($id);
-    $query = "SELECT reservations.id,`titre`, `description`,`debut`, `fin`, `id_utilisateurs`,`login` 
-              FROM `utilisateurs` 
-              INNER JOIN reservations 
-              ON utilisateurs.id = reservations.id_utilisateurs 
-              WHERE utilisateurs.id = :id
-              ORDER BY `debut` DESC"; 
-    $result = $this->bdd->prepare($query);
-    $result->bindValue(":id", $id);
-    // var_dump($result);
-
-    $result->execute();
-    // var_dump($result);
-
-    $getAllInf = $result->fetchAll(PDO::FETCH_ASSOC);
-    // var_dump($getAllInf);
-
-    echo "<table>";
-    echo '<tr>' . '<th>' . 'Titre' . '</th>';
-    echo '<th>' . 'Description' . '</th>';
-    echo '<th>' . 'Date' . '</th>';
-    echo '<th>' . 'Début' . '</th>';
-    echo '<th>' . 'Fin' . '</th>' . '</tr>';
-    foreach($getAllInf as $AllInf){
-     echo '<tr>' . '<td>' .$AllInf['titre'] . '</td>';
-     echo '<td>' . $AllInf['description'] . '</td>';
-     echo '<td>' . date_format(date_create($AllInf['debut'] ), 'd/m/Y'). '</td>';
-     echo '<td>' . date_format(date_create($AllInf['debut'] ), 'H:i'). '</td>';
-     echo '<td>' . date_format(date_create($AllInf['fin'] ), 'H:i'). '</td>';
-     }
-    echo '</table>';
-
-  }
- 
+        echo "<table>";
+        echo '<tr>' . '<th>' . 'Titre' . '</th>';
+        echo '<th>' . 'Description' . '</th>';
+        echo '<th>' . 'Date' . '</th>';
+        echo '<th>' . 'Début' . '</th>';
+        echo '<th>' . 'Fin' . '</th>' . '</tr>';
+        foreach($getAllInf as $AllInf){
+        echo '<tr>' . '<td>' .$AllInf['titre'] . '</td>';
+        echo '<td>' . $AllInf['description'] . '</td>';
+        echo '<td>' . date_format(date_create($AllInf['debut'] ), 'd/m/Y'). '</td>';
+        echo '<td>' . date_format(date_create($AllInf['debut'] ), 'H:i'). '</td>';
+        echo '<td>' . date_format(date_create($AllInf['fin'] ), 'H:i'). '</td>';
+        }
+        echo '</table>';
+    }
 }

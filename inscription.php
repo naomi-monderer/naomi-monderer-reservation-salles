@@ -1,33 +1,74 @@
 <?php
+$title = "Incscription";
 require('Include/header.php');
 require('Class/User.php');
-
-$userData = new User();
-if(isset($_POST['submit']))
-{
-    $Datas= $userData->register($_POST['login'],$_POST['password'],$_POST['passwordConfirm']);
-   
-}
-var_dump($userData);
-
-
 ?>
+<?php
+                if (isset($_GET['reg_err'])) {
+                    $err = htmlspecialchars($_GET['reg_err']);
+
+                    switch ($err) {
+                        case 'success':
+                ?>
+                            <div class="alert alert-success">
+                                <strong>Succès</strong> inscription réussie !
+                            </div>
+                        <?php
+                            break;
+
+                        case 'password':
+                        ?>
+                            <div class="alert alert-danger">
+                                <strong>Erreur</strong> mot de passe différent
+                            </div>
+                        <?php
+                            break;
+
+                        case 'already':
+                        ?>
+                            <div class="alert alert-danger">
+                                <strong>Erreur</strong> compte deja existant
+                            </div>
+                <?php
+
+                    }
+                }
+                ?>
 <body>
         <main>    
             <section>
                 <h3>INSCRIPTION</h3>
                 <form method="post">
-                    <input type="text" name="login" placeholder="identifiant">
-                   
-                    <input type="password" name="password" placeholder="MDP">
-                    <input type="password" name="passwordConfirm" placeholder="confirmez MDP">
+                <div class="form-group">
+                <label for="InputLogin">Login</label>
+                    <input type="text" class="form-control" name="login" placeholder="identifiant">
+                </div>
+                <div class="form-group">
+                <label for="InputPassword1">Password</label>
+                    <input type="password" class="form-control" name="password" >
+                </div>
+                <div class="form-group">
+                <label for="InputPassword1">Password Confirm</label>
 
-                    <input type="submit" name="submit" value="s'inscrire">
+                    <input type="password" class="form-control" name="passwordConfirm" >
+                    </div>
+                    <button type="submit" class="btn btn-primary" name="submit" value="s'inscrire">S'inscrire</button>
                                
                 </form> 
             </section>
         </main>
+        <?php 
+
+$userData = new User();
+if(isset($_POST['submit']))
+{
+    $userData->register($_POST['login'],$_POST['password'],$_POST['passwordConfirm']);
+}
+
+?>
 </body>
+
 <?php
 require('Include/footer.php');
 ?>             
+                    

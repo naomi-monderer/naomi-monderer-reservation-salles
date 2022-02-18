@@ -47,25 +47,14 @@ require_once('Class/User.php');
     public function insert_event($titre,$description,$debut,$fin,$id_utilisateurs)
     // Permet d'insérer de nouveaux evènements en base de données
     // reservation-form.php
-    {    
-        // $date_fin = $debut;
-        // $date_fin_insert = strtotime($date_fin . "+1hour");
-        // $date_fin_insert = date('Y-m-d H:i', $date_fin_insert);
-       
-        // $hour_to_compare = $this->getPlageHorraire($debut);
-        // $creneau_exist = count($hour_to_compare);
-        // $strtotime = ("Monday to Friday");
-        // $weekend = intval(mixed $strtotime, $base = 5);
-
-
-
-       $now = $_SERVER['REQUEST_TIME'];
-        // je dois récupérer l'heure du début da ma reservation dans un fetch. 
-        // mettre ce fetch dans une variable que je vais appeler $debut 
-        // et créer ma condition 
-                    
-        
-
+    {  
+        //definir un creneau d'une heure. 
+        $date_debut = strtotime($debut);
+        $date_fin = strtotime($date_debut . "+1hour");
+        var_dump(strtotime($date_debut . "+1hour"));
+        var_dump($date_fin);
+        if(strtotime($debut . "+1hour")== strtotime($fin))
+        {
             $id_utilisateurs = $_SESSION['userId'];
 
        
@@ -79,10 +68,16 @@ require_once('Class/User.php');
                     ':fin'=>$fin,
                     ':id_utilisateurs'=>$id_utilisateurs
                 ));
-                
-        
-
+                echo 'ok';
+        }
+        else
+        {
+            echo "veuillez resrver un crenau d'1h";
+        }
        
+
+
+       $now = $_SERVER['REQUEST_TIME'];
     }
 
     public function getDebut($date_debut)
@@ -135,7 +130,6 @@ require_once('Class/User.php');
    
     public function formatDate($days, $week = 0)
     {
-        // http://benjamin.leveque.me/formater-une-date-avec-php-5-3-l10n-partie-2.html
         $format = new IntlDateFormatter('fr_FR', IntlDateFormatter::FULL, IntlDateFormatter::NONE);
         $formatFrench = new DateTime("Monday this week +$days days +$week weeks");
         return $format->format( $formatFrench);
@@ -190,42 +184,12 @@ require_once('Class/User.php');
 
         return $resultIdResa;
     }
-// public function getDatas($date_debut)
-    // //
-    // {   
-    //     $query="SELECT * FROM reservations WHERE debut= :debut";
-    //     $result = $this->bdd->prepare($query);
-    //     $result->bindValue(':debut',$date_debut);
-    //     $result->execute();
-    //     $getDatas= $result->fetchAll();
-    //     return $getDatas;
-    // }
 
-    // public function resaPlanning($date_debut)
-    // //
-    // {
-    //     $query = "SELECT reservations.titre, utilisateurs.login, reservations.debut, reservations.fin  
-    //              FROM reservations 
-    //              INNER JOIN utilisateurs
-    //              ON reservations.id_utilisateurs = utilisateurs.id
-    //              WHERE debut= :debut";
-    //     $result = $this->bdd->prepare($query);
-    //     $result->bindValue(':debut',$date_debut);
-    //     $result->execute();
-    //     $resaPlanning = $result->fetchAll(PDO::FETCH_ASSOC);
-    //     return $resaPlanning;
-
-    // }
-
-    // public function suppression($_id) {
-
-    //     $link = $this->_link;
-    //     $SQL = $link->prepare("DELETE FROM reservations WHERE id_utilisateur = $_id");
-    //     $SQL->execute();
-    //     echo "<div class = ''><h2>Annulation prise en compte</h2></div>";
-    //   }     
+    public function PlageHoraire($debut,$fin)
+    {
+        
+    }
 }
-
  
 
 
