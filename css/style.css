@@ -3,17 +3,18 @@ body {
   margin: 0;
   padding: 0;
   max-width: 100vw;
+  min-height: 100%;
 }
 
 footer {
-  height: 20%;
+  margin-top: auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
   list-style: none;
-  bottom: 0;
-  position: relative;
   width: 100%;
+  color: white;
+  padding: 15px;
 }
 .hachure {
   background: linear-gradient(
