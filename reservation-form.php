@@ -4,7 +4,7 @@ $title = "Réservation";
 require_once('Class/Reservation.php');
 require('Include/header.php');
 
-$id_utilisateurs = $_SESSION['userId'];
+
 $i = 0;
 $j = 0;
 if (!empty($_GET['week'])) {
