@@ -16,7 +16,7 @@ class User
                 ];
             $DB_SDN = 'mysql:host=localhost;dbname=reservationsalles';
             $DB_USER = 'root';
-            $DB_PASS = 'root';
+            $DB_PASS = '';
 
             //on va instancier donc créer un objet PDO
             $this->bdd = new PDO($DB_SDN, $DB_USER, $DB_PASS, $options);
@@ -188,40 +188,39 @@ class User
             echo "les informations de l'utilisateurs ont bien été modifiées";
         }
         
-        public function getAllInfos()
-        {
-            $id = $_SESSION['user']['id'];
-            // var_dump($id);
-            $query = "SELECT reservations.id,titre, description,debut, fin, id_utilisateurs,login 
-                    FROM utilisateurs 
-                    INNER JOIN reservations 
-                    ON utilisateurs.id = reservations.id_utilisateurs 
-                    WHERE utilisateurs.id = :id
-                    ORDER BY debut DESC";
-            $result = $this->bdd->prepare($query);
-            $result->bindValue(":id", $id);
-            // var_dump($result);
+    public function getAllInfos()
+    {
+        $id = $_SESSION['user']['id'];
+        // var_dump($id);
+        $query = "SELECT reservations.id,titre, description,debut, fin, id_utilisateurs,login 
+                FROM utilisateurs 
+                INNER JOIN reservations 
+                ON utilisateurs.id = reservations.id_utilisateurs 
+                WHERE utilisateurs.id = :id
+                ORDER BY debut DESC";
+        $result = $this->bdd->prepare($query);
+        $result->bindValue(":id", $id);
+        // var_dump($result);
 
-            $result->execute();
-            // var_dump($result);
+        $result->execute();
+        // var_dump($result);
 
-            $getAllInf = $result->fetchAll(PDO::FETCH_ASSOC);
-            // var_dump($getAllInf);
+        $getAllInf = $result->fetchAll(PDO::FETCH_ASSOC);
+        // var_dump($getAllInf);
 
-            echo "<table class='table'>";
-            echo '<tr>' . '<th scope="row">' . 'Titre' . '</th>';
-            echo '<th scope="row">' . 'Description' . '</th>';
-            echo '<th scope="row">' . 'Date' . '</th>';
-            echo '<th scope="row">' . 'Début' . '</th>';
-            echo '<th scope="row">' . 'Fin' . '</th>' . '</tr>';
-            foreach ($getAllInf as $AllInf) {
-                echo '<tr>' . '<td>' . $AllInf['titre'] . '</td>';
-                echo '<td>' . $AllInf['description'] . '</td>';
-                echo '<td>' . date_format(date_create($AllInf['debut']), 'd/m/Y') . '</td>';
-                echo '<td>' . date_format(date_create($AllInf['debut']), 'H:i') . '</td>';
-                echo '<td>' . date_format(date_create($AllInf['fin']), 'H:i') . '</td>';
-            }
-            echo '</table>';
+        echo "<table class='table'>";
+        echo '<tr>' . '<th scope="row">' . 'Titre' . '</th>';
+        echo '<th scope="row">' . 'Description' . '</th>';
+        echo '<th scope="row">' . 'Date' . '</th>';
+        echo '<th scope="row">' . 'Début' . '</th>';
+        echo '<th scope="row">' . 'Fin' . '</th>' . '</tr>';
+        foreach ($getAllInf as $AllInf) {
+            echo '<tr>' . '<td>' . $AllInf['titre'] . '</td>';
+            echo '<td>' . $AllInf['description'] . '</td>';
+            echo '<td>' . date_format(date_create($AllInf['debut']), 'd/m/Y') . '</td>';
+            echo '<td>' . date_format(date_create($AllInf['debut']), 'H:i') . '</td>';
+            echo '<td>' . date_format(date_create($AllInf['fin']), 'H:i') . '</td>';
         }
-    }   
-
+        echo '</table>';
+    }
+}   

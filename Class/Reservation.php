@@ -29,7 +29,7 @@ class Reservation
                 ];
             $DB_SDN = 'mysql:host=localhost;dbname=reservationsalles';
             $DB_USER = 'root';
-            $DB_PASS = 'root';
+            $DB_PASS = '';
 
             //on va instancier donc créer un objet PDO
             $this->bdd = new PDO($DB_SDN, $DB_USER, $DB_PASS, $options);
@@ -135,5 +135,4 @@ class Reservation
         $getClick = $result->fetchAll(PDO::FETCH_ASSOC);
         
     }
-
 }
