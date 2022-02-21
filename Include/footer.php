@@ -30,12 +30,12 @@
         <h2 class="footer-titre-box">Retrouvez-nous sur Github </h2>
       </ul>
       <ul>
-        <a href="https://github.com/naomie-monderer" target="blank">
+        <a href="https://github.com/naomie-monderer/naomi-monderer-reservation-salles/" target="blank">
           <i class="fab fa-github">Naomi Monderer</i></a>
       </ul>
       <ul>
         <a href="https://github.com/chadhilati-mansoibou" target="blank">
-          <i class="fab fa-github">chadhilati Mansoibou</i></a>
+          <i class="fab fa-github">Chadhilati Mansoibou</i></a>
       </ul>
       <ul>
         <a href="https://github.com/sofiane-ziri" target="blank">

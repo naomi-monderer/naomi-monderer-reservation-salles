@@ -104,7 +104,7 @@ class User
 
 
             $userData = $result->fetchAll();
-
+            var_dump($userData);
             if (password_verify($password, $userData[0]['password'])) {
                 session_start();
                 $_SESSION["user"] = $userData[0];
@@ -144,6 +144,7 @@ class User
             ));
 
             $verifyLogin = $result2->fetchAll();
+            
 
 
             if (!$verifyLogin) {
@@ -154,7 +155,9 @@ class User
                 $result->execute(array(
                     ":id" => $_SESSION['user']['id'],
                     ":login" => $login,
+
                 ));
+
             }
             if (isset($verifyLogin[0]) && $verifyLogin[0]['login'] == $_SESSION['user']['login']) {
                 $update = "UPDATE utilisateurs SET login= :login  id = :id ";
@@ -164,12 +167,15 @@ class User
                     ":id" => $_SESSION['user']['id'],
                     ":login" => $login,
                 ));
+            } else {
+                echo "merci !!!!!!!";
+
             }
 
 
 
 
-            if (!$result2 && $_SESSION['user'])
+            if (!$result2 && $_SESSION['user']){
 
 
 
@@ -177,13 +183,15 @@ class User
                 $_SESSION["user"]['login'] = $login;
             echo "les informations de l'utilisateurs ont bien été modifiées";
         }
+        }
     }
 
     public function updatepassword($password, $passwordConfirm)
     {
 
 
-        if ($password == $passwordConfirm) {
+        if ($password == $passwordConfirm)
+        {
             $cryptedpass = password_hash($passwordConfirm, PASSWORD_BCRYPT);
             $update = "UPDATE utilisateurs SET password= :password WHERE id = :id ";
             $result = $this->bdd->prepare($update);

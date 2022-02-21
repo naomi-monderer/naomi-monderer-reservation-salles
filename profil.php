@@ -13,6 +13,7 @@ if (isset($_POST['submit'])) {
 
 <main>
 
+    <body>
         <section class="Profil">
             <article>
                 <div class="login-form">

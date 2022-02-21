@@ -47,7 +47,7 @@ if (isset($_POST['submit'])) {
                 <div class="form-group">
                     <label for="titre">Titre du film:</label>
                     <input type="text" class="form-control" name="titre" placeholder="ex:Die Hard 3">
-
+                 </div>
                     <div class="form-group">
                         <label for="description">Description:</label>
                         <textarea name="description" class="form-control"></textarea>

@@ -145,16 +145,4 @@ class Reservation
         $result->execute();
         $getClick = $result->fetchAll(PDO::FETCH_ASSOC);
     }
-
-    public function getIdResa()
-    {
-        $id_resa = $_GET["id_resa"];
-
-        $sql_resa = "SELECT * FROM reservations WHERE id= $id_resa";
-        $result = $this->bdd->prepare($sql_resa);
-        $result->execute();
-        $resultIdResa = $result->fetchAll(PDO::FETCH_ASSOC);
-
-        return $resultIdResa;
-    }
 }
