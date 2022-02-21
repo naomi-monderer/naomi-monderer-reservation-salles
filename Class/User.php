@@ -189,8 +189,12 @@ class User
                     ":id" => $_SESSION['user']['id'],
                     ":password" => $cryptedpass,
                 ));
+                $_SESSION['error'] = "les informations de l'utilisateurs ont bien été modifiées";
             }
-            echo "les informations de l'utilisateurs ont bien été modifiées";
+            else
+            {
+                $_SESSION['error'] = "Les mots de passes doivent être identiques.";
+            }
         }
         
     public function getAllInfos()

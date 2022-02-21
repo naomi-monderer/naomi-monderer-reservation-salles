@@ -1,10 +1,4 @@
 <?php
-// date();
-//time();
-//datetime();
-//timestamp ();
-//date(w) lundi = 1 et samedi = 6
-
 require_once('Class/User.php');
 
 class Reservation
@@ -47,7 +41,7 @@ class Reservation
         $date_fin = strtotime($date_debut . "+1hour");
         if (strtotime($debut . "+1hour") == strtotime($fin)) 
         {
-            $id_utilisateurs = $_SESSION['userId'];
+            $id_utilisateurs = $_SESSION['user']['id'];
             $query2 = "INSERT INTO reservations (titre, description,debut,fin,id_utilisateurs) VALUES (:titre, :description, :debut, :fin, :id_utilisateurs)";
             $result2 = $this->bdd->prepare($query2);
             $result2->execute(array(

@@ -47,7 +47,12 @@ if(isset($_POST['submit']))
                         <div class="form-group">
                             <input type="password" name="passwordConfirm" value="" placeholder="passwordConfirm">
                         </div>
-                    
+                        <?php
+                            if(isset($_SESSION['error']))
+                            {
+                                echo $_SESSION['error'];
+                            }
+                            ?>
 
                         <button type="register" name="register" class="btn btn-info" value="mise à jour du password">Mise à jour du password</button>
                     </form>
