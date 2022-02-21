@@ -19,7 +19,12 @@ if(isset($_POST['submit']))
                         <div class="form-group">
                             <input type="text" name="login" value="" placeholder="Identifiant">
                             </div>
-                            
+                            <?php
+                            if(isset($_SESSION['error']))
+                            {
+                                echo $_SESSION['error'];
+                            }
+                            ?>
                         <div class="form-group">
                             <input type="submit" name="submit" class="btn btn-info" value="mise à jour du login">
                         </div>
@@ -61,7 +66,5 @@ if(isset($_POST['submit']))
 
 <?php
 require('Include/footer.php');
-
-var_dump($_SESSION);
-
+unset($_SESSION['error']);
 ?>

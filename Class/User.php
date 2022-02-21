@@ -17,7 +17,7 @@ class User
                 ];
             $DB_SDN = 'mysql:host=localhost;dbname=reservationsalles';
             $DB_USER = 'root';
-            $DB_PASS = '';
+            $DB_PASS = 'root';
 
             //on va instancier donc créer un objet PDO
             $this->bdd = new PDO($DB_SDN, $DB_USER, $DB_PASS, $options);
@@ -163,12 +163,12 @@ class User
                 ));
                 $_SESSION['user']['login'] = $login;
 
-                     echo "les informations de l'utilisateurs ont bien été modifiées.";
+                     $_SESSION['error'] = "<p> les informations de l'utilisateurs ont bien été modifiées.</p>";
               
             }
             else
             {
-                     echo "Vous ne pouvez pas utiliser ce login, car c'est votre login actuel.";
+                $_SESSION['error'] = "<p>Vous ne pouvez pas utiliser ce login, car c'est votre login actuel.</p>";
             }
         }
         
