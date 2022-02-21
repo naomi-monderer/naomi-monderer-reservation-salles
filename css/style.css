@@ -1,48 +1,38 @@
 /*-----------BASES----------*/
-body 
-{
-
-position: relative;
-
-}
-main
-{
-  position: relative;
+body {
   margin: 0;
   padding: 0;
+  max-width: 100vw;
+  min-height: 100%;
 }
 
 
 footer {
-  background-color: #f9f9f9;
-  height: 20%;
+  margin-top: auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
   list-style: none;
-  bottom: 0;
-  
-  
-  
-
+  width: 100%;
+  color: white;
+  padding: 15px;
 }
 .hachure {
   background: linear-gradient(
     45deg,
     #041424 1%,
-  grey 1%,
-  grey 49%,
+    grey 1%,
+    grey 49%,
     #041424 49%,
     #041424 51%,
-  grey 51%,
-  grey 99%,
+    grey 51%,
+    grey 99%,
     #041424 99%
   );
   background-size: 6px 6px;
   background-position: 50px 50px;
 }
-th 
-{
+th {
   width: 12vw;
 }
 /*-----------/BASES----------*/
@@ -71,29 +61,32 @@ a .fab {
   background-image: url("../css/image/batiment.jpg");
   background-size: cover;
 }
+
+main{
+    min-height: 70vh ;
+}
 /*-----------/index----------*/
 
 /*-----------/LAYOUT----------*/
 
 /*-----------MODULE----------*/
-/*-------reservation.php----*/
-.res-container{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
+/*-----------reservation.php----------*/
+.res-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.res-box{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    /* background-color: #00f; */
-    width: 25%;
-    margin: 2rem;
+.res-box {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  /* background-color: #00f; */
+  width: 25%;
+  margin: 2rem;
 }
-.res-titres{
-    font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
+.res-titres {
+  font-family: "Playfair Display", serif;
+  font-size: 1.5rem;
 }
 
 /*-----------/reservation.php----------*/
@@ -125,23 +118,19 @@ a .fab {
 /*-----------/index----------*/
 
 /*-----------planing--------*/
-button
-{
+button {
   margin: 1rem;
   border-radius: 2rem;
- 
 }
-.btn-container
-{
+.btn-container {
   display: flex;
   justify-content: space-between;
 }
 
-.table-container
-{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.table-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /*-----------/planing--------*/

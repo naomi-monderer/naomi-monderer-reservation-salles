@@ -6,8 +6,6 @@ require('Class/User.php');
 
 
 ?>
-
-<body>
     <main>
         <div class="login-form">
             <form method="post">
