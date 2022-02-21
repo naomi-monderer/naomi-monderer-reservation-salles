@@ -4,7 +4,7 @@ $title = "Accueil";
 require('Include/header.php');
 ?>
 
-<body>
+
     <main class="main-index">
         <section>
             <article>

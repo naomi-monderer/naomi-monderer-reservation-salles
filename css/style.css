@@ -6,6 +6,7 @@ body {
   min-height: 100%;
 }
 
+
 footer {
   margin-top: auto;
   display: flex;
@@ -15,6 +16,7 @@ footer {
   width: 100%;
   color: white;
   padding: 15px;
+  background-color:#f8f9fa ;
 }
 .hachure {
   background: linear-gradient(
@@ -34,6 +36,7 @@ footer {
 th {
   width: 12vw;
 }
+
 /*-----------/BASES----------*/
 
 /*-----------LAYOUT----------*/
@@ -59,6 +62,10 @@ a .fab {
   height: 70vh;
   background-image: url("../css/image/batiment.jpg");
   background-size: cover;
+}
+
+main{
+    min-height: 70vh ;
 }
 /*-----------/index----------*/
 
@@ -186,4 +193,5 @@ a.btn.btn-secondary {
   max-width: 80vw;
 
   text-align: center;
+
 }
