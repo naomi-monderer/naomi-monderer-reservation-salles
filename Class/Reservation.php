@@ -1,4 +1,10 @@
 <?php
+// date();
+//time();
+//datetime();
+//timestamp ();
+//date(w) lundi = 1 et samedi = 6
+
 require_once('Class/User.php');
 
 class Reservation
@@ -23,7 +29,7 @@ class Reservation
                 ];
             $DB_SDN = 'mysql:host=localhost;dbname=reservationsalles';
             $DB_USER = 'root';
-            $DB_PASS = 'root';
+            $DB_PASS = '';
 
             //on va instancier donc créer un objet PDO
             $this->bdd = new PDO($DB_SDN, $DB_USER, $DB_PASS, $options);
@@ -41,7 +47,7 @@ class Reservation
         $date_fin = strtotime($date_debut . "+1hour");
         if (strtotime($debut . "+1hour") == strtotime($fin)) 
         {
-            $id_utilisateurs = $_SESSION['user']['id'];
+            $id_utilisateurs = $_SESSION['userId'];
             $query2 = "INSERT INTO reservations (titre, description,debut,fin,id_utilisateurs) VALUES (:titre, :description, :debut, :fin, :id_utilisateurs)";
             $result2 = $this->bdd->prepare($query2);
             $result2->execute(array(
