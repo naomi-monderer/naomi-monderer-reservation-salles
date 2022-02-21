@@ -6,7 +6,6 @@ body {
   min-height: 100%;
 }
 
-
 footer {
   margin-top: auto;
   display: flex;
@@ -16,7 +15,7 @@ footer {
   width: 100%;
   color: white;
   padding: 15px;
-  background-color:#f8f9fa ;
+  background-color: #f8f9fa;
 }
 .hachure {
   background: linear-gradient(
@@ -64,8 +63,8 @@ a .fab {
   background-size: cover;
 }
 
-main{
-    min-height: 70vh ;
+main {
+  min-height: 70vh;
 }
 /*-----------/index----------*/
 
@@ -193,5 +192,4 @@ a.btn.btn-secondary {
   max-width: 80vw;
 
   text-align: center;
-
 }
