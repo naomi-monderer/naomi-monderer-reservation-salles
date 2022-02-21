@@ -3,7 +3,6 @@ session_start();
 $title = "Profil";
 require('Include/header.php');
 require('Class/User.php');
-$error = "";
 $userData = new User();
 $getUserInfos = new User();
 if(isset($_POST['submit']))
@@ -20,7 +19,7 @@ if(isset($_POST['submit']))
                         <div class="form-group">
                             <input type="text" name="login" value="" placeholder="Identifiant">
                             </div>
-                            <p><?= $error?></p>
+                            
                         <div class="form-group">
                             <input type="submit" name="submit" class="btn btn-info" value="mise à jour du login">
                         </div>
@@ -43,7 +42,7 @@ if(isset($_POST['submit']))
                         <div class="form-group">
                             <input type="password" name="passwordConfirm" value="" placeholder="passwordConfirm">
                         </div>
-                        <p><?= $error?></p>
+                    
 
                         <button type="register" name="register" class="btn btn-info" value="mise à jour du password">Mise à jour du password</button>
                     </form>

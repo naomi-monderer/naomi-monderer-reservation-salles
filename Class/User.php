@@ -5,9 +5,10 @@ class User
     private $id;
     public $login;
     public $password;
+  
 
     public function __construct()
-    {
+    {   $this->error = "";
         try {
             $options =
                 [
@@ -126,7 +127,8 @@ class User
 
     public function updatelogin($login)
     {
-        
+       
+       
 
         if (isset($_SESSION['user']) && isset($login))
         {
@@ -160,12 +162,13 @@ class User
                     ":login" => $login,
                 ));
                 $_SESSION['user']['login'] = $login;
-                echo "les informations de l'utilisateurs ont bien été modifiées.";
+
+                     echo "les informations de l'utilisateurs ont bien été modifiées.";
               
             }
             else
             {
-                echo  "Vous ne pouvez pas utiliser ce login, car c'est votre login actuel.";
+                     echo "Vous ne pouvez pas utiliser ce login, car c'est votre login actuel.";
             }
         }
         
