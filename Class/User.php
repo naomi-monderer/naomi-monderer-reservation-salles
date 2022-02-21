@@ -103,18 +103,15 @@ class User
             {
                 session_start();
                 $_SESSION["user"] = $userData[0];
-                $_SESSION["userId"] = $userData[0]["id"];
-                $_SESSION["userLogin"] = $userData[0]["login"];
-                $_SESSION["userPassword"] = $userData[0]["password"];
+             
 
                 header('Location:profil.php');
-                exit();
-                return $userData;
+               
             }
             else
             {
                 header('Location: connexion.php?login_err=password');
-                die();
+            
             }
         }
     }
@@ -129,8 +126,10 @@ class User
 
     public function updatelogin($login)
     {
+        
 
-        if (isset($_SESSION['user'])) {
+        if (isset($_SESSION['user']) && isset($login))
+        {
             $this->login = $login;
 
             $infos2 = "SELECT * FROM utilisateurs WHERE login = :login ";
@@ -143,8 +142,8 @@ class User
             $verifyLogin = $result2->fetchAll();
 
 
-            if (!$verifyLogin) {
-
+            if (!$verifyLogin)
+            {
                 $update = "UPDATE utilisateurs SET login= :login  WHERE id = :id ";
                 $result = $this->bdd->prepare($update);
 
@@ -153,20 +152,23 @@ class User
                     ":login" => $login,
                 ));
             }
-            if (isset($verifyLogin[0]) && $verifyLogin[0]['login'] == $_SESSION['user']['login']) {
-                $update = "UPDATE utilisateurs SET login= :login  id = :id ";
+            if ($login !== $_SESSION['user']['login']) {
+                $update = "UPDATE utilisateurs SET login= :login  WHERE id = :id ";
                 $result = $this->bdd->prepare($update);
-
                 $result->execute(array(
                     ":id" => $_SESSION['user']['id'],
                     ":login" => $login,
                 ));
+                $_SESSION['user']['login'] = $login;
+                echo "les informations de l'utilisateurs ont bien été modifiées.";
+              
             }
-
-            if (!$result2 && $_SESSION['user'])
-            $_SESSION["user"]['login'] = $login;
-            echo "les informations de l'utilisateurs ont bien été modifiées";
+            else
+            {
+                echo  "Vous ne pouvez pas utiliser ce login, car c'est votre login actuel.";
+            }
         }
+        
     }
 
 
