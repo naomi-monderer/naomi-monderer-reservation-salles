@@ -6,7 +6,8 @@ require('Class/User.php');
 
 $userData = new User();
 $getUserInfos = new User();
-if (isset($_POST['submit'])) {
+if(isset($_POST['submit']))
+{
     $userData->updatelogin($_POST['login']);
 }
 ?>

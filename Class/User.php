@@ -8,7 +8,6 @@ class User
 
     public function __construct()
     {
-
         try {
             $options =
                 [
@@ -26,26 +25,19 @@ class User
         }
     }
 
-
     public function register($login, $password, $passwordConfirm)
+    // Enregistré l'utilisateur en bdd
     {
-
-
-
         $_login = htmlspecialchars($login);
         $_password = htmlspecialchars($password);
         $_passwordConfirm = htmlspecialchars($passwordConfirm);
-
-
 
         $login = trim($_login);
         $passwordConfirm = trim($_passwordConfirm);
         $password = trim($_password);
 
-
-        if (!empty($login) && !empty($password) && !empty($passwordConfirm)) {
-
-
+        if (!empty($login) && !empty($password) && !empty($passwordConfirm))
+        {
             $infos = "SELECT * FROM utilisateurs WHERE login = :login ";
             $result = $this->bdd->prepare($infos);
             $result->bindvalue(':login', $login);
@@ -53,10 +45,10 @@ class User
             $result->execute();
             $userData = $result->fetchAll();
 
-
-            if ((count($userData)) === 0) {
-                if ($password == $passwordConfirm) {
-
+            if ((count($userData)) === 0)
+            {
+                if ($password == $passwordConfirm)
+                {
                     $cost = ['cost' => 12];
                     $password = password_hash($password, PASSWORD_BCRYPT);
 
@@ -72,40 +64,43 @@ class User
 
                     ));
                     header('Location:connexion.php?reg_err=success');
-                } else {
+                }
+                else
+                {
                     header('Location: inscription.php?reg_err=password');
                     die();
                 }
-            } else {
+            }
+            else
+            {
                 header('Location: inscription.php?reg_err=already');
                 die();
             }
         }
     }
-    public function connect($login, $password)
-    {
 
+    public function connect($login, $password)
+    // permet d'ouvrir une session à l'utilisateur 
+    {
         $_login = htmlspecialchars($login);
         $_password = htmlspecialchars($password);
 
         $login = trim($_login);
         $password = trim($_password);
 
-
-        if (!empty($login) && !empty($password)) {
-
+        if (!empty($login) && !empty($password))
+        {
             $infos = "SELECT * FROM utilisateurs WHERE login = :login ";
             $result = $this->bdd->prepare($infos);
             $result->setFetchMode(PDO::FETCH_ASSOC); // j'utilise fetch_assoc pour récuperer les key d'un tableau associatif 
             $result->execute(array(
                 ":login" => $login,
-
             ));
 
-
             $userData = $result->fetchAll();
-            var_dump($userData);
-            if (password_verify($password, $userData[0]['password'])) {
+
+            if (password_verify($password, $userData[0]['password']))
+            {
                 session_start();
                 $_SESSION["user"] = $userData[0];
                 $_SESSION["userId"] = $userData[0]["id"];
@@ -115,7 +110,9 @@ class User
                 header('Location:profil.php');
                 exit();
                 return $userData;
-            } else {
+            }
+            else
+            {
                 header('Location: connexion.php?login_err=password');
                 die();
             }
@@ -144,7 +141,6 @@ class User
             ));
 
             $verifyLogin = $result2->fetchAll();
-            
 
 
             if (!$verifyLogin) {
@@ -155,9 +151,7 @@ class User
                 $result->execute(array(
                     ":id" => $_SESSION['user']['id'],
                     ":login" => $login,
-
                 ));
-
             }
             if (isset($verifyLogin[0]) && $verifyLogin[0]['login'] == $_SESSION['user']['login']) {
                 $update = "UPDATE utilisateurs SET login= :login  id = :id ";
@@ -167,52 +161,43 @@ class User
                     ":id" => $_SESSION['user']['id'],
                     ":login" => $login,
                 ));
-            } else {
-                echo "merci !!!!!!!";
-
             }
 
-
-
-
-            if (!$result2 && $_SESSION['user']){
-
-
-
-
-                $_SESSION["user"]['login'] = $login;
+            if (!$result2 && $_SESSION['user'])
+            $_SESSION["user"]['login'] = $login;
             echo "les informations de l'utilisateurs ont bien été modifiées";
         }
-        }
     }
+
 
     public function updatepassword($password, $passwordConfirm)
     {
 
 
-        if ($password == $passwordConfirm)
-        {
-            $cryptedpass = password_hash($passwordConfirm, PASSWORD_BCRYPT);
-            $update = "UPDATE utilisateurs SET password= :password WHERE id = :id ";
-            $result = $this->bdd->prepare($update);
+            if ($password == $passwordConfirm)
+            {
+                $cryptedpass = password_hash($passwordConfirm, PASSWORD_BCRYPT);
+                $update = "UPDATE utilisateurs SET password= :password WHERE id = :id ";
+                $result = $this->bdd->prepare($update);
 
-            $result->execute(array(
-                ":id" => $_SESSION['user']['id'],
-                ":password" => $cryptedpass,
-            ));
+                $result->execute(array(
+                    ":id" => $_SESSION['user']['id'],
+                    ":password" => $cryptedpass,
+                ));
+            }
+            echo "les informations de l'utilisateurs ont bien été modifiées";
         }
-        echo "les informations de l'utilisateurs ont bien été modifiées";
-    }
+        
     public function getAllInfos()
     {
         $id = $_SESSION['user']['id'];
         // var_dump($id);
-        $query = "SELECT reservations.id,`titre`, `description`,`debut`, `fin`, `id_utilisateurs`,`login` 
-                FROM `utilisateurs` 
+        $query = "SELECT reservations.id,titre, description,debut, fin, id_utilisateurs,login 
+                FROM utilisateurs 
                 INNER JOIN reservations 
                 ON utilisateurs.id = reservations.id_utilisateurs 
                 WHERE utilisateurs.id = :id
-                ORDER BY `debut` DESC";
+                ORDER BY debut DESC";
         $result = $this->bdd->prepare($query);
         $result->bindValue(":id", $id);
         // var_dump($result);
@@ -238,4 +223,4 @@ class User
         }
         echo '</table>';
     }
-}
+}   

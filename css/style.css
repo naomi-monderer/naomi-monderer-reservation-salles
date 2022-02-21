@@ -6,6 +6,7 @@ body {
   min-height: 100%;
 }
 
+
 footer {
   margin-top: auto;
   display: flex;
@@ -190,4 +191,5 @@ a.btn.btn-secondary {
   max-width: 80vw;
 
   text-align: center;
+
 }

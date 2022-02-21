@@ -18,7 +18,6 @@ class Reservation
     public $id_utilisateurs;
     private $bdd;
 
-    // pas besoin de déclarer $bdd car elle est instanciée dans ma class User
     public function __construct()
     {
 
@@ -39,19 +38,16 @@ class Reservation
         }
     }
 
-    //créer une nouvelle réservation pour la page reservation-form.php
     public function insert_event($titre, $description, $debut, $fin, $id_utilisateurs)
-    // Permet d'insérer de nouveaux evènements en base de données
-    // reservation-form.php
+    // Permet d'insérer de nouveaux evènements en base de données -agit sur la page reservation-form
+   
     {
         //definir un creneau d'une heure. 
         $date_debut = strtotime($debut);
         $date_fin = strtotime($date_debut . "+1hour");
-        if (strtotime($debut . "+1hour") == strtotime($fin)) {
+        if (strtotime($debut . "+1hour") == strtotime($fin)) 
+        {
             $id_utilisateurs = $_SESSION['userId'];
-
-
-
             $query2 = "INSERT INTO reservations (titre, description,debut,fin,id_utilisateurs) VALUES (:titre, :description, :debut, :fin, :id_utilisateurs)";
             $result2 = $this->bdd->prepare($query2);
             $result2->execute(array(
@@ -63,18 +59,15 @@ class Reservation
             ));
             echo 'ok';
         } else {
-            echo "veuillez resrver un crenau d'1h";
+            echo "Veuillez réserver un creneau d'1 heure";
         }
-
-
-
         $now = $_SERVER['REQUEST_TIME'];
+       
     }
 
     public function getDebut($date_debut)
+    // je récupère la date de début de ma reservation en bdd  
     {
-        // je récupère     
-
         $query = "SELECT * FROM reservations WHERE `debut` = :debut ";
         $result = $this->bdd->prepare($query);
         $result->execute(array(":debut" => $date_debut));
@@ -82,13 +75,9 @@ class Reservation
         return   $getDebut;
     }
 
-
-
-
-    //Afficher la réservation avec le titre et le nom de l'utilisateur sur la page planning
     public function showResa($date_debut)
+    // Afficher la réservation avec le titre et le nom de l'utilisateur sur la page planning dans la td correspondante
     {
-
         $query = "SELECT reservations.id, reservations.titre , reservations.description, reservations.id_utilisateurs,
         utilisateurs.login
                 FROM reservations
@@ -103,16 +92,17 @@ class Reservation
         return $resultResa;
     }
 
-
     public function formatDate($days, $week = 0)
+    // Affiche la date dans le planning au format "LUNDI 2 DECEMBRE 2022"
     {
         $format = new IntlDateFormatter('fr_FR', IntlDateFormatter::FULL, IntlDateFormatter::NONE);
         $formatFrench = new DateTime("Monday this week +$days days +$week weeks");
         return $format->format($formatFrench);
     }
 
-    //Afficher les infos de la réservation sur la page planning
+    
     public function displayReservation()
+    // Afficher l'intégralité des infos de la réservation + le nom du user correspondant sur la page reservation.php
     {
         if (isset($_GET['id'])) {
             $id_reserv = $_GET['id'];
@@ -127,12 +117,11 @@ class Reservation
         $result->execute(array('id' => $id_reserv));
         $displayResa = $result->fetchAll(PDO::FETCH_ASSOC);
 
-
-
         return $displayResa;
     }
 
     public function getClickInfosReserv()
+    // Permet d'insérer une date au bon format en bdd
     {
         $query = "SELECT reservations.id,`titre`, `description`, 
                   DATE_FORMAT(debut,'%d/%m/%Y à %Hh%imin%ss') AS `debut`, 
@@ -144,5 +133,6 @@ class Reservation
         $result = $this->bdd->prepare($query);
         $result->execute();
         $getClick = $result->fetchAll(PDO::FETCH_ASSOC);
+        
     }
 }
