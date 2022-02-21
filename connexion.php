@@ -6,7 +6,6 @@ $title= 'connexion';
 
 
 ?>
-<body>
     <?php if (isset($_GET['reg_err'])) {
                     $err = htmlspecialchars($_GET['reg_err']);
 
@@ -61,7 +60,6 @@ if(isset($_POST['submit']) && ($_POST['password']))
 {
     $userData->connect($_POST['login'],$_POST['password']);
 }?>
-</body>
 <?php
 require('Include/footer.php');
 ?>             

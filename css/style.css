@@ -6,15 +6,30 @@ body
     font-family: 'Fira Sans', sans-serif;
 }
 
-footer
-{
-    background-color: #f9f9f9;
-    height: 20%;
-    display: flex;
+/* footer */
+/* { */
+    /* background-color: #f9f9f9; */
+    /* height: 20%; */
+    /* display: flex;
     justify-content: space-between;
     align-items: center;
-    list-style: none;
-}
+    list-style: none; */
+
+    /* background-color: #34475E;
+    color: white;
+    position:fixed;
+    width: 100%;
+    bottom: 0;
+    height: 1.5em; */
+/* 
+    background-color: #34475E;
+  color: white;
+  position:fixed;
+  width: 50%;
+  bottom: 0;
+  /* height: 1.5em; */
+
+  
 .hachure
 {
     background: linear-gradient(45deg, #00f 1%, #fff 1%, #fff 49%, #00f 49%, #00f 51%, #fff 51%, #fff 99%, #00f 99%);
@@ -29,19 +44,19 @@ a
 
 
 /*-----------LAYOUT----------*/
-.footer-box
+/* .footer-box
 {
-    color:#041424;
-    font-size: 0.9rem;
-    line-height: 0.3em;
-    margin-right: 2rem;
+    flex: 1em;
+    
+    
+
 }
 
 .footer-titre-box
 {
     font-style: bold;
     font-size: 1.1rem;
-}
+} */
 a .fab
 {
    position: center;
@@ -56,6 +71,10 @@ a .fab
     background-image: url('../css/image/batiment.jpg');
     background-size: cover;
  
+}
+
+main{
+    min-height: 70vh ;
 }
 /*-----------/index----------*/
 

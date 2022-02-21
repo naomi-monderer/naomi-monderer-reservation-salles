@@ -13,7 +13,6 @@ if(isset($_POST['submit']))
     $userData->updatelogin($_POST['login']);
 }
 ?>
-<body>
         <main>    
             <section>
                 <h3>PROFIL</h3>
@@ -45,7 +44,6 @@ if(isset($_POST['register']))
         </section>
         </main>
         
-</body>
 <?php
 require('Include/footer.php');
 ?>
