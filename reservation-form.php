@@ -57,7 +57,7 @@ if (isset($_POST['submit'])) {
                 if (isset($_GET['date'])) {
                     $date_debut = date("Y-m-d", strtotime($_GET['date']));
                     $heure_debut = date("H:i", strtotime($_GET['date']));
-                    $event_debut = $date_debut . 'T' . $heure_debut;
+                    $event_debut = $date_debut . ' ' . $heure_debut;
                 ?>
 
                     <input type="datetime-local" class="form-control" name="debut" value="<?= $event_debut ?>" style="pointer-events: none;">
