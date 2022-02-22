@@ -75,7 +75,7 @@ if (isset($_POST['submit'])) {
                 ?>
 
                 <label for="fin">jusqu'à :</label>
-                <input type="texte" class="form-control" name="fin" value="<?= $event_fin ?>" style="pointer-events: none;">
+                <input type="datetime-local" class="form-control" name="fin" value="<?= $event_fin ?>" style="pointer-events: none;">
             </div>
             <div>
                 <input type="submit" class="btn btn-primary" value="Réserver" name="submit">
