@@ -21,9 +21,9 @@ require('Include/header.php');
                         <div class="index-pres">
                             <p>
                                 Choisissez vous-même votre programation de films!
-                                Ce site vous permet de réserver un salle de vidéo-projection.
-                                Il vous suffi de choisir un créneau dans le planning
-                                et de remplir le formulaire de réservation sur cette horraire.
+                                Ici, vou pouvez réserver un salle de vidéo-projection.
+                                Il vous suffi de choisir un créneau sur le planning
+                                et de remplir le formulaire de réservation.
                                 La salle est disponible toute la semaine de 08h à 19h sauf les week-end.
                             </p>
                         </div>
