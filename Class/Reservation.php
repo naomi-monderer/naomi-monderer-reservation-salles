@@ -23,7 +23,7 @@ class Reservation
                 ];
             $DB_SDN = 'mysql:host=localhost;dbname=reservationsalles';
             $DB_USER = 'root';
-            $DB_PASS = 'root';
+            $DB_PASS = '';
 
             //on va instancier donc créer un objet PDO
             $this->bdd = new PDO($DB_SDN, $DB_USER, $DB_PASS, $options);
@@ -35,7 +35,7 @@ class Reservation
     public function insert_event($titre, $description, $debut, $fin, $id_utilisateurs)
     // Permet d'insérer de nouveaux evènements en base de données -agit sur la page reservation-form
    
-    {
+    { $this->id_utilisateurs = $id_utilisateurs;
         //definir un creneau d'une heure. 
         $date_debut = strtotime($debut);
         $date_fin = strtotime($date_debut . "+1hour");

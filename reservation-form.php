@@ -3,11 +3,11 @@ session_start();
 $title = "Réservation";
 require_once('Class/Reservation.php');
 require('Include/header.php');
-
+$id_utilisateurs = $_SESSION['user']['id'];
 
 $i = 0;
 $j = 0;
-if (!empty($_GET['week'])) {
+if (!empty($_GET['week'])){
     $week = $_GET['week'];
 } else {
     $week = 0;
@@ -18,22 +18,22 @@ $error = '';
 $reservation = new Reservation();
 $testResInfos = $reservation->getClickInfosReserv();
 
-if (isset($_POST['submit'])) 
-{
+if (isset($_POST['submit'])) {
     $titre = $_POST['titre'];
     $description = $_POST['description'];
     $debut = $_POST['debut'];
     $fin = $_POST['fin'];
     $now = date('Y-m-d h:i:s', strtotime("yesterday"));
 
+
+
+
     if (!empty($_POST['titre']) && !empty($_POST['description']) && !empty($_POST['debut']) && !empty($_POST['fin'])) {
 
         $reservation->insert_event($titre, $description, $debut, $fin, $id_utilisateurs);
     } elseif ($_POST['debut'] <= $now) {
-    
-    }
-    
-    {
+        echo "L'";
+    } {
         $error = 'Veuillez remplir tous les champs';
     }
 }
@@ -60,7 +60,7 @@ if (isset($_POST['submit']))
                     $event_debut = $date_debut . 'T' . $heure_debut;
                 ?>
 
-                    <input type="texte" class="form-control" name="debut" value="<?= $event_debut ?>" style="pointer-events: none; disabled=true">
+                    <input type="datetime-local" class="form-control" name="debut" value="<?= $event_debut ?>" style="pointer-events: none;">
 
 
                 <?php } else { ?>
@@ -88,7 +88,6 @@ if (isset($_POST['submit']))
         <?php echo $error; ?>
     </div>
 </main>
-
 <?php
 require('Include/footer.php');
 ?>

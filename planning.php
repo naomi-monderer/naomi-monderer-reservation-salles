@@ -1,6 +1,6 @@
 <?php
 session_start();
-$title = "Planing";
+$title = "Planning";
 require('Include/header.php');
 require('Class/User.php');
 require('Class/Reservation.php');
