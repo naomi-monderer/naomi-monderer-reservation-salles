@@ -5,10 +5,11 @@ class User
     private $id;
     public $login;
     public $password;
-  
+
 
     public function __construct()
-    {   $this->error = "";
+    {
+        $this->error = "";
         try {
             $options =
                 [
@@ -37,8 +38,7 @@ class User
         $passwordConfirm = trim($_passwordConfirm);
         $password = trim($_password);
 
-        if (!empty($login) && !empty($password) && !empty($passwordConfirm))
-        {
+        if (!empty($login) && !empty($password) && !empty($passwordConfirm)) {
             $infos = "SELECT * FROM utilisateurs WHERE login = :login ";
             $result = $this->bdd->prepare($infos);
             $result->bindvalue(':login', $login);
@@ -46,10 +46,8 @@ class User
             $result->execute();
             $userData = $result->fetchAll();
 
-            if ((count($userData)) === 0)
-            {
-                if ($password == $passwordConfirm)
-                {
+            if ((count($userData)) === 0) {
+                if ($password == $passwordConfirm) {
                     $cost = ['cost' => 12];
                     $password = password_hash($password, PASSWORD_BCRYPT);
 
@@ -65,15 +63,11 @@ class User
 
                     ));
                     header('Location:connexion.php?reg_err=success');
-                }
-                else
-                {
+                } else {
                     header('Location: inscription.php?reg_err=password');
                     die();
                 }
-            }
-            else
-            {
+            } else {
                 header('Location: inscription.php?reg_err=already');
                 die();
             }
@@ -89,8 +83,7 @@ class User
         $login = trim($_login);
         $password = trim($_password);
 
-        if (!empty($login) && !empty($password))
-        {
+        if (!empty($login) && !empty($password)) {
             $infos = "SELECT * FROM utilisateurs WHERE login = :login ";
             $result = $this->bdd->prepare($infos);
             $result->setFetchMode(PDO::FETCH_ASSOC); // j'utilise fetch_assoc pour récuperer les key d'un tableau associatif 
@@ -100,19 +93,14 @@ class User
 
             $userData = $result->fetchAll();
 
-            if (password_verify($password, $userData[0]['password']))
-            {
+            if (password_verify($password, $userData[0]['password'])) {
                 session_start();
                 $_SESSION["user"] = $userData[0];
-             
+
 
                 header('Location:profil.php');
-               
-            }
-            else
-            {
+            } else {
                 header('Location: connexion.php?login_err=password');
-            
             }
         }
     }
@@ -127,11 +115,10 @@ class User
 
     public function updatelogin($login)
     {
-       
-       
 
-        if (isset($_SESSION['user']) && isset($login))
-        {
+
+
+        if (isset($_SESSION['user']) && isset($login)) {
             $this->login = $login;
 
             $infos2 = "SELECT * FROM utilisateurs WHERE login = :login ";
@@ -144,8 +131,7 @@ class User
             $verifyLogin = $result2->fetchAll();
 
 
-            if (!$verifyLogin)
-            {
+            if (!$verifyLogin) {
                 $update = "UPDATE utilisateurs SET login= :login  WHERE id = :id ";
                 $result = $this->bdd->prepare($update);
 
@@ -163,15 +149,11 @@ class User
                 ));
                 $_SESSION['user']['login'] = $login;
 
-                     $_SESSION['error'] = "<p> les informations de l'utilisateurs ont bien été modifiées.</p>";
-              
-            }
-            else
-            {
+                $_SESSION['error'] = "<p> les informations de l'utilisateurs ont bien été modifiées.</p>";
+            } else {
                 $_SESSION['error'] = "<p>Vous ne pouvez pas utiliser ce login, car c'est votre login actuel.</p>";
             }
         }
-        
     }
 
 
@@ -179,24 +161,21 @@ class User
     {
 
 
-            if ($password == $passwordConfirm)
-            {
-                $cryptedpass = password_hash($passwordConfirm, PASSWORD_BCRYPT);
-                $update = "UPDATE utilisateurs SET password= :password WHERE id = :id ";
-                $result = $this->bdd->prepare($update);
+        if ($password == $passwordConfirm) {
+            $cryptedpass = password_hash($passwordConfirm, PASSWORD_BCRYPT);
+            $update = "UPDATE utilisateurs SET password= :password WHERE id = :id ";
+            $result = $this->bdd->prepare($update);
 
-                $result->execute(array(
-                    ":id" => $_SESSION['user']['id'],
-                    ":password" => $cryptedpass,
-                ));
-                $_SESSION['error'] = "les informations de l'utilisateurs ont bien été modifiées";
-            }
-            else
-            {
-                $_SESSION['error'] = "Les mots de passes doivent être identiques.";
-            }
+            $result->execute(array(
+                ":id" => $_SESSION['user']['id'],
+                ":password" => $cryptedpass,
+            ));
+            $_SESSION['error'] = "les informations de l'utilisateurs ont bien été modifiées";
+        } else {
+            $_SESSION['error'] = "Les mots de passes doivent être identiques.";
         }
-        
+    }
+
     public function getAllInfos()
     {
         $id = $_SESSION['user']['id'];
@@ -232,4 +211,4 @@ class User
         }
         echo '</table>';
     }
-}   
+}

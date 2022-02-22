@@ -34,13 +34,12 @@ class Reservation
 
     public function insert_event($titre, $description, $debut, $fin, $id_utilisateurs)
     // Permet d'insérer de nouveaux evènements en base de données -agit sur la page reservation-form
-   
+
     {
         //definir un creneau d'une heure. 
         $date_debut = strtotime($debut);
         $date_fin = strtotime($date_debut . "+1hour");
-        if (strtotime($debut . "+1hour") == strtotime($fin)) 
-        {
+        if (strtotime($debut . "+1hour") == strtotime($fin)) {
             $id_utilisateurs = $_SESSION['user']['id'];
             $query2 = "INSERT INTO reservations (titre, description,debut,fin,id_utilisateurs) VALUES (:titre, :description, :debut, :fin, :id_utilisateurs)";
             $result2 = $this->bdd->prepare($query2);
@@ -56,7 +55,6 @@ class Reservation
             echo "Veuillez réserver un creneau d'1 heure";
         }
         $now = $_SERVER['REQUEST_TIME'];
-       
     }
 
     public function getDebut($date_debut)
@@ -94,7 +92,7 @@ class Reservation
         return $format->format($formatFrench);
     }
 
-    
+
     public function displayReservation()
     // Afficher l'intégralité des infos de la réservation + le nom du user correspondant sur la page reservation.php
     {
@@ -118,8 +116,8 @@ class Reservation
     // Permet d'insérer une date au bon format en bdd
     {
         $query = "SELECT reservations.id,`titre`, `description`, 
-                  DATE_FORMAT(debut,'%d/%m/%Y à %Hh%imin%ss') AS `debut`, 
-                  DATE_FORMAT(fin,'%d/%m/%Y à %Hh%imin%ss') AS `fin`, `id_utilisateurs`,`login` 
+                  DATE_FORMAT(debut,'%d/%m/%Y à %H%imin%ss') AS `debut`, 
+                  DATE_FORMAT(fin,'%d/%m/%Y à %H%imin%ss') AS `fin`, `id_utilisateurs`,`login` 
                   FROM `reservations` 
                   INNER JOIN utilisateurs 
                   ON reservations.id_utilisateurs = utilisateurs.id 
@@ -127,6 +125,5 @@ class Reservation
         $result = $this->bdd->prepare($query);
         $result->execute();
         $getClick = $result->fetchAll(PDO::FETCH_ASSOC);
-        
     }
 }

@@ -5,7 +5,7 @@ require('Include/header.php');
 require('Class/User.php');
 require('Class/Reservation.php');
 $test = new Reservation();
-$now =  date('Y-m-d h:i:s', strtotime("yesterday"));
+$now =  date('Y-m-d H:i:s', strtotime("today"));
 if (!empty($_GET['week'])) {
     $week = $_GET['week'];
 } else {
@@ -47,7 +47,7 @@ if (!empty($_GET['week'])) {
                         <?php
                         for ($i = 0; $i < 7; $i++) {
 
-                            $date_debut = date('Y-m-d h:i:s', strtotime("Monday this week +$i days +$week weeks $j:00:00"));
+                            $date_debut = date('Y-m-d H:i:s', strtotime("Monday this week +$i days +$week weeks $j:00:00"));
                             $showResa = $test->showResa(date('Y-m-d', strtotime('Monday this week +' . $i . "days +$week weeks")) . ' ' . $j . ':00:00');
 
                             if (!empty($showResa)) { ?>

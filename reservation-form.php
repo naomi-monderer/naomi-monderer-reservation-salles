@@ -12,7 +12,7 @@ if (!empty($_GET['week'])) {
 } else {
     $week = 0;
 }
-$temps_anterieur = strtotime(date('Y-m-d h:i:s', strtotime("Monday this week +$i days +$week weeks $j:00:00")));
+$temps_anterieur = strtotime(date('Y-m-d H:i:s', strtotime("Monday this week +$i days +$week weeks $j:00:00")));
 $error = '';
 
 $reservation = new Reservation();
@@ -23,7 +23,7 @@ if (isset($_POST['submit'])) {
     $description = $_POST['description'];
     $debut = $_POST['debut'];
     $fin = $_POST['fin'];
-    $now = date('Y-m-d h:i:s', strtotime("yesterday"));
+    $now = date('Y-m-d H:i:s', strtotime("yesterday"));
 
 
 
